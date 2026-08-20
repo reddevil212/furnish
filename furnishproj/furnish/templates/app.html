@@ -1,0 +1,236 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Furnish - eCommerce for furnitures{% endblock %}</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="font-sans text-gray-800">
+
+<!-- ================= NAVBAR ================= -->
+{% block navbar %}
+<nav class="navbar navbar-expand-lg bg-white shadow-sm px-4 py-3 navbar-custom">
+    <div class="container-fluid px-0">
+
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <span class="d-flex flex-column text-uppercase text-xs fw-bold lh-sm">
+                <span style="letter-spacing: .12rem;">Furnish</span>
+               
+            </span>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <div class="mx-auto d-lg-block d-none">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'home' or request.resolver_match.url_name == 'home_alt' %}{% block nav_home_active %}active{% endblock %}{% else %}{% block nav_home_override %}{% endblock %}{% endif %}" href="{% url 'home' %}">
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'aboutus' or request.resolver_match.url_name == 'about' %}{% block nav_about_active %}active{% endblock %}{% else %}{% block nav_about_override %}{% endblock %}{% endif %}" href="{% url 'aboutus' %}">
+                        About us
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'products' %}{% block nav_products_active %}active{% endblock %}{% else %}{% block nav_products_override %}{% endblock %}{% endif %}" href="{% url 'products' %}">
+                        Products
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'testimonials' %}{% block nav_testimonials_active %}active{% endblock %}{% else %}{% block nav_testimonials_override %}{% endblock %}{% endif %}" href="{% url 'testimonials' %}">
+                        Testimonials
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}{% block nav_contact_active %}active{% endblock %}{% else %}{% block nav_contact_override %}{% endblock %}{% endif %}" href="{% url 'contact' %}">
+                        Contact
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Phone + Offcanvas Menu Button -->
+      <div class="d-flex align-items-center gap-3">
+
+    {% if user.is_authenticated %}
+    <!-- Logged in state -->
+    <span class="fw-semibold text-dark me-1 d-none d-sm-inline">
+        <i class="bi bi-person-circle me-1"></i>Hi, {{ user.first_name|default:user.username }}
+    </span>
+    <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm">
+        Logout
+    </a>
+    {% else %}
+    <!-- Login Button -->
+    <a href="{% url 'login' %}" class="btn btn-outline-dark btn-sm">
+        Login
+    </a>
+
+    <!-- Signup Button -->
+    <a href="{% url 'register' %}" class="btn btn-dark btn-sm">
+        Register
+    </a>
+    {% endif %}
+
+   
+   
+
+    <!-- Offcanvas Button -->
+    <a href="#offcanvasExample"
+       data-bs-toggle="offcanvas"
+       role="button"
+       aria-controls="offcanvasExample">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="24"
+             height="24"
+             fill="currentColor"
+             class="bi bi-list"
+             viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                  d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+        </svg>
+    </a>
+
+</div>
+
+    </div>
+</nav>
+{% endblock navbar %}
+
+<!-- ================= MAIN CONTENT ================= -->
+{% block content %}
+{% endblock content %}
+
+<!-- ================= FOOTER ================= -->
+{% block footer %}
+<footer class="bg-dark pt-8 footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-12">
+                <a class="navbar-brand text-white" href="{% url 'home' %}">
+                    <span class="d-flex flex-column text-uppercase text-xs fw-bold lh-sm">
+                        <span style="letter-spacing: .12rem;">Furnish</span>
+                        <span>Template</span>
+                    </span>
+                </a>
+            </div>
+
+            <div class="col-lg-8 col-md-8 mb-4 d-flex justify-content-start justify-content-md-end">
+                <ul class="list-unstyled lh-lg d-flex flex-column flex-md-row gap-4">
+                    <li><a href="{% url 'home' %}" class="ft-links text-decoration-none">Home</a></li>
+                    <li><a href="{% url 'products' %}" class="ft-links text-decoration-none">Products</a></li>
+                    <li><a href="{% url 'aboutus' %}" class="ft-links text-decoration-none">About Us</a></li>
+                    <li><a href="{% url 'testimonials' %}" class="ft-links text-decoration-none">Testimonials</a></li>
+                    <li><a href="{% url 'contact' %}" class="ft-links text-decoration-none">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row justify-content-center align-items-center pt-lg-8 pb-4">
+            <div class="col-lg-6 col-md-6 mb-4">
+                <h2 class="display-3 text-white">We Design All Over The World</h2>
+            </div>
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="d-flex gap-3 justify-content-start justify-content-lg-end">
+                    <a href="#" class="btn btn-outline-light btn-icon"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="btn btn-outline-light btn-icon"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="btn btn-outline-light btn-icon"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="btn btn-outline-light btn-icon"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center align-items-center py-lg-8">
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="d-flex flex-column">
+                    <span>Email Id</span>
+                    <span class="h3 fw-light">info@example.com</span>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="d-flex gap-3 justify-content-lg-end">
+                    <a href="{% url 'contact' %}" class="btn btn-outline-light">Contact us</a>
+                </div>
+            </div>
+        </div>
+
+        <hr class="bg-secondary">
+
+        <div class="row pb-3">
+            <div class="col-md-6 text-center text-md-start">
+                <p class="mb-0">
+                    &copy; 2025 Furnish. Developed by <a href="https://codescandy.com" class="text-white" target="_blank" rel="noopener noreferrer">CodesCandy</a> • Distributed by <a href="https://themewagon.com" class="text-white" target="_blank" rel="noopener noreferrer">ThemeWagon</a>. All rights reserved.
+                </p>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <a href="#" class="ft-links text-decoration-none me-3">Privacy Policy</a>
+                <a href="#" class="ft-links text-decoration-none">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</footer>
+{% endblock footer %}
+
+
+
+<!-- ================= OFFCANVAS MENU ================= -->
+{% block offcanvas %}
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header px-4">
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <span class="d-flex flex-column text-uppercase text-xs fw-bold lh-sm">
+                <span style="letter-spacing: .12rem;">Furnish</span>
+                <span>Template</span>
+            </span>
+        </a>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="navbar-custom">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'home' or request.resolver_match.url_name == 'home_alt' %}active{% endif %}" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'aboutus' or request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'aboutus' %}">About us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'products' %}active{% endif %}" href="{% url 'products' %}">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'testimonials' %}active{% endif %}" href="{% url 'testimonials' %}">Testimonials</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="{% url 'contact' %}">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock offcanvas %}
+
+<!-- ================= SCRIPTS ================= -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="{% static 'assets/js/swiper.js' %}"></script>
+<script src="{% static 'assets/js/main.js' %}"></script>
+
+{% block extra_js %}{% endblock %}
+</body>
+</html>

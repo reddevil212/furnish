@@ -1,0 +1,215 @@
+{% extends 'app.html' %}
+{% load static %}
+
+{% block title %}Products eCommerce Bootstrap HTML Template - Furnish{% endblock %}
+
+{% block content %}
+<main>
+  <section class="py-lg-8 py-5 text-center">
+      <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+        <h1 class="display-5 mb-3">Product List</h1>
+        <p class="text-muted  lead">
+         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat ad sint quae sunt, molestiae consectetur vitae! Impedit nulla ea provident quis est eos dolores enim.
+        </p>
+        </div>
+        </div>
+      </div>
+    </section>
+     <!-- Page Content -->
+      <section class="py-lg-8 py-5">
+  <div class="container ">
+    <div class="row">
+      <!-- Sidebar Filters -->
+      <aside class="col-lg-3 mb-4">
+        <h3 class="fw-semibold mb-3 h5 ">Filters</h3>
+        <div class="mb-4 bg-light border bg-opacity-50 p-4">
+          <h6 class="fw-semibold mb-3 text-xs text-uppercase">Category</h6>
+          <ul class="list-unstyled lh-lg small mb-0">
+            <li><a href="#" class="text-dark">Living Room</a></li>
+            <li><a href="#" class="text-dark">Bedroom</a></li>
+            <li><a href="#" class="text-dark">Office</a></li>
+            <li><a href="#" class="text-dark">Decor</a></li>
+          </ul>
+        </div>
+        <div class="mb-4 bg-light border bg-opacity-50 p-4">
+          <h6 class="fw-semibold mb-3 text-xs text-uppercase">Price</h6>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="price1">
+            <label class="form-check-label " for="price1">Under $100</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="price2">
+            <label class="form-check-label" for="price2">$100-$300</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="price3">
+            <label class="form-check-label" for="price3">Above $300</label>
+          </div>
+        </div>
+      <div class="mb-4 bg-light border bg-opacity-50 p-4">
+          <h6 class="fw-semibold mb-3 text-xs text-uppercase">Colour</h6>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="col1">
+            <label class="form-check-label" for="col1">Gray</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="col2">
+            <label class="form-check-label" for="col2">Black</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="col3">
+            <label class="form-check-label" for="col3">Wood</label>
+          </div>
+        </div>
+        <div class="d-grid">
+          <button class="btn btn-primary">Apply Filters</button>
+        </div>
+      </aside>
+
+      <!-- Product Grid -->
+      <div class="col-lg-9">
+        <div class="row g-4">
+            <div class="col-12">
+                <div class=" d-flex flex-column flex-lg-row flex-row justify-content-between gap-4">
+							
+								<div class="col-sm-4 col-lg-3 offset-lg-9">
+									<select class="form-select">
+										<option value="" selected="">Sort by: Featured</option>
+										<option value="Best selling">Best selling</option>
+										<option value="Alphabetically, A-Z">Alphabetically, A-Z</option>
+										<option value="Alphabetically, Z-A">Alphabetically, Z-A</option>
+										<option value="Price, low to high">Price, low to high</option>
+										<option value="Price, high to low">Price, high to low</option>
+										<option value="Date, old to new">Date, old to new</option>
+										<option value="Date, new to old">Date, new to old</option>
+									</select>
+							</div>
+
+            </div>
+            </div>
+          <!-- Repeat Product Card -->
+          <div class="col-sm-6 col-md-4">
+            <div class="card product-card">
+              <a href="#"><img src="{% static 'assets/images/product-img-1.jpg' %}" class="card-img-top" alt="Product Name"></a>
+              <div class="card-body">
+                 <p class="text-muted mb-2 text-uppercase text-xs mb-3">Brand</p>
+                  <div class="mb-3">
+                <h3 class="h5 mb-1"> <a href="#">Modern Sofa</a></h3>
+               
+                <div class="">
+                  <span class="fw-semibold text-decoration-line-through">$59.00</span>
+                  <span class="">$29.00</span>
+                </div>
+                </div>
+                <a href="#" class="btn btn-primary btn-sm">Add to Cart</a>
+              </div>
+            </div>
+          </div>   <div class="col-sm-6 col-md-4">
+            <div class="card product-card">
+              <a href="#"><img src="{% static 'assets/images/product-img-2.jpg' %}" class="card-img-top" alt="Product Name"></a>
+              <div class="card-body">
+                 <p class="text-muted mb-2 text-uppercase text-xs mb-3">Brand</p>
+                  <div class="mb-3">
+                <h3 class="h5 mb-1"> <a href="#">Floor Lamp</a></h3>
+               
+                <div class="">
+                  <span class="fw-semibold text-decoration-line-through">$95.00</span>
+                  <span class="">$89.00</span>
+                </div>
+                </div>
+                <a href="#" class="btn btn-primary btn-sm">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+          <!-- /Repeat -->
+            <div class="col-sm-6 col-md-4">
+            <div class="card product-card">
+              <a href="#"><img src="{% static 'assets/images/product-img-5.jpg' %}" class="card-img-top" alt="Product Name"></a>
+              <div class="card-body">
+                 <p class="text-muted mb-2 text-uppercase text-xs mb-3">Brand</p>
+                  <div class="mb-3">
+                <h3 class="h5 mb-1"> <a href="#">High Back Boss Chair</a></h3>
+               
+                <div class="">
+                  <span class="fw-semibold text-decoration-line-through">$78.00</span>
+                  <span class="">$68.00</span>
+                </div>
+                </div>
+                <a href="#" class="btn btn-primary btn-sm">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+                <div class="col-sm-6 col-md-4">
+            <div class="card product-card">
+              <a href="#"><img src="{% static 'assets/images/product-img-6.jpg' %}" class="card-img-top" alt="Product Name"></a>
+              <div class="card-body">
+                 <p class="text-muted mb-2 text-uppercase text-xs mb-3">Brand</p>
+                  <div class="mb-3">
+                <h3 class="h5 mb-1"> <a href="#">Fancy Metal Clock</a></h3>
+               
+                 <div class="">
+                  <span class="fw-semibold text-decoration-line-through">$78.00</span>
+                  <span class="">$68.00</span>
+                </div>
+                </div>
+                <a href="#" class="btn btn-primary btn-sm">Add to Cart</a>
+              </div>
+            </div>
+          </div>   <div class="col-sm-6 col-md-4">
+            <div class="card product-card">
+              <a href="#"><img src="{% static 'assets/images/product-img-3.jpg' %}" class="card-img-top" alt="Product Name"></a>
+              <div class="card-body">
+                 <p class="text-muted mb-2 text-uppercase text-xs mb-3">Brand</p>
+                  <div class="mb-3">
+                <h3 class="h5 mb-1"> <a href="#">Comfort Chair</a></h3>
+               
+                <div class="">
+                  <span class="fw-semibold text-decoration-line-through">$38.00</span>
+                  <span class="">$28.00</span>
+                </div>
+                </div>
+                <a href="#" class="btn btn-primary btn-sm">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+          <!-- /Repeat -->
+            <div class="col-sm-6 col-md-4">
+            <div class="card product-card">
+              <a href="#"><img src="{% static 'assets/images/product-img-7.jpg' %}" class="card-img-top" alt="Product Name"></a>
+              <div class="card-body">
+                 <p class="text-muted mb-2 text-uppercase text-xs mb-3">Brand</p>
+                  <div class="mb-3">
+                <h3 class="h5 mb-1"> <a href="#">Morden Metal Frame Stool</a></h3>
+               
+                <div class="">
+
+                  <span class="fw-semibold">$28.00</span>
+                  <span class="">$18.00</span>
+                </div>
+                </div>
+                <a href="#" class="btn btn-primary btn-sm">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+          <!-- Add more cards as needed -->
+        </div>
+
+        <!-- Pagination -->
+        <nav class="mt-4">
+          <ul class="pagination justify-content-center">
+            <li class="page-item disabled"><a class="page-link" href="#">«</a></li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">»</a></li>
+          </ul>
+        </nav>
+
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+{% endblock content %}

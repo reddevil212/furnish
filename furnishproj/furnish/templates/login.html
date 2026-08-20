@@ -1,0 +1,37 @@
+{% extends "app.html" %}
+
+{% block content %}
+    <div class="container my-5" style="max-width: 500px;">
+        <div class="text-center mb-4">
+            <h1>Login Page</h1>
+        </div>
+
+        {% if error %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        <div>
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" name="username" id="username" class="form-control" required>
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" name="password" id="password" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <span>Don't have an account? <a href="{% url 'register' %}">Create Now</a></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

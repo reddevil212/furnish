@@ -1,0 +1,1 @@
+console.log('Furnish site JS loaded successfully.');
