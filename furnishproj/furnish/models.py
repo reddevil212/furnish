@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Ecomm_Category(models.Model):
@@ -37,5 +38,29 @@ class Ecom_Product(models.Model):
 
     def __str__(self):
         return self.product_name
+
+
+
+class Ecom_Favourites(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favourites')
+    product = models.ForeignKey(Ecom_Product, on_delete=models.CASCADE)
+    createdaAt = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user} -> {self.product}"
+
+
+class Ecom_Cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='cart_items')
+    product = models.ForeignKey(Ecom_Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} -> {self.product.product_name} (x{self.quantity})"
+
+    @property
+    def total_price(self):
+        return self.product.product_price * self.quantity
 
 

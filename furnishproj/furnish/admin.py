@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Ecomm_Category, Ecom_Product
+from .models import *
 
 # Register your models here.
 @admin.register(Ecomm_Category)
@@ -14,3 +14,5 @@ class EcomProductAdmin(admin.ModelAdmin):
     search_fields = ('product_name', 'product_description')
     prepopulated_fields = {'product_slug': ('product_name',)}
 
+admin.site.register(Ecom_Favourites)
+admin.site.register(Ecom_Cart)

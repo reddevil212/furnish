@@ -1,0 +1,93 @@
+{% extends 'app.html' %}
+{% load static %}
+
+{% block title %}
+    {% if category %}{{ category.category_name }}{% else %}Category{% endif %} - Furnish
+{% endblock title %}
+
+{% block content %}
+<main class="py-5">
+    <div class="container">
+        <!-- Category Header -->
+        <div class="row justify-content-center text-center mb-5">
+            <div class="col-lg-8">
+                <span class="text-uppercase text-secondary fw-semibold text-xs tracking-wider">Category</span>
+                <h1 class="display-5 fw-bold text-dark mt-2 mb-3">
+                    {% if category %}
+                        {{ category.category_name }}
+                    {% else %}
+                        Category Products
+                    {% endif %}
+                </h1>
+                {% if category.category_desc %}
+                    <p class="text-muted lead">{{ category.category_desc }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        {% if products %}
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+                {% for product in products %}
+                    <div class="col">
+                        <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden product-card">
+                            <a href="{% url 'get_product_detail_view' product.product_slug %}" class="d-block overflow-hidden">
+                                {% if product.product_image %}
+                                    <img src="{{ product.product_image.url }}" class="card-img-top" alt="{{ product.product_name }}" style="height: 220px; object-fit: cover;">
+                                {% else %}
+                                    <div class="bg-secondary bg-opacity-10 d-flex align-items-center justify-content-center" style="height: 220px;">
+                                        <i class="bi bi-image text-muted fs-1"></i>
+                                    </div>
+                                {% endif %}
+                            </a>
+                            <div class="card-body d-flex flex-column p-4">
+                                <div class="mb-2">
+                                    <span class="badge text-bg-info rounded-pill px-3 py-1 text-xs text-uppercase me-1">
+                                        {{ product.product_category.category_name }}
+                                    </span>
+                                    {% if product.product_is_featured %}
+                                        <span class="badge text-bg-warning rounded-pill px-3 py-1 text-xs text-uppercase">
+                                            Featured
+                                        </span>
+                                    {% endif %}
+                                </div>
+                                <h5 class="card-title fw-semibold text-dark mb-2">
+                                    <a href="{% url 'get_product_detail_view' product.product_slug %}" class="text-dark text-decoration-none">
+                                        {{ product.product_name }}
+                                    </a>
+                                </h5>
+                                <div class="mb-3">
+                                    <span class="text-muted text-decoration-line-through me-2">₹{{ product.product_price|add:"500" }}</span>
+                                    <span class="fw-bold text-dark">₹{{ product.product_price }}</span>
+                                </div>
+                                <div class="d-flex gap-2 mt-auto">
+                                    <a href="{% url 'add_to_cart' product.id %}" class="btn btn-dark btn-sm flex-fill d-inline-flex align-items-center justify-content-center gap-1">
+                                        <i class="bi bi-cart-plus"></i> Add to Cart
+                                    </a>
+                                    <a href="{% url 'add_to_fav' product.id %}" class="btn btn-outline-danger btn-sm" title="Add to Favourites">
+                                        <i class="bi bi-heart-fill"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <!-- Empty Category State -->
+            <div class="card border-0 shadow-sm rounded-4 text-center py-5 px-4 my-4">
+                <div class="mb-3">
+                    <i class="bi bi-box-seam text-muted" style="font-size: 4rem;"></i>
+                </div>
+                <h3 class="fw-bold text-dark mb-2">No Products Found</h3>
+                <p class="text-muted mb-4">There are currently no products available in this category.</p>
+                <div>
+                    <a href="{% url 'products' %}" class="btn btn-dark px-4 py-2 rounded-3">
+                        <i class="bi bi-shop me-2"></i>View All Products
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</main>
+{% endblock content %}

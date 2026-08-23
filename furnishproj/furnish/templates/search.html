@@ -1,0 +1,134 @@
+{% extends 'app.html' %}
+{% block content %}
+    <div>
+        <section class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6">
+                    <form method="GET" action="{% url 'search' %}">
+                        <div class="input-group mb-3">
+                            <input
+                                type="text"
+                                name="query"
+                                id="query"
+                                class="form-control form-control-lg"
+                                placeholder="Search furniture by name, category, description..."
+                                value="{{ query|default:'' }}"
+                                autofocus
+                            />
+                            <button type="submit" class="btn btn-primary px-4">
+                                <i class="bi bi-search me-1"></i> Search
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="container pb-5">
+            {% if query %}
+                <h4 class="mb-4 text-secondary">
+                    Search results for
+                    <span class="text-dark fw-bold">"{{ query }}"</span>
+                    <small class="fs-6 text-muted"
+                        >({{ searchedProducts|length }} item{% if searchedProducts|length != 1 %}
+                            s
+                        {% endif %}
+                        found)</small
+                    >
+                </h4>
+            {% endif %}
+
+            <div class="row g-4">
+                {% for product in searchedProducts %}
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                        <div class="card product-card h-100 shadow-sm border-0">
+                            <a
+                                href="{% url 'get_product_detail_view' product.product_slug %}"
+                            >
+                                {% if product.product_image %}
+                                    <img
+                                        src="{{ product.product_image.url }}"
+                                        class="card-img-top"
+                                        alt="{{ product.product_name }}"
+                                        style="height: 220px; object-fit: cover;"
+                                    />
+                                {% else %}
+                                    <div
+                                        class="bg-light d-flex align-items-center justify-content-center text-muted"
+                                        style="height: 220px;"
+                                    >
+                                        No Image
+                                    </div>
+                                {% endif %}
+                            </a>
+                            <div class="card-body d-flex flex-column">
+                                <div class="mb-2">
+                                    <span
+                                        class="badge text-bg-info rounded-pill me-1"
+                                        >{{ product.product_category }}</span
+                                    >
+                                    {% if product.product_is_featured %}
+                                        <span
+                                            class="badge text-bg-warning rounded-pill"
+                                            >Featured</span
+                                        >
+                                    {% endif %}
+                                </div>
+                                <h5 class="card-title h6 mb-2">
+                                    <a
+                                        href="{% url 'get_product_detail_view' product.product_slug %}"
+                                        class="text-decoration-none text-dark"
+                                    >
+                                        {{ product.product_name }}
+                                    </a>
+                                </h5>
+                                <div
+                                    class="mt-auto pt-2 d-flex justify-content-between align-items-center"
+                                >
+                                    <div>
+                                        <span
+                                            class="text-muted text-decoration-line-through small me-1"
+                                            >₹{{ product.product_price|add:"500" }}</span
+                                        >
+                                        <span class="fw-bold text-dark"
+                                            >₹{{ product.product_price }}</span
+                                        >
+                                    </div>
+                                    <a
+                                        href="{% url 'get_product_detail_view' product.product_slug %}"
+                                        class="btn btn-outline-dark btn-sm"
+                                        >View</a
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    {% if query %}
+                        <div class="col-12 text-center py-5">
+                            <i
+                                class="bi bi-search text-muted display-4 mb-3 d-block"
+                            ></i>
+                            <h5 class="text-secondary">
+                                No products found matching "{{ query }}"
+                            </h5>
+                            <p class="text-muted small">
+                                Try searching for generic terms like "table",
+                                "chair", or "sofa".
+                            </p>
+                        </div>
+                    {% else %}
+                        <div class="col-12 text-center py-5">
+                            <i
+                                class="bi bi-search text-muted display-4 mb-3 d-block"
+                            ></i>
+                            <h5 class="text-secondary">
+                                Type a keyword above to search for products.
+                            </h5>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+{% endblock content %}
