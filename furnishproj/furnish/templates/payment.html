@@ -1,0 +1,152 @@
+{% extends 'app.html' %}
+{% load static %}
+
+{% block title %}
+    Complete Payment - Furnish
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-9">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+                <!-- Card Header -->
+                <div class="bg-dark text-white p-4 text-center">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-white bg-opacity-10 rounded-circle p-3 mb-3">
+                        <i class="bi bi-shield-lock-fill text-warning fs-1"></i>
+                    </div>
+                    <h3 class="fw-bold mb-1">Razorpay Secure Checkout</h3>
+                    <p class="text-white-50 mb-0 small">Complete your payment securely with UPI, Cards, NetBanking, or Wallets</p>
+                </div>
+
+                <!-- Card Body -->
+                <div class="card-body p-4 p-md-5">
+                    <!-- Order Details Summary -->
+                    <div class="bg-light rounded-4 p-4 mb-4">
+                        <div class="d-flex justify-content-between align-items-center pb-3 mb-3 border-bottom">
+                            <div>
+                                <small class="text-muted d-block">Order Reference</small>
+                                <span class="fw-bold font-monospace text-dark">#{{ order.order_id }}</span>
+                            </div>
+                            <span class="badge bg-warning-subtle text-warning-emphasis rounded-pill px-3 py-2 text-uppercase">
+                                <i class="bi bi-clock me-1"></i> Payment Pending
+                            </span>
+                        </div>
+
+                        {% if order.shipping_address %}
+                        <div class="mb-3">
+                            <small class="text-muted d-block fw-semibold">Shipping Address</small>
+                            <span class="text-secondary small">{{ order.shipping_address.address }}</span>
+                        </div>
+                        {% endif %}
+
+                        <div class="d-flex justify-content-between align-items-center pt-2">
+                            <span class="fs-5 fw-bold text-dark">Total Payable Amount</span>
+                            <span class="fs-4 fw-bold text-success">₹{{ order.total_amount }}</span>
+                        </div>
+                    </div>
+
+                    <!-- Items Preview -->
+                    {% if order.item.all %}
+                    <div class="mb-4">
+                        <h6 class="fw-bold mb-3 text-secondary">Items in this Order</h6>
+                        <div class="list-group list-group-flush border rounded-3 p-2">
+                            {% for item in order.item.all %}
+                            <div class="list-group-item d-flex justify-content-between align-items-center px-2 py-2 border-0">
+                                <div class="d-flex align-items-center">
+                                    {% if item.product.product_image %}
+                                        <img src="{{ item.product.product_image.url }}" alt="{{ item.product.product_name }}" class="rounded me-3" style="width: 42px; height: 42px; object-fit: cover;">
+                                    {% else %}
+                                        <div class="bg-light rounded me-3 d-flex align-items-center justify-content-center" style="width: 42px; height: 42px;">
+                                            <i class="bi bi-box-seam text-muted"></i>
+                                        </div>
+                                    {% endif %}
+                                    <div>
+                                        <span class="fw-semibold text-dark small d-block">{{ item.product.product_name }}</span>
+                                        <small class="text-muted">Qty: {{ item.quantity }}</small>
+                                    </div>
+                                </div>
+                                <span class="fw-semibold text-dark small">₹{% widthratio item.product.product_price 1 item.quantity %}</span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <!-- Pay Button -->
+                    <button id="rzp-button" class="btn btn-dark btn-lg w-100 py-3 rounded-3 fw-bold shadow-sm d-flex align-items-center justify-content-center gap-2">
+                        <i class="bi bi-lock-fill"></i>
+                        Pay ₹{{ order.total_amount }} with Razorpay
+                    </button>
+
+                    <p class="text-center text-muted small mt-3 mb-0">
+                        <i class="bi bi-shield-check text-success me-1"></i>
+                        256-Bit Encrypted Payment | Powered by Razorpay
+                    </p>
+
+                    <!-- Hidden Verification Form -->
+                    <form id="payment-verify-form" action="{% url 'payment_callback' %}" method="POST" style="display: none;">
+                        {% csrf_token %}
+                        <input type="hidden" name="razorpay_payment_id" id="razorpay_payment_id">
+                        <input type="hidden" name="razorpay_order_id" id="razorpay_order_id">
+                        <input type="hidden" name="razorpay_signature" id="razorpay_signature">
+                    </form>
+
+                    <!-- Cancel / Return to checkout -->
+                    <div class="text-center mt-4">
+                        <a href="{% url 'checkout' %}" class="text-muted text-decoration-none small">
+                            <i class="bi bi-arrow-left me-1"></i> Cancel and Return to Checkout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Razorpay Checkout Script -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    var options = {
+        "key": "{{ razorpay_key_id }}",
+        "amount": "{{ amount_in_paise }}",
+        "currency": "INR",
+        "name": "Furnish",
+        "description": "Order #{{ order.order_id }}",
+        "order_id": "{{ razorpay_order_id }}",
+        "handler": function (response) {
+            document.getElementById('razorpay_payment_id').value = response.razorpay_payment_id;
+            document.getElementById('razorpay_order_id').value = response.razorpay_order_id;
+            document.getElementById('razorpay_signature').value = response.razorpay_signature;
+            document.getElementById('payment-verify-form').submit();
+        },
+        "prefill": {
+            "name": "{{ user.get_full_name|default:user.username }}",
+            "email": "{{ user.email|default:'' }}"
+        },
+        "theme": {
+            "color": "#212529"
+        },
+        "modal": {
+            "ondismiss": function() {
+                console.log('Payment modal dismissed');
+            }
+        }
+    };
+
+    var rzp = new Razorpay(options);
+
+    document.getElementById('rzp-button').onclick = function(e) {
+        rzp.open();
+        e.preventDefault();
+    };
+
+    // Automatically trigger checkout popup on page load
+    window.addEventListener('DOMContentLoaded', function() {
+        // slight timeout so page is rendered before modal popups
+        setTimeout(function() {
+            rzp.open();
+        }, 500);
+    });
+</script>
+{% endblock content %}

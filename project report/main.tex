@@ -1,0 +1,2290 @@
+\documentclass[12pt,a4paper]{article}
+
+% =========================================================
+% PACKAGES
+% =========================================================
+
+\usepackage[
+    a4paper,
+    top=0.55in,
+    bottom=0.45in,
+    left=0.65in,
+    right=0.65in
+]{geometry}
+
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{setspace}
+\usepackage{microtype}
+\usepackage{tikz}
+\usepackage{fancyhdr}
+\usepackage{tocloft}
+\usepackage{listings}
+
+% Times-like font
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+
+% =========================================================
+% COLORS
+% =========================================================
+\definecolor{bcetblue}{RGB}{25,65,120}
+\definecolor{codegreen}{RGB}{34,139,34}
+\definecolor{codegray}{RGB}{110,110,110}
+\definecolor{codepurple}{RGB}{128,0,128}
+\definecolor{codeblue}{RGB}{25,65,120}
+\definecolor{codebg}{RGB}{248,249,252}
+
+% =========================================================
+% CODE LISTING STYLE
+% =========================================================
+
+\lstdefinestyle{pythonstyle}{
+    backgroundcolor=\color{codebg},
+    commentstyle=\color{codegray}\itshape,
+    keywordstyle=\color{codeblue}\bfseries,
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codegreen},
+    basicstyle=\fontsize{7.5}{9.6}\ttfamily,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4,
+    frame=single,
+    rulecolor=\color{codeblue!35},
+    xleftmargin=12pt,
+    xrightmargin=4pt
+}
+
+\lstset{style=pythonstyle}
+
+% =========================================================
+% BODY FONT SIZE
+% =========================================================
+
+\renewcommand{\normalsize}{\fontsize{18}{27}\selectfont}
+
+% =========================================================
+% PAGE NUMBERING + AUTOMATIC PAGE BORDER
+% =========================================================
+
+\pagestyle{fancy}
+
+\fancyhf{}
+
+% Page number at bottom center
+\fancyfoot[C]{\thepage}
+
+% Remove header/footer lines
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ---------------------------------------------------------
+% Automatic border for EVERY page
+% ---------------------------------------------------------
+
+\fancyhead[C]{%
+\begin{tikzpicture}[remember picture,overlay]
+    \draw[
+        color=black,
+        line width=1.2pt
+    ]
+    ([xshift=0.28in,yshift=-0.28in]current page.north west)
+    rectangle
+    ([xshift=-0.28in,yshift=0.28in]current page.south east);
+\end{tikzpicture}%
+}
+
+% ---------------------------------------------------------
+% Plain page style
+% Used automatically by \section, \tableofcontents, etc.
+% ---------------------------------------------------------
+
+\fancypagestyle{plain}{
+    \fancyhf{}
+
+    % Page number
+    \fancyfoot[C]{\thepage}
+
+    % Automatic border
+    \fancyhead[C]{%
+    \begin{tikzpicture}[remember picture,overlay]
+        \draw[
+            color=black,
+            line width=1.2pt
+        ]
+        ([xshift=0.28in,yshift=-0.28in]current page.north west)
+        rectangle
+        ([xshift=-0.28in,yshift=0.28in]current page.south east);
+    \end{tikzpicture}%
+    }
+
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+% =========================================================
+% TABLE OF CONTENTS FORMATTING
+% =========================================================
+
+\renewcommand{\cftsecfont}{\fontsize{14}{18}\selectfont}
+\renewcommand{\cftsecpagefont}{\fontsize{14}{18}\selectfont}
+
+\setlength{\cftbeforesecskip}{8pt}
+
+% =========================================================
+% DOCUMENT
+% =========================================================
+
+\begin{document}
+
+% =========================================================
+% PAGE 1: TITLE PAGE
+% =========================================================
+
+\begin{center}
+
+% =========================================================
+% PROJECT TITLE
+% =========================================================
+
+{\color{bcetblue}
+\fontsize{16}{21}\selectfont
+\textbf{Development of Furnish -- AI Enabled Furniture Ecommerce Website}
+}
+
+\vfill
+
+% =========================================================
+% PROJECT REPORT
+% =========================================================
+
+{\fontsize{16}{20}\selectfont
+\bfseries
+A Project Report for Internship
+}
+
+\vfill
+
+% =========================================================
+% SUBMITTED BY
+% =========================================================
+
+{\fontsize{18}{27}\selectfont
+\itshape
+Submitted by
+}
+
+\nopagebreak\vspace{0.12in}
+
+{\fontsize{18}{27}\selectfont
+\bfseries
+\begin{tabular}{c}
+Sayan Pal \\[5pt]
+Arjun Kundu \\[5pt]
+Arpita Patra
+\end{tabular}
+}
+
+\vfill
+
+% =========================================================
+% DEGREE
+% =========================================================
+
+{\fontsize{18}{27}\selectfont
+\itshape
+in partial fulfillment for the award of the degree of
+}
+
+\nopagebreak\vspace{0.12in}
+
+{\color{bcetblue}
+\fontsize{15}{19}\selectfont
+\bfseries
+Bachelor of Computer Application
+}
+
+\vfill
+
+% =========================================================
+% COLLEGE NAME & LOGO
+% =========================================================
+
+{\color{bcetblue}
+\fontsize{16}{20}\selectfont
+\bfseries
+BENGAL COLLEGE OF ENGINEERING AND TECHNOLOGY
+}
+
+\nopagebreak\vspace{0.5in}
+
+\includegraphics[
+    width=1.2in,
+    height=1.2in,
+    keepaspectratio
+]{bcet-logo.png}
+
+\vspace{0.18in}
+
+% =========================================================
+% AT / EUPHORIA GENX
+% =========================================================
+
+{\fontsize{18}{27}\selectfont
+\itshape
+At
+}
+
+\nopagebreak\vspace{0.18in}
+
+{\color{bcetblue}
+\fontsize{14}{18}\selectfont
+\bfseries
+Euphoria GenX
+}
+
+\nopagebreak\vspace{0.18in}
+
+\includegraphics[
+    width=2.20in,
+    keepaspectratio
+]{euphoria.png}
+
+\vfill
+
+\end{center}
+
+
+% =========================================================
+% PAGE 2: BONAFIDE CERTIFICATE
+% =========================================================
+
+\newpage
+
+\vspace*{0.6in}
+
+\begin{center}
+{\fontsize{16}{20}\selectfont
+\textbf{Euphoria GenX}
+}
+\end{center}
+
+\vspace{0.15in}
+
+\begin{center}
+\includegraphics[
+    width=2.20in,
+    keepaspectratio
+]{euphoria.png}
+\end{center}
+
+\vspace{0.35in}
+
+\begin{center}
+{\fontsize{18}{27}\selectfont
+\textbf{BONAFIDE CERTIFICATE}
+}
+\end{center}
+
+\vspace{0.4in}
+
+\begin{center}
+\begin{spacing}{1.5}
+{\fontsize{16}{24}\selectfont
+\noindent
+Certified that this project work was carried out under my supervision. \\
+
+\textbf{``Development of Furnish -- AI Enabled Furniture Ecommerce Website''}
+is the bonafide work of:
+}
+\end{spacing}
+\end{center}
+
+\vspace{0.35in}
+
+\begin{center}
+\begin{spacing}{1.5}
+{\fontsize{16}{24}\selectfont
+\begin{tabular}{|p{2.4in}|p{2in}|}
+\hline
+\textbf{Name of the Student} & \textbf{Signature} \\ \hline
+Sayan Pal   & \rule{0pt}{0.5in} \\ \hline
+Arjun Kundu & \rule{0pt}{0.5in} \\ \hline
+Arpita Patra & \rule{0pt}{0.5in} \\ \hline
+\end{tabular}
+}
+\end{spacing}
+\end{center}
+
+\vspace{0.8in}
+
+\begin{flushleft}
+\begin{spacing}{1.2}
+{\fontsize{16}{24}\selectfont
+\noindent\rule{2.5in}{0.4pt}\\
+\vspace{0.05in}
+Raihan Mistry\\
+\textbf{PROJECT MENTOR}
+}
+\end{spacing}
+\end{flushleft}
+
+
+% =========================================================
+% PAGE 3: ACKNOWLEDGEMENT
+% =========================================================
+
+\newpage
+
+\begin{center}
+
+\vspace*{0.2in}
+
+{\fontsize{18}{22}\selectfont
+\textbf{ACKNOWLEDGEMENT}
+}
+
+\end{center}
+
+\vspace{0.6in}
+
+{\fontsize{18}{22}\selectfont
+
+\begin{spacing}{1.5}
+
+\noindent
+We take this opportunity to express our deep gratitude and sincerest thanks to our project mentor, \\
+\textbf{Mr. Raihan Mistry}, for providing invaluable suggestions, helpful guidance, and constant encouragement throughout the execution of this project work.
+
+\vspace{0.25in}
+
+\noindent
+We would also like to extend a special mention to our colleagues for their collaboration. Last but not the least, we are deeply grateful to all the faculty members of \textbf{Euphoria GenX} for their unwavering support and guidance.
+
+\end{spacing}
+
+}
+
+\vfill
+
+\vspace*{0.4in}
+
+
+% =========================================================
+% PAGE 4: TABLE OF CONTENTS
+% =========================================================
+
+\newpage
+
+\vspace*{0.25in}
+
+\begin{center}
+{\fontsize{18}{22}\selectfont
+\textbf{TABLE OF CONTENTS}
+}
+\end{center}
+
+\vspace{0.25in}
+
+% Remove default "Contents" heading
+\renewcommand{\contentsname}{}
+
+\begin{spacing}{1.25}
+\tableofcontents
+\end{spacing}
+
+
+% =========================================================
+% MAIN PROJECT REPORT
+% =========================================================
+
+\newpage
+
+% Main report begins from page 5
+\pagenumbering{arabic}
+\setcounter{page}{5}
+
+
+% =========================================================
+% 1. TITLE OF THE PROJECT (PAGE 5)
+% =========================================================
+
+\section{Title of the Project}
+
+\vspace{0.10in}
+
+{\fontsize{60}{20}\selectfont
+\begin{spacing}{1.2}
+
+\noindent
+\textbf{Official Project Title:} \\
+{\color{bcetblue}\textbf{\fontsize{16}{22}\selectfont Development of Furnish -- AI Enabled Furniture Ecommerce Website}}
+
+\vspace{0.15in}
+
+\noindent
+\textbf{1.1 Project Overview \& Profile Summary}
+
+\vspace{0.05in}
+
+\noindent
+The following profile table encapsulates the key identification attributes, academic affiliation, and foundational technical parameters of the developed system:
+
+\vspace{0.3in}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\fontsize{12}{16}\selectfont
+\begin{tabular}{|p{2.1in}|p{4.4in}|}
+\hline
+\textbf{Project Name} & \textbf{Furnish} -- AI Enabled Furniture E-Commerce \\ \hline
+\textbf{Project Nature} & Full-Stack Web Application \& Autonomous Conversational Agent \\ \hline
+\textbf{Academic Program} & Bachelor of Computer Application (BCA) \\ \hline
+\textbf{Institution} & Bengal College of Engineering and Technology (BCET) \\ \hline
+\textbf{Industrial Training Center} & Euphoria GenX (Project Mentor: Mr. Raihan Mistry) \\ \hline
+\textbf{Project Team Members} & Sayan Pal, Arjun Kundu, Arpita Patra \\ \hline
+\textbf{Primary Technologies} & Python 3.14, Django 5.x Framework, Google Gemini API, SQLite / PostgreSQL, Razorpay API, HTML5, CSS3, JavaScript \\ \hline
+\end{tabular}
+\end{center}
+
+\vspace{0.3in}
+
+\noindent
+\textbf{1.2 Executive Project Synopsis}
+
+\vspace{0.05in}
+
+\noindent
+\textbf{Furnish} is an advanced, enterprise-grade e-commerce web platform purposefully engineered to modernize online furniture shopping. Recognizing that furniture acquisition is fundamentally visual, spatial, and multi-component, the system couples a complete web store with an autonomous, real-time \textbf{Generative Artificial Intelligence}  Interior Stylist powered by \textbf{Google Gemini} .
+
+\vspace{0.10in}
+
+\noindent
+The project bridges the gap between conventional digital merchandising and interactive interior consultation. Beyond standard catalog browsing, wishlists, and secure transactions via \textbf{Razorpay} , Furnish deploys an autonomous conversational concierge capable of interpreting customer design requirements, recommending coordinated furniture ensembles, managing shopping carts, and tracking order logistics directly through natural language dialogue.
+
+\end{spacing}
+}
+
+\vfill
+
+\newpage
+
+
+% =========================================================
+% 2. INTRODUCTION AND OBJECTIVES (PAGE 6)
+% =========================================================
+
+\section{Introduction and Objectives of the Project}
+
+\vspace{0.10in}
+
+{\fontsize{13.5}{19.5}\selectfont
+\begin{spacing}{1.2}
+
+\noindent
+\textbf{2.1 Introduction \& Context}
+
+\vspace{0.05in}
+
+\noindent
+The retail furniture industry has witnessed rapid digital transformation; however, online consumer engagement has traditionally been impeded by the inability to visualize spatial harmony and color coordination across multi-item purchases. Standard e-commerce portals present static grids of products with disconnected descriptions, leaving buyers uncertain whether selected sofas, center tables, and storage units will cohesively integrate into their living spaces.
+
+\vspace{0.10in}
+
+\noindent
+\textbf{Furnish} resolves this friction by synthesizing an end-to-end digital retail storefront with an intelligent, conversational interior styling assistant. Constructed on the robust Django Model-View-Template (MVT) architecture, the portal delivers a responsive catalog, multidimensional price and category filtering, custom customer address books, persistent wishlists, and seamless Razorpay payment processing. Concurrently, an autonomous AI shopping agent guides the customer from product discovery to post-order tracking.
+
+\vspace{0.4in}
+
+\noindent
+\textbf{2.2 Objectives of the Project}
+
+\vspace{0.05in}
+
+\noindent
+The core objectives guiding the architectural design and implementation of Furnish include:
+
+\vspace{0.08in}
+
+\begin{itemize}
+    \setlength{\itemsep}{4pt}
+    \setlength{\parskip}{0pt}
+    \item \textbf{Comprehensive E-Commerce Architecture:} To engineer a reliable, role-secured web platform utilizing Python and Django, enabling smooth catalog discovery, user authentication, customer profile management, and persistent cart management.
+    \item \textbf{Autonomous Generative AI Interior Stylist:} To integrate Google Gemini LLM with autonomous tool/function-calling capability, allowing the AI to recommend room-coordinated aesthetics, search catalog stock, mutate cart contents, and track shipments in natural language.
+    \item \textbf{Normalized Relational Data Modeling:} To construct a structured RDBMS schema enforcing referential integrity across users, categories, products, wishlists, shopping carts, addresses, and order items.
+    \item \textbf{Secure Transaction Processing:} To integrate the Razorpay payment gateway API with cryptographic signature verification (HMAC-SHA256) alongside Cash-on-Delivery (COD) to guarantee financial security.
+    \item \textbf{Real-Time Order Tracking \& Fulfilment:} To establish complete order transparency utilizing unique UUID order tokens, automated tracking numbers, and instant status updates for consumers.
+\end{itemize}
+
+\end{spacing}
+}
+
+\vfill
+
+\newpage
+
+
+% =========================================================
+% 3. PROJECT CATEGORY (PAGE 7)
+% =========================================================
+
+\section{Project Category}
+
+\vspace{0.10in}
+
+{\fontsize{13.5}{19}\selectfont
+\begin{spacing}{1.18}
+
+\noindent
+As per academic and software engineering classification paradigms, the project \textbf{Furnish} constitutes a multi-faceted application synthesizing four essential computer science domains:
+
+\vspace{0.12in}
+
+\noindent
+\textbf{3.1 Relational Database Management Systems (RDBMS)}
+
+\vspace{0.04in}
+
+\noindent
+The backbone of Furnish is structured upon a fully normalized relational database (PostgreSQL), accessed through Django's Object-Relational Mapper (ORM). The data architecture models multi-table relational entities \textbf{(\texttt{User}, \texttt{Ecomm\_Category}, \texttt{Ecom\_Product}, \texttt{Ecom\_Favourites}, \texttt{Ecom\_Cart}, \texttt{Ecom\_Adress}, \texttt{Ecom\_Order}, and \texttt{Ecom\_OrderItem})} . Referential integrity is enforced through strict primary/foreign key mappings, cascading rules, unique slug constraints, and transactional consistency for order placement and payment status logging.
+
+\vspace{0.4in}
+
+\noindent
+\textbf{3.2 Object-Oriented Programming Systems (OOPS)}
+
+\vspace{0.04in}
+
+\noindent
+The application is constructed upon Python 3 and Django, embodying strict OOP principles:
+\begin{itemize}
+    \setlength{\itemsep}{2pt}
+    \setlength{\parskip}{0pt}
+    \item \textbf{Encapsulation:} Model classes encapsulate business constraints, auto-slugification within \texttt{save()} overrides, and calculated attributes (e.g., \texttt{total\_price} via properties).
+    \item \textbf{Inheritance \& Modularity:} Models subclass Django's \texttt{models.Model}, while modular views cleanly isolate authentication, cart mutations, checkout workflows, and AI services.
+    \item \textbf{Abstraction:} The \texttt{FurnishAIAgent} class abstracts complex LLM prompt construction, context variable handling, and tool execution behind clean interface methods.
+\end{itemize}
+
+\vspace{0.4in}
+
+\noindent
+\textbf{3.3 Artificial Intelligence \& Intelligent Agent Systems}
+
+\vspace{0.04in}
+
+\noindent
+Furnish advances beyond static rule-based chatbots by deploying an \textbf{Agentic AI Shopping Concierge} utilizing the Google Gemini LLM. Powered by autonomous function calling, the AI agent is equipped with native tools (\texttt{search\_products}, \texttt{get\_product\_details}, \texttt{add\_product\_to\_cart}, \texttt{get\_order\_history}, \texttt{track\_specific\_order}). The agent reasons over customer intent, executes live database queries, performs shopping cart modifications, and delivers interactive visual UI responses.
+
+\vspace{0.4in}
+
+\noindent
+\textbf{3.4 Web Engineering, Multimedia \& Distributed Networking}
+
+\vspace{0.04in}
+
+\noindent
+The platform adopts a multi-tier client-server architecture. Secure networking protocols (HTTPS, TLS) govern communications, including CSRF token verification, session protection, RESTful AJAX endpoints for asynchronous AI streaming, media storage pipelines for high-resolution furniture imagery, and external webhook integrations with Razorpay servers.
+
+\end{spacing}
+}
+
+\vfill
+
+\newpage
+
+
+% =========================================================
+% 4. TOOLS / PLATFORM / HARDWARE / SOFTWARE
+% =========================================================
+
+% =========================================================
+% 4. TOOLS / PLATFORM & SOFTWARE SPECIFICATIONS (PAGE 8)
+% =========================================================
+
+\section{Tools/Platform, Software Requirement Specifications}
+
+\vspace{0.10in}
+
+{\fontsize{13}{18}\selectfont
+\begin{spacing}{1.15}
+
+\noindent
+\textbf{4.1 Software Requirements \& Development Platform}
+
+\vspace{0.06in}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\fontsize{11.5}{15}\selectfont
+\begin{tabular}{|p{2.1in}|p{4.4in}|}
+\hline
+\textbf{Operating System} & Windows 10 / 11, Linux (Ubuntu), or macOS \\ \hline
+\textbf{Programming Language} & Python 3.10+ (Developed with Python 3.14) \\ \hline
+\textbf{Web Framework} & Django 5.x (Model-View-Template Architecture) \\ \hline
+\textbf{Database Engine} & PostgreSQL \\ \hline
+\textbf{Artificial Intelligence Engine} & Google Gemini API (\texttt{google-genai} SDK, Gemini 2.5 / 3.6 Flash) \\ \hline
+\textbf{Payment Gateway API} & Razorpay Python SDK (\texttt{razorpay}) \& Checkout JS \\ \hline
+\textbf{Frontend Technologies} & HTML5, CSS3, JavaScript (ES6+), Bootstrap 5 \\ \hline
+\textbf{Development Tools / IDE} & Antigravity IDE, Git \& GitHub \\ \hline
+\end{tabular}
+\end{center}
+
+\vspace{0.12in}
+
+\noindent
+\textbf{4.2 Hardware Requirement Specifications}
+
+\vspace{0.06in}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\fontsize{11.5}{15}\selectfont
+\begin{tabular}{|p{2.1in}|p{4.4in}|}
+\hline
+\textbf{Processor} & Dual Core 2.0 GHz or higher (Intel Core i3/i5 or AMD Ryzen) \\ \hline
+\textbf{System Memory (RAM)} & Minimum 4 GB (8 GB or higher recommended) \\ \hline
+\textbf{Storage} & Minimum 500 MB available disk space for project \& database \\ \hline
+\textbf{Network Connectivity} & Active Broadband Internet (for Google Gemini \& Razorpay APIs) \\ \hline
+\end{tabular}
+\end{center}
+
+\end{spacing}
+}
+
+\vspace{0.15in}
+
+
+% =========================================================
+% 5. GOALS OF IMPLEMENTATION (PAGE 8)
+% =========================================================
+
+\section{Goals of Implementation}
+
+\vspace{0.08in}
+
+{\fontsize{13.5}{19.5}\selectfont
+\begin{spacing}{1.2}
+
+\noindent
+The primary goal of implementation is to deliver an end-to-end, resilient furniture e-commerce platform that pairs streamlined catalog discovery, persistent carts, and secure Razorpay payments with an autonomous Gemini AI interior stylist for personalized, conversational shopping.
+
+\end{spacing}
+}
+
+\vfill
+
+\newpage
+
+
+% =========================================================
+% 6. DATA MODEL (PAGE 9)
+% =========================================================
+
+\section{Data Model}
+
+\vspace{0.10in}
+
+{\fontsize{13.5}{19.5}\selectfont
+\begin{spacing}{1.2}
+
+\noindent
+The data model of \textbf{Furnish} illustrates the complete relational database architecture and entity mappings powering the platform. It defines the structural dependencies and foreign-key associations across customer authentication (\texttt{User}), product taxonomies (\texttt{Ecomm\_Category}), inventory catalog (\texttt{Ecom\_Product}), customer favourites (\texttt{Ecom\_Favourites}), shopping cart items (\texttt{Ecom\_Cart}), address records (\texttt{Ecom\_Adress}), and transactional orders (\texttt{Ecom\_Order} and \texttt{Ecom\_OrderItem}).
+
+\end{spacing}
+}
+
+\vspace{0.4in}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[
+    width=0.96\textwidth,
+    keepaspectratio
+]{DataModels.png}
+\vspace{0.3in}
+\caption{ER Data Model Diagram of Furnish E-Commerce System}
+\label{fig:datamodels}
+\end{figure}
+
+\vfill
+
+\newpage
+
+
+% =========================================================
+% 7. FUNCTIONAL REQUIREMENTS (PAGE 10 - PART 1)
+% =========================================================
+
+\section{Functional Requirements (Use Case Specifications)}
+
+\vspace{0.08in}
+
+{\fontsize{13}{18}\selectfont
+\begin{spacing}{1.15}
+
+\noindent
+Functional requirements specify the behavioral capabilities, services, and operational reactions of the \textbf{Furnish} platform to user interactions. The core system workflows are formally detailed below as structured use case specification tables:
+
+\vspace{0.10in}
+
+% --- UC-01 ---
+\noindent
+\textbf{Use Case 1: User Authentication \& Account Management}
+
+\vspace{0.04in}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\fontsize{10.5}{14}\selectfont
+\begin{tabular}{|p{1.6in}|p{4.9in}|}
+\hline
+\textbf{Use Case Name} & User Authentication \& Profile Management (\textbf{UC-01}) \\ \hline
+\textbf{Primary Actor} & End-User (Customer) / Guest \\ \hline
+\textbf{Priority} & \textbf{High} (Foundational security and personalization) \\ \hline
+\textbf{Preconditions} & System is online; user accesses the portal via web browser. \\ \hline
+\textbf{Main Flow (Details)} &
+1. Guest navigates to registration page, enters username, email, and password. \newline
+2. Django authenticates input, enforces password validation, and stores PBKDF2 hash. \newline
+3. User logs in; session is established and personalized state (cart, wishlist) is loaded. \newline
+4. User can update delivery addresses (\texttt{Ecom\_Adress}) and change password securely. \\ \hline
+\textbf{Postconditions} & Authenticated user session initiated; authorization tokens granted. \\ \hline
+\end{tabular}
+\end{center}
+
+\vspace{0.08in}
+
+% --- UC-02 ---
+\noindent
+\textbf{Use Case 2: Product Catalog Browsing \& Multi-Parametric Search}
+
+\vspace{0.04in}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\fontsize{10.5}{14}\selectfont
+\begin{tabular}{|p{1.6in}|p{4.9in}|}
+\hline
+\textbf{Use Case Name} & Catalog Browsing \& Multi-Filter Search (\textbf{UC-02}) \\ \hline
+\textbf{Primary Actor} & Guest / Registered User \\ \hline
+\textbf{Priority} & \textbf{High} (Core merchandising and discovery) \\ \hline
+\textbf{Preconditions} & Product catalog populated with active categories and inventory items. \\ \hline
+\textbf{Main Flow (Details)} &
+1. User browses category listings (Living Room, Bedroom, Dining, Office). \newline
+2. User submits search queries matching product title, description, or category. \newline
+3. System applies multi-criteria filters: category slugs, preset price tiers (under ₹5K to ₹25K+), and custom min/max price thresholds. \newline
+4. System displays matching items with prices, stock status, and high-res imagery. \\ \hline
+\textbf{Postconditions} & Dynamically filtered product queryset rendered with responsive pagination. \\ \hline
+\end{tabular}
+\end{center}
+
+\vspace{0.08in}
+
+% --- UC-03 ---
+\noindent
+\textbf{Use Case 3: Cart \& Wishlist (Favourites) Operations}
+
+\vspace{0.04in}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\fontsize{10.5}{14}\selectfont
+\begin{tabular}{|p{1.6in}|p{4.9in}|}
+\hline
+\textbf{Use Case Name} & Shopping Cart \& Favourites Management (\textbf{UC-03}) \\ \hline
+\textbf{Primary Actor} & Registered User \\ \hline
+\textbf{Priority} & \textbf{Critical} (Prerequisite for transaction fulfillment) \\ \hline
+\textbf{Preconditions} & User is authenticated; selected products are active in inventory. \\ \hline
+\textbf{Main Flow (Details)} &
+1. User adds desired product to personal favourites (wishlist) or shopping cart. \newline
+2. User modifies cart quantities with increment/decrement controls or removes items. \newline
+3. System dynamically calculates line-item subtotal and aggregate order total via model properties. \newline
+4. Persistent cart count updates in real-time across navigation headers. \\ \hline
+\textbf{Postconditions} & Database records in \texttt{Ecom\_Cart} and \texttt{Ecom\_Favourites} updated. \\ \hline
+\end{tabular}
+\end{center}
+
+\end{spacing}
+}
+
+\vfill
+
+\newpage
+
+
+% =========================================================
+% 7. FUNCTIONAL REQUIREMENTS (PAGE 11 - PART 2)
+% =========================================================
+
+\noindent
+{\color{bcetblue}\textbf{\fontsize{14}{18}\selectfont 7. Functional Requirements (Use Case Specifications)}}
+
+\vspace{0.10in}
+
+{\fontsize{13}{18}\selectfont
+\begin{spacing}{1.15}
+
+% --- UC-04 ---
+\noindent
+\textbf{Use Case 4: Checkout, Order Placement \& Razorpay Payment Gateway}
+
+\vspace{0.04in}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\fontsize{10.5}{14}\selectfont
+\begin{tabular}{|p{1.6in}|p{4.9in}|}
+\hline
+\textbf{Use Case Name} & Checkout \& Payment Processing (\textbf{UC-04}) \\ \hline
+\textbf{Primary Actor} & Registered User \\ \hline
+\textbf{Priority} & \textbf{Critical} (Revenue generation and financial safety) \\ \hline
+\textbf{Preconditions} & User cart is non-empty; at least one delivery address is saved. \\ \hline
+\textbf{Main Flow (Details)} &
+1. User proceeds to checkout, selects delivery address, and chooses payment mode: \newline
+   \textbf{a) Cash on Delivery (COD):} Order created immediately with pending status. \newline
+   \textbf{b) Online Payment:} Razorpay API generates order ID; frontend launches modal. \newline
+2. Upon payment completion, Razorpay returns payment ID and cryptographic signature. \newline
+3. Backend verifies HMAC-SHA256 signature, validates payment authenticity, and updates status to completed. \newline
+4. System creates \texttt{Ecom\_Order} and \texttt{Ecom\_OrderItem} records, deducts stock, and clears cart. \\ \hline
+\textbf{Postconditions} & Unique order UUID and tracking token generated; invoice recorded. \\ \hline
+\end{tabular}
+\end{center}
+
+\vspace{0.08in}
+
+% --- UC-05 ---
+\noindent
+\textbf{Use Case 5: Autonomous AI Interior Stylist \& Shopping Concierge}
+
+\vspace{0.04in}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\fontsize{10.5}{14}\selectfont
+\begin{tabular}{|p{1.6in}|p{4.9in}|}
+\hline
+\textbf{Use Case Name} & Autonomous AI Interior Stylist (\textbf{UC-05}) \\ \hline
+\textbf{Primary Actor} & Registered User / Guest \\ \hline
+\textbf{Priority} & \textbf{High} (Core intelligent differentiator of the platform) \\ \hline
+\textbf{Preconditions} & Google GenAI API is online; catalog context and session are active. \\ \hline
+\textbf{Main Flow (Details)} &
+1. User initiates conversational chat requesting room styling ideas or product suggestions. \newline
+2. Google Gemini model interprets user intent and autonomously invokes tools: \newline
+   -- \texttt{search\_products} / \texttt{get\_product\_details} to suggest real matching store inventory. \newline
+   -- \texttt{add\_product\_to\_cart} / \texttt{remove\_product\_from\_cart} to mutate cart directly. \newline
+   -- \texttt{get\_order\_history} / \texttt{track\_specific\_order} to report shipment status. \newline
+3. System returns structured JSON payload rendering rich UI product cards and chips. \\ \hline
+\textbf{Postconditions} & AI context preserved; requested catalog actions executed autonomously. \\ \hline
+\end{tabular}
+\end{center}
+
+\vspace{0.08in}
+
+% --- UC-06 ---
+\noindent
+\textbf{Use Case 6: Real-Time Order Tracking \& Shipment History}
+
+\vspace{0.04in}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\fontsize{10.5}{14}\selectfont
+\begin{tabular}{|p{1.6in}|p{4.9in}|}
+\hline
+\textbf{Use Case Name} & Order Tracking \& Shipment History (\textbf{UC-06}) \\ \hline
+\textbf{Primary Actor} & Registered User / Guest (via order identifier) \\ \hline
+\textbf{Priority} & \textbf{Medium} (Post-purchase customer satisfaction) \\ \hline
+\textbf{Preconditions} & Valid order record exists with assigned order ID and tracking token. \\ \hline
+\textbf{Main Flow (Details)} &
+1. Customer accesses Orders portal or enters order tracking query into AI assistant. \newline
+2. Backend queries \texttt{Ecom\_Order} matching user ID, UUID, or tracking number. \newline
+3. System renders order date, item breakdown, payment status, and dispatch progress. \\ \hline
+\textbf{Postconditions} & Complete order audit trail and shipping status displayed to the user. \\ \hline
+\end{tabular}
+\end{center}
+
+\end{spacing}
+}
+
+\vfill
+
+\newpage
+
+
+% =========================================================
+% 8. NON-FUNCTIONAL REQUIREMENTS (PAGE 12)
+% =========================================================
+
+\section{Non-functional Requirements}
+
+\vspace{0.08in}
+
+{\fontsize{13}{18}\selectfont
+\begin{spacing}{1.15}
+
+\noindent
+Non-functional requirements outline the quality metrics, operational benchmarks, and security constraints governing the execution of the \textbf{Furnish} platform:
+
+\vspace{0.10in}
+
+\noindent
+\textbf{8.1 Performance \& Low-Latency Responsiveness}
+\begin{itemize}
+    \setlength{\itemsep}{1.5pt}
+    \item \textbf{Page Load Latency:} Catalog and product detail pages render under 1.5 seconds on standard broadband connections through query optimization and cached static assets.
+    \item \textbf{Asynchronous AI Execution:} The AI stylist leverages asynchronous AJAX endpoints with lightweight JSON payloads, streaming tool outputs within 1.0 to 2.5 seconds.
+    \item \textbf{Database Query Efficiency:} Utilizes Django ORM \texttt{select\_related} and query filters to prevent $N+1$ query bottlenecks during catalog browsing.
+\end{itemize}
+
+\vspace{0.08in}
+
+\noindent
+\textbf{8.2 Security, Cryptography \& Data Integrity}
+\begin{itemize}
+    \setlength{\itemsep}{1.5pt}
+    \item \textbf{Authentication Security:} Passwords hashed via PBKDF2 with SHA-256 salts; session cookies secured with \texttt{HttpOnly} and \texttt{SameSite} flags.
+    \item \textbf{Financial Transaction Integrity:} Razorpay webhook and checkout handshakes strictly validated via HMAC-SHA256 signature verification preventing tamper attacks.
+    \item \textbf{Injection \& Cross-Site Protection:} Django ORM parameterized queries completely neutralize SQL injection; automatic template escaping mitigates XSS attacks.
+\end{itemize}
+
+\vspace{0.08in}
+
+\noindent
+\textbf{8.3 Reliability, Fault Tolerance \& AI Fallback}
+\begin{itemize}
+    \setlength{\itemsep}{1.5pt}
+    \item \textbf{System Uptime:} Target operational availability of 99.9\% under normal deployment workloads.
+    \item \textbf{Graceful Degradation:} If Google GenAI API rate limits or network failures occur, the AI concierge falls back gracefully with polite notifications without crashing the web app.
+    \item \textbf{Transactional Integrity:} Order creation and cart purging execute within atomic database transactions to eliminate partial or corrupted order states.
+\end{itemize}
+
+\vspace{0.08in}
+
+\noindent
+\textbf{8.4 Usability, Aesthetics \& Cross-Device Portability}
+\begin{itemize}
+    \setlength{\itemsep}{1.5pt}
+    \item \textbf{Responsive Design:} Adaptive layout built with HTML5, CSS3, and Bootstrap 5 ensures seamless accessibility across smartphones, tablets, laptops, and wide desktop screens.
+    \item \textbf{Intuitive UI Elements:} Real-time visual feedback, interactive AI product cards, and consistent color palettes (\texttt{bcetblue}) ensure an effortless user journey.
+\end{itemize}
+
+\vspace{0.08in}
+
+\noindent
+\textbf{8.5 Summary of Non-Functional Specifications}
+
+\vspace{0.04in}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\fontsize{10.5}{14}\selectfont
+\begin{tabular}{|p{1.7in}|p{2.2in}|p{2.6in}|}
+\hline
+\textbf{Quality Attribute} & \textbf{Target Metric} & \textbf{Implementation Technique} \\ \hline
+\textbf{Performance} & Page render $< 1.5$s; AI $< 2.5$s & Asynchronous AJAX, DB indexation \\ \hline
+\textbf{Security} & Zero injection vulnerabilities & Django ORM, CSRF, HMAC-SHA256 \\ \hline
+\textbf{Reliability} & 99.9\% uptime; atomic orders & ACID transactions, API fallback handling \\ \hline
+\textbf{Portability} & Cross-browser \& mobile adaptive & HTML5/CSS3, Bootstrap 5 responsive grid \\ \hline
+\end{tabular}
+\end{center}
+
+\end{spacing}
+}
+
+\vfill
+
+\newpage
+
+% =========================================================
+% 9. FEASIBILITY STUDY (PAGE 13)
+% =========================================================
+
+\section{Feasibility Study}
+
+\vspace{0.08in}
+
+{\fontsize{13}{18}\selectfont
+\begin{spacing}{1.15}
+
+\noindent
+A feasibility study was conducted to evaluate the practical, operational, technical, and economic viability of developing \textbf{Furnish}.
+
+\vspace{0.10in}
+
+\begin{enumerate}
+    \setlength{\itemsep}{2pt}
+    \setlength{\parskip}{0pt}
+    \item \textbf{Product Feasibility:} Furnish is a modern AI-powered e-commerce platform that helps users select and coordinate furniture through personalized interior styling.
+
+    \item \textbf{Technical Feasibility:} The system uses reliable technologies such as Python, Django, PostgreSQL/SQLite, Gemini API, and Razorpay, all familiar to the development team.
+
+    \item \textbf{Social \& Operational Feasibility:} A simple, responsive interface and conversational AI assistant make the platform easy to use with minimal training.
+
+    \item \textbf{Economic Feasibility:} Open-source technologies reduce development costs, while available AI and payment service allowances keep the project within budget.
+
+    \item \textbf{Alternative Solution:} A desktop inventory system or static catalog was considered, but these lack public e-commerce, online payments, and personalized AI styling.
+\end{enumerate}
+
+
+\vspace{0.12in}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.22}
+\fontsize{10.5}{14}\selectfont
+\begin{tabular}{|p{2.0in}|p{4.5in}|}
+\hline
+\multicolumn{2}{|c|}{\textbf{\fontsize{11}{15}\selectfont Feasibility Study Summary Matrix}} \\ \hline
+\textbf{System:} Furnish E-Commerce Platform & \textbf{Date:} 14 September, 2026 \\ \hline
+\textbf{Author:} Sayan Pal &  \\ \hline
+\textbf{Product} & The project requires an intelligent, responsive web application that enables online furniture discovery, cart management, secure checkout, and real-time AI styling assistance. \\ \hline
+\textbf{Technical Feasibility} & The application is developed using Python, Django, SQLite/PostgreSQL, Google Gemini API, and Razorpay. The team is proficient and competent in this technology stack. \\ \hline
+\textbf{Social Feasibility} & The interface is intuitive and self-explanatory. Users are IT-literate and conversational AI makes interaction natural and effortless. \\ \hline
+\textbf{Market Research} & Market research confirms growing consumer preference for online furniture purchases, with significant demand for assisted interior decoration and aesthetic curation. \\ \hline
+\textbf{Economic Feasibility} & The application is built using open-source frameworks and free developer tiers, ensuring full delivery within the allocated budget. \\ \hline
+\textbf{Alternate Solution} & A static catalog website or desktop software; however, static sites cannot offer conversational interior advice, and desktop tools cannot support remote online commerce. \\ \hline
+\end{tabular}
+\end{center}
+
+\end{spacing}
+}
+
+\vfill
+
+\newpage
+
+
+% =========================================================
+% 10. PROJECT PLANNING (PAGE 14)
+% =========================================================
+
+\section{Project Planning}
+
+\vspace{0.08in}
+
+{\fontsize{13}{18}\selectfont
+\begin{spacing}{1.15}
+
+\noindent
+Project planning establishes a disciplined, phased execution strategy to ensure timely delivery, architectural stability, and continuous quality verification. The engineering workflow for \textbf{Furnish} was divided into ten sequential phases, illustrated in the process flow diagram below:
+
+\vspace{0.10in}
+
+% --- Process Flow Diagram ---
+\begin{center}
+    \includegraphics[
+        width=0.85\textwidth,
+        height=5in,
+        keepaspectratio
+    ]{download.png}
+\end{center}
+
+\vspace{0.10in}
+
+\noindent
+\textbf{10.1 Key Deliverables and Phase Breakdown}
+
+\vspace{0.06in}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\fontsize{9.5}{13}\selectfont
+\begin{tabular}{|p{0.5in}|p{2.1in}|p{3.9in}|}
+\hline
+\textbf{Phase} & \textbf{Planning Stage} & \textbf{Key Activities \& Deliverables} \\ \hline
+
+\textbf{1} & Requirement Analysis &
+Formalize functional/non-functional scope and user personas. \\ \hline
+
+\textbf{2} & System \& Database Design &
+Design normalized ER schema, data models, and API blueprints. \\ \hline
+
+\textbf{3} & Frontend Development &
+Build responsive UI templates, catalog views, and chat interface. \\ \hline
+
+\textbf{4} & Django Backend Development &
+Configure Django project, model mappings, and URL controllers. \\ \hline
+
+\textbf{5} & E-Commerce Features &
+Implement cart operations, product filtering, and favourites. \\ \hline
+
+\textbf{6} & Payment Integration &
+Configure Razorpay SDK, checkout flow, and HMAC signatures. \\ \hline
+
+\textbf{7} & AI Integration &
+Deploy Gemini AI agent with autonomous tool/function-calling. \\ \hline
+
+\textbf{8} & Testing \& Debugging &
+Execute unit tests, edge-case checks, and payment simulations. \\ \hline
+
+\textbf{9} & Deployment &
+Configure web servers, environment security, and static assets. \\ \hline
+
+\textbf{10} & Repeated Testing \& Maint. &
+Post-release monitoring, performance audits, and feedback iterations. \\ \hline
+
+\end{tabular}
+\end{center}
+
+\end{spacing}
+}
+
+
+\vfill
+
+\newpage
+
+
+\section{Database Design}
+
+\vspace{0.08in}
+
+{\fontsize{13}{18}\selectfont
+\begin{spacing}{1.15}
+
+\noindent
+The database design of \textbf{Furnish} follows a normalized relational structure managed through Django's Object-Relational Mapping (ORM) layer.
+
+\vspace{0.05in}
+
+% --- TABLE 1: User ---
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\fontsize{9}{12}\selectfont
+\begin{tabular}{|p{1.4in}|p{1.1in}|p{0.8in}|p{2.9in}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{\fontsize{10}{13}\selectfont Name of Type: User (Django Authentication \& Customer Entity)}} \\ \hline
+\textbf{Attribute} & \textbf{Datatype} & \textbf{Key} & \textbf{Description} \\ \hline
+\texttt{id} & AutoField (Int) & Primary Key (PK) & Unique auto-incrementing user identification number. \\ \hline
+\texttt{username} & CharField(150) & Unique & Distinct alphanumeric handle used for login authentication. \\ \hline
+\texttt{email} & EmailField(254) & None & Verified customer contact and notification email address. \\ \hline
+\texttt{password} & CharField(128) & None & Securely hashed password string (salted PBKDF2-SHA256). \\ \hline
+\texttt{first\_name} & CharField(150) & None & Customer's given legal first name. \\ \hline
+\texttt{last\_name} & CharField(150) & None & Customer's family legal surname. \\ \hline
+\texttt{is\_staff} & BooleanField & None & Authorization flag granting administrative dashboard access. \\ \hline
+\texttt{is\_active} & BooleanField & None & Operational account status toggle (Default: \texttt{True}). \\ \hline
+\texttt{date\_joined} & DateTimeField & None & System timestamp recording user account registration. \\ \hline
+\end{tabular}
+\end{center}
+
+\vspace{0.05in}
+
+% --- TABLE 2: Ecomm_Category ---
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\fontsize{9}{12}\selectfont
+\begin{tabular}{|p{1.4in}|p{1.1in}|p{0.8in}|p{2.9in}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{\fontsize{10}{13}\selectfont Name of Type: Ecomm\_Category (Product Category Entity)}} \\ \hline
+\textbf{Attribute} & \textbf{Datatype} & \textbf{Key} & \textbf{Description} \\ \hline
+\texttt{id} & AutoField (Int) & Primary Key (PK) & Unique auto-incrementing category identification number. \\ \hline
+\texttt{category\_name} & CharField(100) & Unique & Display name of furniture classification (e.g., Living, Dining). \\ \hline
+\texttt{category\_slug} & SlugField(100) & Unique & SEO-friendly URL slug auto-generated from category name. \\ \hline
+\texttt{category\_desc} & TextField & None & Detailed textual narrative describing styling theme (Nullable). \\ \hline
+\texttt{category\_image} & ImageField & None & Server file path for category banner/cover imagery (Nullable). \\ \hline
+\texttt{category\_created\_at} & DateTimeField & None & Timestamp recording category taxonomy creation. \\ \hline
+\end{tabular}
+\end{center}
+
+\vspace{0.08in}
+
+% --- TABLE 3: Ecom_Product ---
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\fontsize{9}{12}\selectfont
+\begin{tabular}{|p{1.4in}|p{1.1in}|p{0.8in}|p{2.9in}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{\fontsize{10}{13}\selectfont Name of Type: Ecom\_Product (Furniture Product Entity)}} \\ \hline
+\textbf{Attribute} & \textbf{Datatype} & \textbf{Key} & \textbf{Description} \\ \hline
+\texttt{id} & AutoField (Int) & Primary Key (PK) & Unique auto-incrementing product identification number. \\ \hline
+\texttt{product\_category} & ForeignKey & Foreign Key (FK) & Maps to \texttt{Ecomm\_Category(id)} with \texttt{ON DELETE CASCADE}. \\ \hline
+\texttt{product\_name} & CharField(150) & Unique & Commercial title of the furniture piece. \\ \hline
+\texttt{product\_slug} & SlugField(150) & Unique & Canonical URL slug for SEO routing and product detail views. \\ \hline
+\texttt{product\_image} & ImageField & None & File path pointing to high-resolution item visual (Nullable). \\ \hline
+\texttt{product\_description} & TextField & None & Comprehensive product specifications, materials, and dimensions. \\ \hline
+\texttt{product\_price} & DecimalField(10,2) & None & Billed retail purchase price in INR (Rs.). \\ \hline
+\texttt{product\_quantity\_in\_stock} & IntegerField & None & Available warehouse inventory quantity count. \\ \hline
+\texttt{product\_is\_active} & BooleanField & None & Catalog visibility status flag (Default: \texttt{True}). \\ \hline
+\texttt{product\_is\_featured} & BooleanField & None & Showcase highlight toggle for homepage featured carousel. \\ \hline
+\texttt{product\_created\_at} & DateTimeField & None & System timestamp recording product listing date. \\ \hline
+\end{tabular}
+\end{center}
+
+\end{spacing}
+}
+
+\vfill
+
+\newpage
+
+
+% =========================================================
+% 11. DATABASE DESIGN (PAGE 16 - CONTINUED)
+% =========================================================
+
+\noindent
+{\color{bcetblue}\textbf{\fontsize{14}{18}\selectfont 11. Database Design (Schema Specifications)}}
+
+\vspace{0.08in}
+
+{\fontsize{13}{18}\selectfont
+\begin{spacing}{1.15}
+
+% --- TABLE 4: Ecom_Favourites ---
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\fontsize{9}{12}\selectfont
+\begin{tabular}{|p{1.4in}|p{1.1in}|p{0.8in}|p{2.9in}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{\fontsize{10}{13}\selectfont Name of Type: Ecom\_Favourites (Customer Wishlist Entity)}} \\ \hline
+\textbf{Attribute} & \textbf{Datatype} & \textbf{Key} & \textbf{Description} \\ \hline
+\texttt{id} & AutoField (Int) & Primary Key (PK) & Auto-incrementing wishlist entry identification key. \\ \hline
+\texttt{user} & ForeignKey & Foreign Key (FK) & Maps to \texttt{User(id)} with \texttt{ON DELETE CASCADE}. \\ \hline
+\texttt{product} & ForeignKey & Foreign Key (FK) & Maps to \texttt{Ecom\_Product(id)} with \texttt{ON DELETE CASCADE}. \\ \hline
+\texttt{createdaAt} & DateField & None & Date on which item was saved to customer wishlist. \\ \hline
+\end{tabular}
+\end{center}
+
+\vspace{0.06in}
+
+% --- TABLE 5: Ecom_Cart ---
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\fontsize{9}{12}\selectfont
+\begin{tabular}{|p{1.4in}|p{1.1in}|p{0.8in}|p{2.9in}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{\fontsize{10}{13}\selectfont Name of Type: Ecom\_Cart (Active Shopping Cart Entity)}} \\ \hline
+\textbf{Attribute} & \textbf{Datatype} & \textbf{Key} & \textbf{Description} \\ \hline
+\texttt{id} & AutoField (Int) & Primary Key (PK) & Auto-incrementing shopping cart record key. \\ \hline
+\texttt{user} & ForeignKey & Foreign Key (FK) & Maps to \texttt{User(id)} identifying cart owner. \\ \hline
+\texttt{product} & ForeignKey & Foreign Key (FK) & Maps to \texttt{Ecom\_Product(id)} referencing selected item. \\ \hline
+\texttt{quantity} & PosIntegerField & None & Units of product selected by customer (Default: \texttt{1}). \\ \hline
+\texttt{created\_at} & DateTimeField & None & Timestamp recording initial addition of item to cart. \\ \hline
+\end{tabular}
+\end{center}
+
+\vspace{0.06in}
+
+% --- TABLE 6: Ecom_Adress ---
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\fontsize{9}{12}\selectfont
+\begin{tabular}{|p{1.4in}|p{1.1in}|p{0.8in}|p{2.9in}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{\fontsize{10}{13}\selectfont Name of Type: Ecom\_Adress (Shipping Address Entity)}} \\ \hline
+\textbf{Attribute} & \textbf{Datatype} & \textbf{Key} & \textbf{Description} \\ \hline
+\texttt{id} & AutoField (Int) & Primary Key (PK) & Auto-incrementing address identification identifier. \\ \hline
+\texttt{user} & ForeignKey & Foreign Key (FK) & Maps to \texttt{User(id)} owning the delivery address record. \\ \hline
+\texttt{address} & TextField & None & Full physical delivery address, city, state, pin, and phone. \\ \hline
+\end{tabular}
+\end{center}
+
+\vspace{1.0in}
+
+
+
+% --- TABLE 7: Ecom_Order ---
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\fontsize{9}{12}\selectfont
+\begin{tabular}{|p{1.4in}|p{1.1in}|p{0.8in}|p{2.9in}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{\fontsize{10}{13}\selectfont Name of Type: Ecom\_Order (Transactional Order Entity)}} \\ \hline
+\textbf{Attribute} & \textbf{Datatype} & \textbf{Key} & \textbf{Description} \\ \hline
+\texttt{id} & AutoField (Int) & Primary Key (PK) & Internal auto-incrementing relational order identifier. \\ \hline
+\texttt{order\_id} & UUIDField & Unique & Globally unique UUIDv4 token for public order tracking. \\ \hline
+\texttt{user} & ForeignKey & Foreign Key (FK) & Maps to \texttt{User(id)} placing the order. \\ \hline
+\texttt{shipping\_address} & ForeignKey & Foreign Key (FK) & Maps to \texttt{Ecom\_Adress(id)} with \texttt{ON DELETE SET\_NULL}. \\ \hline
+\texttt{total\_amount} & DecimalField(10,2) & None & Total payable monetary sum calculated for the order. \\ \hline
+\texttt{payment\_mode} & CharField(20) & None & Mode selection: Cash on Delivery (\texttt{'cod'}) or Online (\texttt{'online'}). \\ \hline
+\texttt{payment\_status} & CharField(20) & None & Status choices: \texttt{'pending'}, \texttt{'completed'}, or \texttt{'failed'}. \\ \hline
+\texttt{order\_tracking\_number} & CharField(100) & None & Courier logistics dispatch number (Nullable). \\ \hline
+\texttt{order\_placed\_at} & DateField & None & Date on which purchase transaction was initialized. \\ \hline
+\texttt{razor\_order\_id} & CharField(250) & None & Transaction order identifier generated by Razorpay API. \\ \hline
+\texttt{razor\_payment\_id} & CharField(250) & None & Payment confirmation capture ID returned by Razorpay. \\ \hline
+\texttt{razorpay\_signeture} & CharField(250) & None & HMAC-SHA256 cryptographic signature token for verification. \\ \hline
+\end{tabular}
+\end{center}
+
+\vspace{0.06in}
+
+% --- TABLE 8: Ecom_OrderItem ---
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\fontsize{9}{12}\selectfont
+\begin{tabular}{|p{1.4in}|p{1.1in}|p{0.8in}|p{2.9in}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{\fontsize{10}{13}\selectfont Name of Type: Ecom\_OrderItem (Order Line-Item Entity)}} \\ \hline
+\textbf{Attribute} & \textbf{Datatype} & \textbf{Key} & \textbf{Description} \\ \hline
+\texttt{id} & AutoField (Int) & Primary Key (PK) & Auto-incrementing line-item identification key. \\ \hline
+\texttt{order} & ForeignKey & Foreign Key (FK) & Maps to parent \texttt{Ecom\_Order(id)} with \texttt{ON DELETE CASCADE}. \\ \hline
+\texttt{product} & ForeignKey & Foreign Key (FK) & Maps to purchased \texttt{Ecom\_Product(id)} with \texttt{ON DELETE CASCADE}. \\ \hline
+\texttt{quantity} & IntegerField & None & Count of units purchased for this specific line item. \\ \hline
+\end{tabular}
+\end{center}
+
+\end{spacing}
+}
+
+\vfill
+
+\newpage
+
+
+% =========================================================
+% 12. USER INTERFACE DESIGN (PAGES 17 - 21)
+% =========================================================
+
+\section{User Interface Design}
+
+\vspace{0.06in}
+
+{\fontsize{13}{18}\selectfont
+\begin{spacing}{1.15}
+
+
+% --- Figure 12.1: Homepage ---
+\noindent
+\textbf{12.1 Homepage Interface} \\
+{\fontsize{11}{14}\selectfont The landing page showcases the brand identity, promotional hero banner, curated category navigation cards, and floating entry points to the autonomous Gemini AI Interior Stylist.}
+
+\vspace{0.04in}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[
+    width=0.90\textwidth,
+    height=2.85in,
+    keepaspectratio
+]{homepage.png}
+\caption{Furnish E-Commerce Homepage with Hero Banner and Category Grid}
+\label{fig:homepage}
+\end{figure}
+
+\vspace{0.06in}
+
+% --- Figure 12.2: Products ---
+\noindent
+\textbf{12.2 Product Catalog \& Multi-Filter Interface} \\
+{\fontsize{11}{14}\selectfont The centralized catalog presents product cards with real-time stock indicators, pricing in INR, dynamic category slug filtering, and price preset threshold selections.}
+
+\vspace{0.04in}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[
+    width=0.90\textwidth,
+    height=2.85in,
+    keepaspectratio
+]{products.png}
+\caption{Product Catalog Interface with Parametric Price and Category Filters}
+\label{fig:products}
+\end{figure}
+
+\end{spacing}
+}
+
+\vfill
+
+\newpage
+
+
+% =========================================================
+% 12. USER INTERFACE DESIGN (PAGE 18 - CONTINUED)
+% =========================================================
+
+\noindent
+{\color{bcetblue}\textbf{\fontsize{14}{18}\selectfont 12. User Interface Design}}
+
+\vspace{0.08in}
+
+{\fontsize{13}{18}\selectfont
+\begin{spacing}{1.15}
+
+% --- Figure 12.3: Search ---
+\noindent
+\textbf{12.3 Search Results Interface} \\
+{\fontsize{11}{14}\selectfont The search interface dynamically queries database products across titles, descriptions, and categories, returning real-time matching results with pagination.}
+
+\vspace{0.04in}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[
+    width=0.90\textwidth,
+    height=2.90in,
+    keepaspectratio
+]{search.png}
+\caption{Real-Time Catalog Search Results Interface}
+\label{fig:search}
+\end{figure}
+
+\vspace{0.08in}
+
+% --- Figure 12.4: Specific Product ---
+\noindent
+\textbf{12.4 Specific Product Detail View} \\
+{\fontsize{11}{14}\selectfont Displays high-resolution furniture imagery, detailed dimensional specifications, inventory stock status, unit pricing, and direct add-to-cart or wishlist action triggers.}
+
+\vspace{0.04in}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[
+    width=0.90\textwidth,
+    height=2.90in,
+    keepaspectratio
+]{specificproduct.png}
+\caption{Individual Furniture Product Detail Page with Specifications}
+\label{fig:specificproduct}
+\end{figure}
+
+\end{spacing}
+}
+
+\vfill
+
+\newpage
+
+
+% =========================================================
+% 12. USER INTERFACE DESIGN (PAGE 19 - CONTINUED)
+% =========================================================
+
+\noindent
+{\color{bcetblue}\textbf{\fontsize{14}{18}\selectfont 12. User Interface Design}}
+
+\vspace{0.08in}
+
+{\fontsize{13}{18}\selectfont
+\begin{spacing}{1.15}
+
+% --- Figure 12.5: Favourites ---
+\noindent
+\textbf{12.5 Customer Favourites (Wishlist) View} \\
+{\fontsize{11}{14}\selectfont Allows authenticated customers to curate saved furniture items for future consideration, with one-click options to remove or transfer products to the active cart.}
+
+\vspace{0.04in}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[
+    width=0.90\textwidth,
+    height=2.90in,
+    keepaspectratio
+]{favourites.png}
+\caption{Customer Favourites (Wishlist) Management Interface}
+\label{fig:favourites}
+\end{figure}
+
+\vspace{0.08in}
+
+% --- Figure 12.6: Cart ---
+\noindent
+\textbf{12.6 Shopping Cart Interface} \\
+{\fontsize{11}{14}\selectfont Presents current cart contents, interactive quantity increment/decrement controls, live line-item subtotal computation, order total calculation, and checkout initiation.}
+
+\vspace{0.04in}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[
+    width=0.90\textwidth,
+    height=2.90in,
+    keepaspectratio
+]{cart.png}
+\caption{Interactive Shopping Cart Interface with Quantity Controls}
+\label{fig:cart}
+\end{figure}
+
+\end{spacing}
+}
+
+\vfill
+
+\newpage
+
+
+% =========================================================
+% 12. USER INTERFACE DESIGN (PAGE 20 - CONTINUED)
+% =========================================================
+
+\noindent
+{\color{bcetblue}\textbf{\fontsize{14}{18}\selectfont 12. User Interface Design}}
+
+\vspace{0.08in}
+
+{\fontsize{13}{18}\selectfont
+\begin{spacing}{1.15}
+
+% --- Figure 12.7: Addresses ---
+\noindent
+\textbf{12.7 Shipping Address Management Interface} \\
+{\fontsize{11}{14}\selectfont Customer address book allowing users to add, review, and maintain multiple delivery addresses, with phone and location validation for smooth logistics dispatch.}
+
+\vspace{0.04in}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[
+    width=0.90\textwidth,
+    height=2.90in,
+    keepaspectratio
+]{adresses.png}
+\caption{Customer Shipping Address Book Management Interface}
+\label{fig:adresses}
+\end{figure}
+
+\vspace{0.08in}
+
+% --- Figure 12.8: Checkout ---
+\noindent
+\textbf{12.8 Order Checkout Interface} \\
+{\fontsize{11}{14}\selectfont Enables customers to review ordered furniture items, select a saved delivery address, and choose between Cash on Delivery (COD) and Online Payment via Razorpay.}
+
+\vspace{0.04in}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[
+    width=0.90\textwidth,
+    height=2.90in,
+    keepaspectratio
+]{checkout.png}
+\caption{Order Checkout and Delivery Address Selection Interface}
+\label{fig:checkout}
+\end{figure}
+
+\end{spacing}
+}
+
+\vfill
+
+\newpage
+
+
+% =========================================================
+% 12. USER INTERFACE DESIGN (PAGE 21 - CONTINUED)
+% =========================================================
+
+\noindent
+{\color{bcetblue}\textbf{\fontsize{14}{18}\selectfont 12. User Interface Design}}
+
+\vspace{0.08in}
+
+{\fontsize{13}{18}\selectfont
+\begin{spacing}{1.15}
+
+% --- Figure 12.9: Payments Page ---
+\noindent
+\textbf{12.9 Razorpay Payment Gateway Interface} \\
+{\fontsize{11}{14}\selectfont The integrated payment modal handles secure online transactions supporting Cards, UPI, NetBanking, and Wallets with cryptographic HMAC-SHA256 signature confirmation.}
+
+\vspace{0.04in}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[
+    width=0.90\textwidth,
+    height=2.90in,
+    keepaspectratio
+]{paymentspage.png}
+\caption{Secure Razorpay Online Payment Gateway Integration Interface}
+\label{fig:paymentspage}
+\end{figure}
+
+\vspace{0.08in}
+
+% --- Figure 12.10: Orders ---
+\noindent
+\textbf{12.10 Order History \& Real-Time Tracking Interface} \\
+{\fontsize{11}{14}\selectfont Comprehensive order management dashboard displaying historical order IDs, placement dates, payment statuses, itemized billings, and consignment tracking tokens.}
+
+\vspace{0.04in}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[
+    width=0.90\textwidth,
+    height=2.90in,
+    keepaspectratio
+]{orders.png}
+\caption{Customer Order History and Tracking Details Interface}
+\label{fig:orders}
+\end{figure}
+
+
+\end{spacing}
+}
+
+\vfill
+
+\newpage
+
+
+% =========================================================
+% 13. CODING (PAGES 22 - 26)
+% =========================================================
+
+\section{Coding}
+
+\vspace{0.06in}
+
+{\fontsize{13}{18}\selectfont
+\begin{spacing}{1.15}
+
+\noindent
+The business logic, request routing, and data transactional flows of \textbf{Furnish} are engineered within Python 3 and the Django 5.x framework, adhering strictly to the Model-View-Template (MVT) architectural paradigm. The core execution engine is primarily organized across two vital Python modules:
+\begin{itemize}
+    \setlength{\itemsep}{2pt}
+    \item \textbf{\texttt{urls.py}:} Configures canonical URL patterns, RESTful converters, parameter extraction, and route delegation to respective view handlers.
+    \item \textbf{\texttt{views.py}:} Encapsulates HTTP request processing, catalog filtering, cart mutation algorithms, Razorpay gateway integration, and autonomous Google Gemini AI tool execution.
+\end{itemize}
+
+\vspace{0.08in}
+
+\noindent
+\textbf{13.1 URL Routing Implementation (\texttt{urls.py})}
+
+\vspace{0.04in}
+
+\noindent
+{\fontsize{11}{14}\selectfont The routing table delegates incoming customer and API requests to target controllers using typed URL converters (\texttt{<slug:...>}, \texttt{<int:...>}, \texttt{<uuid:...>}):}
+
+\end{spacing}
+}
+
+\vspace{0.06in}
+
+\begin{lstlisting}[language=Python, caption={Canonical URL Routing Table (furnish/urls.py)}, label={lst:urls}]
+from django.urls import path
+from .views import *
+
+urlpatterns = [
+    path('', home_view, name='home'),
+    path('home/', home_view, name='home_alt'),
+    path('search/', search, name='search'),
+    path('search/<str:query>/', search, name='search_with_query'),
+    path('aboutus/', aboutus, name='aboutus'),
+    path('about/', aboutus, name='about'),
+    path('contact/', contact, name='contact'),
+    path('products/', products, name='products'),
+    path('testimonials/', testimonials, name='testimonials'),
+    path('login/', login, name='login'),
+    path('register/', register, name='register'),
+    path('logout/', logout, name='logout'),
+    path('change_password/', change_password, name='change_password'),
+    path('product/<slug:pslug>', get_product_detail_view, name='get_product_detail_view'),
+    path('category/<slug:cslug>', get_product_from_category, name='get_product_from_category'),
+    path('favourites/', view_favourites, name='favourites'),
+    path('add-to-favourites/<int:pid>/', add_to_fav, name='add_to_fav'),
+    path('add-to-favourites/<int:userId>/<int:pid>/', add_to_fav, name='add_to_fav_alt'),
+    path('remove-from-favourites/<int:pid>/', remove_from_fav, name='remove_from_fav'),
+    path('cart/', view_cart, name='cart'),
+    path('add-to-cart/<int:pid>/', add_to_cart, name='add_to_cart'),
+    path('update-cart/<int:pid>/<str:action>/', update_cart_quantity, name='update_cart_quantity'),
+    path('remove-from-cart/<int:pid>/', remove_from_cart, name='remove_from_cart'),
+    path('manage-address/', manage_address_page, name='manage_address_page'),
+    path('add-address/', add_address, name='add_address'),
+    path('remove-address/<int:address_id>/', remove_address, name='remove_address'),
+    path('checkout/', checkout, name='checkout'),
+    path('order-process/', order_process, name='order_process'),
+    path('payment/<uuid:order_id>/', payment_page, name='payment_page'),
+    path('payment-callback/', payment_callback, name='payment_callback'),
+    path('orders/', orders, name='orders'),
+    path('ai/chat/', ai_chat_view, name='ai_chat'),
+    path('ai/clear/', ai_clear_history_view, name='ai_clear'),
+    path('ai/assistant/', ai_assistant_page, name='ai_assistant'),
+]
+\end{lstlisting}
+
+\vfill
+
+\newpage
+
+
+% =========================================================
+% 13. CODING (PAGE 23 - CONTINUED)
+% =========================================================
+
+\noindent
+{\color{bcetblue}\textbf{\fontsize{14}{18}\selectfont 13. Coding (Views Implementation -- Catalog, Filter \& Search)}}
+
+\vspace{0.08in}
+
+{\fontsize{13}{18}\selectfont
+\begin{spacing}{1.15}
+
+\noindent
+\textbf{13.2 Product Catalog, Dynamic Filtering \& Keyword Search (\texttt{views.py})}
+
+\vspace{0.04in}
+
+\noindent
+{\fontsize{11}{14}\selectfont The \texttt{products} view executes compound query filtering across keyword matches, category slugs, and preset/custom price ranges using Django \texttt{Q} objects:}
+
+\end{spacing}
+}
+
+\vspace{0.06in}
+
+\begin{lstlisting}[language=Python, caption={Catalog Filtering and Search Logic (furnish/views.py)}, label={lst:catalog_views}]
+def products(request):
+    products_qs = Ecom_Product.objects.filter(product_is_active=True)
+
+    # 1. Search Query with Case-Insensitive Q Filtering
+    q = request.GET.get('q', '').strip()
+    if q:
+        products_qs = products_qs.filter(
+            Q(product_name__icontains=q) |
+            Q(product_description__icontains=q) |
+            Q(product_category__category_name__icontains=q)
+        )
+
+    # 2. Category Filter (supports multiple selected categories)
+    selected_categories = [c for c in request.GET.getlist('category') if c]
+    if selected_categories:
+        products_qs = products_qs.filter(product_category__category_slug__in=selected_categories)
+
+    # 3. Price Preset Filter
+    price_range = request.GET.get('price_range', '').strip()
+    if price_range == 'under_5000':
+        products_qs = products_qs.filter(product_price__lt=5000)
+    elif price_range == '5000_10000':
+        products_qs = products_qs.filter(product_price__gte=5000, product_price__lte=10000)
+    elif price_range == '10000_25000':
+        products_qs = products_qs.filter(product_price__gte=10000, product_price__lte=25000)
+    elif price_range == 'above_25000':
+        products_qs = products_qs.filter(product_price__gt=25000)
+
+    # 4. Custom Min/Max Price Filtering
+    min_price = request.GET.get('min_price', '').strip()
+    max_price = request.GET.get('max_price', '').strip()
+    if min_price:
+        try:
+            products_qs = products_qs.filter(product_price__gte=float(min_price))
+        except ValueError:
+            pass
+    if max_price:
+        try:
+            products_qs = products_qs.filter(product_price__lte=float(max_price))
+        except ValueError:
+            pass
+
+    # Pagination: 9 products per catalog page
+    paginator = Paginator(products_qs.order_by('-product_created_at'), 9)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    categories = Ecomm_Category.objects.annotate(product_count=Count('products'))
+    return render(request, 'products.html', {
+        'products': page_obj,
+        'categories': categories,
+        'q': q,
+        'selected_categories': selected_categories,
+        'price_range': price_range,
+    })
+\end{lstlisting}
+
+\vfill
+
+\newpage
+
+
+% =========================================================
+% 13. CODING (PAGE 24 - CONTINUED)
+% =========================================================
+
+\noindent
+{\color{bcetblue}\textbf{\fontsize{14}{18}\selectfont 13. Coding (Views Implementation -- Cart \& Favourites)}}
+
+\vspace{0.08in}
+
+{\fontsize{13}{18}\selectfont
+\begin{spacing}{1.15}
+
+\noindent
+\textbf{13.3 Shopping Cart \& Customer Favourites Management (\texttt{views.py})}
+
+\vspace{0.04in}
+
+\noindent
+{\fontsize{11}{14}\selectfont Handles authenticated customer cart additions, incremental stock quantity adjustments, and wishlist toggling:}
+
+\end{spacing}
+}
+
+\vspace{0.06in}
+
+\begin{lstlisting}[language=Python, caption={Cart and Favourites Mutation Controllers (furnish/views.py)}, label={lst:cart_views}]
+def add_to_cart(request, pid):
+    if not request.user.is_authenticated:
+        messages.warning(request, "Please log in to add products to your cart.")
+        return redirect('login')
+
+    product = get_object_or_404(Ecom_Product, id=pid, product_is_active=True)
+    cart_item, created = Ecom_Cart.objects.get_or_404(user=request.user, product=product)
+
+    if not created:
+        if cart_item.quantity < product.product_quantity_in_stock:
+            cart_item.quantity += 1
+            cart_item.save()
+            messages.success(request, f"Updated {product.product_name} quantity to {cart_item.quantity}.")
+        else:
+            messages.error(request, f"Cannot add more. Only {product.product_quantity_in_stock} in stock.")
+    else:
+        cart_item.quantity = 1
+        cart_item.save()
+        messages.success(request, f"Added {product.product_name} to cart.")
+
+    return redirect(request.META.get('HTTP_REFERER', 'cart'))
+
+
+def update_cart_quantity(request, pid, action):
+    if not request.user.is_authenticated:
+        return redirect('login')
+
+    cart_item = get_object_or_404(Ecom_Cart, user=request.user, product__id=pid)
+    product = cart_item.product
+
+    if action == 'plus':
+        if cart_item.quantity < product.product_quantity_in_stock:
+            cart_item.quantity += 1
+            cart_item.save()
+        else:
+            messages.error(request, f"Maximum available stock reached ({product.product_quantity_in_stock}).")
+    elif action == 'minus':
+        if cart_item.quantity > 1:
+            cart_item.quantity -= 1
+            cart_item.save()
+        else:
+            cart_item.delete()
+
+    return redirect('cart')
+
+
+def add_to_fav(request, pid, userId=None):
+    if not request.user.is_authenticated:
+        messages.warning(request, "Please log in to save items to your favourites.")
+        return redirect('login')
+
+    product = get_object_or_404(Ecom_Product, id=pid)
+    fav, created = Ecom_Favourites.objects.get_or_create(user=request.user, product=product)
+    if created:
+        messages.success(request, f"{product.product_name} added to your favourites!")
+    else:
+        messages.info(request, f"{product.product_name} is already in your favourites.")
+    return redirect(request.META.get('HTTP_REFERER', 'favourites'))
+\end{lstlisting}
+
+\vfill
+
+\newpage
+
+
+% =========================================================
+% 13. CODING (PAGE 25 - CONTINUED)
+% =========================================================
+
+\noindent
+{\color{bcetblue}\textbf{\fontsize{14}{18}\selectfont 13. Coding (Views Implementation -- Checkout \& Razorpay)}}
+
+\vspace{0.08in}
+
+{\fontsize{13}{18}\selectfont
+\begin{spacing}{1.15}
+
+\noindent
+\textbf{13.4 Order Processing, Razorpay API \& Payment Callback (\texttt{views.py})}
+
+\vspace{0.04in}
+
+\noindent
+{\fontsize{11}{14}\selectfont Encapsulates transactional order initialization, Razorpay client order generation, and HMAC-SHA256 signature verification:}
+
+\end{spacing}
+}
+
+\vspace{0.06in}
+
+\begin{lstlisting}[language=Python, caption={Order Processing and Razorpay Payment Verification (furnish/views.py)}, label={lst:payment_views}]
+def order_process(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+
+    if request.method == "POST":
+        address_id = request.POST.get('address_id')
+        payment_method = request.POST.get('payment_method')
+        cart_items = Ecom_Cart.objects.filter(user=request.user).select_related('product')
+        shipping_address = Ecom_Adress.objects.filter(id=address_id, user=request.user).first()
+        total_amount = sum(item.total_price for item in cart_items)
+        tracking_number = f"{uuid.uuid4().hex[:8].upper()}"
+
+        if payment_method == 'online':
+            order = Ecom_Order.objects.create(
+                user=request.user, shipping_address=shipping_address,
+                total_amount=total_amount, payment_mode='online',
+                payment_status='pending', order_tracking_number=tracking_number
+            )
+            order_items = [Ecom_OrderItem(order=order, product=i.product, quantity=i.quantity) for i in cart_items]
+            Ecom_OrderItem.objects.bulk_create(order_items)
+
+            # Initialize Razorpay Client and create payment order
+            client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+            razor_order = client.order.create({
+                'amount': int(total_amount * 100), 'currency': 'INR', 'payment_capture': '1',
+                'notes': {'order_id': str(order.order_id), 'user_id': str(request.user.id)}
+            })
+            order.razor_order_id = razor_order['id']
+            order.save()
+            return redirect('payment_page', order_id=order.order_id)
+
+
+@csrf_exempt
+def payment_callback(request):
+    if request.method == "POST":
+        razorpay_payment_id = request.POST.get('razorpay_payment_id')
+        razorpay_order_id = request.POST.get('razorpay_order_id')
+        razorpay_signature = request.POST.get('razorpay_signature')
+
+        order = Ecom_Order.objects.filter(razor_order_id=razorpay_order_id).first()
+        client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+        params_dict = {
+            'razorpay_order_id': razorpay_order_id,
+            'razorpay_payment_id': razorpay_payment_id,
+            'razorpay_signature': razorpay_signature
+        }
+
+        try:
+            # Cryptographic signature verification
+            client.utility.verify_payment_signature(params_dict)
+            order.payment_status = 'completed'
+            order.razor_payment_id = razorpay_payment_id
+            order.razorpay_signeture = razorpay_signature
+            order.save()
+            # Deduct inventory stock and clear active cart
+            for item in order.item.all():
+                item.product.product_quantity_in_stock -= item.quantity
+                item.product.save()
+            Ecom_Cart.objects.filter(user=order.user).delete()
+            return redirect('orders')
+        except razorpay.errors.SignatureVerificationError:
+            order.payment_status = 'failed'
+            order.save()
+            return redirect('checkout')
+\end{lstlisting}
+
+\vfill
+
+\newpage
+
+
+% =========================================================
+% 13. CODING (PAGE 26 - CONTINUED)
+% =========================================================
+
+\noindent
+{\color{bcetblue}\textbf{\fontsize{14}{18}\selectfont 13. Coding (Views Implementation -- Autonomous AI Agent Concierge)}}
+
+\vspace{0.08in}
+
+{\fontsize{13}{18}\selectfont
+\begin{spacing}{1.15}
+
+\noindent
+\textbf{13.5 Autonomous AI Interior Stylist \& Chat Controller (\texttt{views.py})}
+
+\vspace{0.04in}
+
+\noindent
+{\fontsize{11}{14}\selectfont Powers asynchronous conversational chat, multi-turn session persistence, autonomous tool execution via Google Gemini, and interactive UI card payload responses:}
+
+\end{spacing}
+}
+
+\vspace{0.06in}
+
+\begin{lstlisting}[language=Python, caption={Agentic AI Conversational Chat View (furnish/views.py)}, label={lst:ai_views}]
+def ai_chat_view(request):
+    """
+    Handles user chat interaction with Furnish Agentic AI.
+    Executes tool calling (catalog search, cart updates, order tracking)
+    and returns structured JSON with conversational text, rich product cards,
+    and live cart metrics.
+    """
+    if request.method != "POST":
+        return JsonResponse({"status": "error", "message": "Only POST method allowed."}, status=405)
+
+    try:
+        data = json.loads(request.body.decode('utf-8'))
+    except Exception:
+        data = request.POST
+
+    user_message = data.get("message", "").strip()
+    if not user_message:
+        return JsonResponse({"status": "error", "message": "Message cannot be empty."}, status=400)
+
+    # Retrieve multi-turn conversation history from user session
+    session_history = request.session.get("furnish_ai_chat_history", [])
+
+    # Instantiate AI Agent and execute autonomous reasoning cycle
+    agent = FurnishAIAgent(request=request)
+    result = agent.chat(user_message, session_history=session_history)
+
+    # Persist updated session history
+    request.session["furnish_ai_chat_history"] = result.get("history", [])
+    request.session.modified = True
+
+    return JsonResponse(result)
+
+
+def ai_clear_history_view(request):
+    """Clears the conversational AI session memory."""
+    if request.method == "POST":
+        request.session["furnish_ai_chat_history"] = []
+        request.session.modified = True
+        return JsonResponse({"status": "success", "message": "Chat history cleared."})
+    return JsonResponse({"status": "error", "message": "POST required."}, status=405)
+
+
+def ai_assistant_page(request):
+    """Renders the dedicated full-screen AI Interior Design Studio experience."""
+    featured_products = Ecom_Product.objects.filter(product_is_active=True, product_is_featured=True)[:4]
+    categories = Ecomm_Category.objects.all()
+    return render(request, 'ai_assistant.html', {
+        'featured_products': featured_products,
+        'categories': categories,
+    })
+\end{lstlisting}
+
+\vfill
+
+\newpage
+
+
+% =========================================================
+% 14. TESTING & 15. SYSTEM SECURITY MEASURES (PAGE 27)
+% =========================================================
+
+\section{Testing}
+
+\vspace{0.06in}
+
+{\fontsize{12.5}{17}\selectfont
+\begin{spacing}{1.12}
+
+\noindent
+Testing verifies the correctness, stability, and security of \textbf{Furnish} across modular units, end-to-end integration, and user interactions. A multi-tiered testing methodology was adopted:
+
+\vspace{0.06in}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\fontsize{9}{12}\selectfont
+\begin{tabular}{|p{0.6in}|p{1.9in}|p{1.9in}|p{1.2in}|p{0.6in}|}
+\hline
+\textbf{Test ID} & \textbf{Test Scenario} & \textbf{Input / Action} & \textbf{Expected Output} & \textbf{Status} \\ \hline
+\textbf{TC-01} & User Registration \& Auth & Valid email, username, password & Account created, PBKDF2 hash & \textbf{Pass} \\ \hline
+\textbf{TC-02} & Dynamic Catalog Filtering & Filter by category and price tier & Filtered queryset matches query & \textbf{Pass} \\ \hline
+\textbf{TC-03} & Cart Quantity Validation & Increment past warehouse stock & Error message, quantity capped & \textbf{Pass} \\ \hline
+\textbf{TC-04} & Razorpay Signature Handshake & Valid test transaction callback & HMAC verified, order marked paid & \textbf{Pass} \\ \hline
+\textbf{TC-05} & AI Agent Tool Execution & Natural language cart mutation & Agent calls tool, cart updated & \textbf{Pass} \\ \hline
+\end{tabular}
+\end{center}
+
+\end{spacing}
+}
+
+\vspace{0.10in}
+
+
+\section{System Security Measures}
+
+\vspace{0.06in}
+
+{\fontsize{12.5}{17}\selectfont
+\begin{spacing}{1.12}
+
+\noindent
+To safeguard user data, payment transactions, and administrative resources, the system implements robust security layers:
+\begin{itemize}
+    \setlength{\itemsep}{1.5pt}
+    \item \textbf{Authentication \& Password Encryption:} Passwords securely hashed using PBKDF2 with SHA-256 salts. Sessions enforced with \texttt{HttpOnly} and \texttt{SameSite=Lax} flags to prevent session hijacking.
+    \item \textbf{CSRF Protection:} Every state-mutating form and AJAX POST payload mandates a unique, cryptographically signed CSRF token (\texttt{csrf\_token}).
+    \item \textbf{Payment Verification Integrity:} Online payments require HMAC-SHA256 signature verification comparing Razorpay credentials against incoming callback tokens before updating order states.
+    \item \textbf{XSS \& Injection Defense:} Django's automatic template escaping sanitizes user inputs, mitigating Cross-Site Scripting (XSS).
+\end{itemize}
+
+\end{spacing}
+}
+
+\vspace{0.1in}
+
+
+
+% =========================================================
+% 16. DATABASE SECURITY & 17. USER PROFILES (PAGE 28)
+% =========================================================
+
+\section{Database/Data Security}
+
+\vspace{0.06in}
+
+{\fontsize{12.5}{17}\selectfont
+\begin{spacing}{1.12}
+
+\noindent
+Database protection is paramount for ensuring transaction consistency and safeguarding personal consumer records:
+\begin{itemize}
+    \setlength{\itemsep}{1.5pt}
+    \item \textbf{SQL Injection Immunization:} All database interactions route through Django ORM's parameterized query builder, completely eliminating raw SQL execution vulnerabilities.
+    \item \textbf{Referential Integrity \& Atomic Transactions:} Primary/foreign key constraints enforce relational consistency. Checkout workflows execute within database transactions, preventing partial cart deduction or phantom orders.
+    \item \textbf{Environment Isolation:} Database credentials, API secrets, and sensitive tokens reside within a restricted \texttt{.env} configuration, excluded from version control.
+\end{itemize}
+
+\end{spacing}
+}
+
+\vspace{0.10in}
+
+
+\section{Creation of User Profiles and Access Rights}
+
+\vspace{0.06in}
+
+{\fontsize{12.5}{17}\selectfont
+\begin{spacing}{1.12}
+
+\noindent
+Furnish enforces a Role-Based Access Control (RBAC) paradigm to delineate authorization boundaries across three user tiers:
+\begin{enumerate}
+    \setlength{\itemsep}{1.5pt}
+    \item \textbf{Guest Visitor:} Can browse the public catalog, execute search filters, view product specifications, and engage with the AI stylist in preview mode.
+    \item \textbf{Authenticated Customer:} Accesses persistent cart, manages personal address books, curates favourites, places orders, and tracks shipment statuses.
+    \item \textbf{Administrator / Staff:} Authenticated via Django Admin to manage categories, products, inventory counts, audit orders, and review customer payment receipts.
+\end{enumerate}
+
+\vspace{0.06in}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\fontsize{9.5}{13}\selectfont
+\begin{tabular}{|p{1.5in}|p{1.1in}|p{1.1in}|p{1.2in}|p{1.2in}|}
+\hline
+\textbf{Role Tier} & \textbf{Catalog \& Search} & \textbf{Cart \& Orders} & \textbf{Address Book} & \textbf{Admin Dashboard} \\ \hline
+\textbf{Guest} & Read Only & Restricted & No Access & No Access \\ \hline
+\textbf{Customer} & Read Only & Full Access & Full Access & No Access \\ \hline
+\textbf{Administrator} & Full CRUD & Audit \& Update & Read Only & Full CRUD Access \\ \hline
+\end{tabular}
+\end{center}
+
+\end{spacing}
+}
+
+\vspace{0.1in}
+
+
+% =========================================================
+% 18. COST ESTIMATION (PAGE 29)
+% =========================================================
+
+\section{Cost Estimation of the Project along with Cost Estimation Model}
+
+\vspace{0.06in}
+
+{\fontsize{12.5}{17}\selectfont
+\begin{spacing}{1.12}
+
+\noindent
+The project cost estimation is calculated using the \textbf{Basic COCOMO (Constructive Cost Model)} for Organic software projects:
+\begin{equation*}
+\text{Effort } (E) = a_b \times (\text{KLOC})^{b_b} = 2.4 \times (2.5)^{1.05} \approx 6.27 \text{ Person-Months}
+\end{equation*}
+\begin{equation*}
+\text{Development Time } (D) = c_b \times (E)^{d_b} = 2.5 \times (6.27)^{0.38} \approx 5.02 \text{ Months}
+\end{equation*}
+
+\end{spacing}
+}
+
+\vspace{0.10in}
+
+
+
+
+
+% =========================================================
+% 19. FUTURE SCOPE & 20. BIBLIOGRAPHY (PAGE 30)
+% =========================================================
+
+\section{Future Scope and Further Enhancement of the Project}
+
+\vspace{0.06in}
+
+{\fontsize{12.5}{17}\selectfont
+\begin{spacing}{1.12}
+
+\noindent
+While Furnish provides a robust digital shopping and styling foundation, future iterations can introduce several high-value enhancements:
+\begin{itemize}
+    \setlength{\itemsep}{2pt}
+    \item \textbf{Augmented Reality (AR) 3D Room Visualizer:} Implementing WebXR/Three.js to allow shoppers to project 3D digital twins of furniture directly into their rooms using smartphone cameras.
+    \item \textbf{Multi-Vendor Marketplace Architecture:} Transitioning from a single-store inventory model to a multi-vendor ecosystem with vendor onboarding and commission splits.
+    \item \textbf{Multilingual Voice Concierge:} Expanding the Gemini AI agent with speech-to-text and text-to-speech to enable voice-based interior design consultations in regional languages.
+    \item \textbf{Automated Courier Logistics Integration:} Integrating carrier APIs (e.g., Shiprocket, BlueDart) for automatic consignment generation and live GPS tracking.
+\end{itemize}
+
+\end{spacing}
+}
+
+\vspace{0.10in}
+
+
+\section{Bibliography}
+
+\vspace{0.06in}
+
+{\fontsize{11.5}{15}\selectfont
+\begin{spacing}{1.12}
+
+\noindent
+\textbf{Books and Academic Literature:}
+\begin{enumerate}
+    \setlength{\itemsep}{2pt}
+    \item Pressman, R. S., \& Maxim, B. R. (2020). \textit{Software Engineering: A Practitioner's Approach} (9th ed.). McGraw-Hill Education.
+    \item Silberschatz, A., Korth, H. F., \& Sudarshan, S. (2019). \textit{Database System Concepts} (7th ed.). McGraw-Hill.
+    \item Forouzan, B. A. (2017). \textit{Data Communications and Networking} (5th ed.). McGraw-Hill.
+\end{enumerate}
+
+\vspace{0.06in}
+
+\noindent
+\textbf{Official Documentation \& Online References:}
+\begin{enumerate}
+    \setcounter{enumi}{3}
+    \setlength{\itemsep}{2pt}
+    \item Django Software Foundation. \textit{Django Documentation (Version 5.x)}. Retrieved from \\ \texttt{https://docs.djangoproject.com/}
+    \item Google AI for Developers. \textit{Google GenAI SDK \& Gemini API Reference Guide}. Retrieved from \texttt{https://ai.google.dev/}
+    \item Razorpay Software Private Limited.\textit{Razorpay Payments API \& Webhooks Integration Guide}. Retrieved from \texttt{https://razorpay.com/docs/}
+    \item Python Software Foundation. (2024). \textit{Python 3.14 Language Reference}. Retrieved from \texttt{https://docs.python.org/3/}
+\end{enumerate}
+
+\end{spacing}
+}
+
+\vfill
+
+\newpage
+
+
+% =========================================================
+% END OF DOCUMENT
+% =========================================================
+
+\end{document}

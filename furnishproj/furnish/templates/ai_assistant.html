@@ -1,0 +1,157 @@
+{% extends 'app.html' %}
+{% load static %}
+
+{% block title %}AI Interior Stylist — Furnish{% endblock %}
+
+{% block content %}
+<main style="background:#faf9f7; color:#171614;">
+
+    <!-- Hero -->
+    <section class="py-5">
+        <div class="container py-lg-5">
+            <div class="row align-items-center g-5">
+
+                <div class="col-lg-6">
+                    <div class="mb-4" style="color:#b86f2c; font-size:.8rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase;">
+                        Furnish AI
+                    </div>
+
+                    <h1 class="fw-semibold mb-4"
+                        style="font-size:clamp(2.8rem,5vw,5rem); line-height:.98; letter-spacing:-.055em;">
+                        Furniture,<br>
+                        <span style="color:#b86f2c;">chosen for you.</span>
+                    </h1>
+
+                    <p class="text-secondary mb-4"
+                       style="max-width:480px; font-size:1.05rem; line-height:1.7;">
+                        Tell us what you're looking for. Our AI finds pieces from the Furnish collection that work together, fit your budget, and can be added to your cart.
+                    </p>
+
+                    <div class="d-flex flex-wrap gap-2">
+                        <button type="button"
+                                class="btn btn-dark rounded-pill px-4 py-3 fw-medium"
+                                onclick="document.getElementById('furnish-ai-launcher').click();">
+                            <i class="fa-solid fa-wand-magic-sparkles me-2"></i>
+                            Ask Furnish AI
+                        </button>
+
+                        <a href="{% url 'products' %}"
+                           class="btn btn-outline-dark rounded-pill px-4 py-3 fw-medium">
+                            Browse furniture
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="bg-white border rounded-4 p-4 p-lg-5"
+                         style="box-shadow:0 20px 60px rgba(0,0,0,.06);">
+
+                        <div class="d-flex align-items-center justify-content-between mb-5">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="d-flex align-items-center justify-content-center rounded-circle"
+                                     style="width:42px;height:42px;background:#171614;color:#fff;">
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                </div>
+
+                                <div>
+                                    <div class="fw-semibold">Furnish AI</div>
+                                    <div class="text-secondary small">Your interior assistant</div>
+                                </div>
+                            </div>
+
+                            <span class="rounded-circle"
+                                  style="width:8px;height:8px;background:#49a56a;"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="text-secondary small mb-2">You</div>
+                            <div class="fw-medium" style="font-size:1.05rem;">
+                                I need a warm, modern living room under ₹40,000.
+                            </div>
+                        </div>
+
+                        <div class="border-top pt-4">
+                            <div class="text-secondary small mb-2">Furnish AI</div>
+
+                            <p class="mb-4" style="line-height:1.65;">
+                                I found a sofa, coffee table and accent chair that work well together and stay within your budget.
+                            </p>
+
+                            <div class="d-flex align-items-center justify-content-between">
+                                <span class="small text-secondary">
+                                    <i class="fa-solid fa-circle-check me-1" style="color:#49a56a;"></i>
+                                    3 pieces selected
+                                </span>
+
+                                <button type="button"
+                                        class="btn btn-sm btn-dark rounded-pill px-3"
+                                        onclick="document.getElementById('furnish-ai-launcher').click();">
+                                    Continue
+                                    <i class="fa-solid fa-arrow-right ms-2"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Capabilities -->
+    <section class="border-top py-5">
+        <div class="container py-lg-4">
+
+            <div class="row g-4">
+
+                <div class="col-md-4">
+                    <div class="pe-lg-4">
+                        <i class="fa-solid fa-magnifying-glass mb-4"
+                           style="font-size:1.2rem;color:#b86f2c;"></i>
+
+                        <h5 class="fw-semibold mb-2">Find the right pieces</h5>
+
+                        <p class="text-secondary mb-0"
+                           style="line-height:1.65;">
+                            Search the Furnish collection by style, room, colour, size or budget.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="pe-lg-4">
+                        <i class="fa-solid fa-layer-group mb-4"
+                           style="font-size:1.2rem;color:#b86f2c;"></i>
+
+                        <h5 class="fw-semibold mb-2">Make them work together</h5>
+
+                        <p class="text-secondary mb-0"
+                           style="line-height:1.65;">
+                            Get recommendations for pieces that complement what you already like.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div>
+                        <i class="fa-solid fa-cart-shopping mb-4"
+                           style="font-size:1.2rem;color:#b86f2c;"></i>
+
+                        <h5 class="fw-semibold mb-2">Shop without the friction</h5>
+
+                        <p class="text-secondary mb-0"
+                           style="line-height:1.65;">
+                            Add products to your cart and check your orders directly through the assistant.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+</main>
+{% endblock content %}

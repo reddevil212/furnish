@@ -3,7 +3,10 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
+        />
         <title>
             {% block title %}
                 Furnish - eCommerce for furnitures
@@ -43,14 +46,17 @@
         <!-- ================= NAVBAR ================= -->
         {% block navbar %}
             <nav
-                class="navbar navbar-expand-lg bg-white shadow-sm px-4 py-3 navbar-custom"
+                class="navbar navbar-expand-lg bg-white shadow-sm px-3 px-md-4 py-2 py-md-3 navbar-custom"
             >
                 <div class="container-fluid px-0">
                     <a class="navbar-brand" href="{% url 'home' %}">
                         <span
                             class="d-flex flex-column text-uppercase text-xs fw-bold lh-sm"
                         >
-                            <span style="letter-spacing: .12rem;">Furnish</span>
+                            <span
+                                style="letter-spacing: .12rem; font-size: 1.1rem;"
+                                >Furnish</span
+                            >
                         </span>
                     </a>
 
@@ -84,6 +90,15 @@
                                     Products
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link d-flex align-items-center gap-1 {% if request.resolver_match.url_name == 'ai_assistant' %}active{% endif %}"
+                                    href="{% url 'ai_assistant' %}"
+                                    style="color: #d47f31; font-weight: 600;"
+                                >
+                                    AI Stylist
+                                </a>
+                            </li>
                             <div
                                 class="collapse navbar-collapse"
                                 id="navbarNavDarkDropdown"
@@ -91,7 +106,7 @@
                                 <ul class="navbar-nav">
                                     <li class="nav-item dropdown">
                                         <button
-                                            class="btn btn-dark dropdown-toggle"
+                                            class="btn  dropdown-toggle"
                                             data-bs-toggle="dropdown"
                                             aria-expanded="false"
                                         >
@@ -140,13 +155,13 @@
                         </ul>
                     </div>
 
-                    <!-- Phone + Offcanvas Menu Button -->
-                    <div class="d-flex align-items-center gap-3">
+                    <!-- Right Side Navbar Actions -->
+                    <div class="d-flex align-items-center gap-2 gap-md-3">
                         <!-- Favourites & Cart Badges -->
-                        <div class="d-flex align-items-center gap-2">
+                        <div class="d-flex align-items-center gap-1 gap-md-2">
                             <a
                                 href="{% url 'favourites' %}"
-                                class="btn btn-outline-danger btn-sm position-relative d-inline-flex align-items-center gap-1"
+                                class="btn btn-outline-danger btn-sm position-relative d-inline-flex align-items-center gap-1 px-2 px-md-3"
                                 title="Favourites"
                             >
                                 <i class="bi bi-heart-fill"></i>
@@ -159,7 +174,7 @@
                             </a>
                             <a
                                 href="{% url 'cart' %}"
-                                class="btn btn-outline-dark btn-sm position-relative d-inline-flex align-items-center gap-1"
+                                class="btn btn-outline-dark btn-sm position-relative d-inline-flex align-items-center gap-1 px-2 px-md-3"
                                 title="Cart"
                             >
                                 <i class="bi bi-cart-fill"></i>
@@ -170,49 +185,112 @@
                             </a>
                         </div>
 
-                        {% if user.is_authenticated %}
-                            <!-- Logged in state -->
-                            <span
-                                class="fw-semibold text-dark me-1 d-none d-sm-inline"
-                            >
-                                <i class="bi bi-person-circle me-1"></i>Hi,
-                                {{ user.first_name|default:user.username }}
-                            </span>
-                            <a
-                                href="{% url 'logout' %}"
-                                class="btn btn-outline-danger btn-sm"
-                            >
-                                Logout
-                            </a>
-                        {% else %}
-                            <!-- Login Button -->
-                            <a
-                                href="{% url 'login' %}"
-                                class="btn btn-outline-dark btn-sm"
-                            >
-                                Login
-                            </a>
+                        <!-- Desktop Auth State (hidden on mobile, visible on desktop) -->
+                        <div class="d-none d-lg-flex align-items-center gap-2">
+                            {% if user.is_authenticated %}
+                                <div class="dropdown">
+                                    <button
+                                        class="btn bg-transparent dropdown-toggle"
+                                        type="button"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                    >
+                                        {{ user.first_name|default:user.username }}
+                                    </button>
 
-                            <!-- Signup Button -->
-                            <a
-                                href="{% url 'register' %}"
-                                class="btn btn-dark btn-sm"
-                            >
-                                Register
-                            </a>
-                        {% endif %}
+                                    <div
+                                        class="dropdown-menu dropdown-menu-end shadow-sm"
+                                    >
+                                        <a
+                                            class="dropdown-item"
+                                            href="{% url 'manage_address_page' %}"
+                                        >
+                                            <i
+                                                class="fa-solid fa-plus mx-1"
+                                            ></i>
+                                            Manage Address
+                                        </a>
 
-                        <!-- Offcanvas Button -->
+                                        <a
+                                            class="dropdown-item"
+                                            href="{% url 'cart' %}"
+                                        >
+                                            <i
+                                                class="fa-solid fa-cart-shopping mx-1"
+                                            ></i>
+                                            Your Cart
+                                        </a>
+
+                                        <a
+                                            class="dropdown-item"
+                                            href="{% url 'orders' %}"
+                                        >
+                                            <i
+                                                class="fa-solid fa-cart-shopping mx-1"
+                                            ></i>
+                                            Your Orders
+                                        </a>
+
+                                        <a
+                                            class="dropdown-item"
+                                            href="{% url 'favourites' %}"
+                                        >
+                                            <i
+                                                class="bi bi-heart-fill mx-1 text-danger"
+                                            ></i>
+                                            Favourites
+                                        </a>
+
+                                        <div class="dropdown-divider"></div>
+
+                                        <a
+                                            class="dropdown-item text-danger"
+                                            href="{% url 'change_password' %}"
+                                        >
+                                            <i class="fa-solid fa-lock"></i>
+                                            Change Password
+                                        </a>
+                                        <a
+                                            class="dropdown-item text-danger"
+                                            href="{% url 'logout' %}"
+                                        >
+                                            <i
+                                                class="bi bi-box-arrow-right mx-1"
+                                            ></i>
+                                            Logout
+                                        </a>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <a
+                                    href="{% url 'login' %}"
+                                    class="btn btn-outline-dark btn-sm"
+                                >
+                                    Login
+                                </a>
+
+                                <a
+                                    href="{% url 'register' %}"
+                                    class="btn btn-dark btn-sm"
+                                >
+                                    Register
+                                </a>
+                            {% endif %}
+                        </div>
+
+                        <!-- Offcanvas Button (Visible on mobile & tablet) -->
                         <a
                             href="#offcanvasExample"
                             data-bs-toggle="offcanvas"
                             role="button"
                             aria-controls="offcanvasExample"
+                            class="btn btn-link text-dark p-1 ms-1 d-lg-none text-decoration-none"
+                            aria-label="Toggle Navigation"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
+                                width="28"
+                                height="28"
                                 fill="currentColor"
                                 class="bi bi-list"
                                 viewBox="0 0 16 16"
@@ -271,7 +349,7 @@
                             </span>
 
                             <h2
-                                class="display-2 fw-light text-white mt-3 mb-4"
+                                class="display-4 display-md-2 fw-light text-white mt-3 mb-4"
                                 style="line-height:.95;letter-spacing:-.04em;"
                             >
                                 Spaces that feel<br />
@@ -527,77 +605,367 @@
                 id="offcanvasExample"
                 aria-labelledby="offcanvasExampleLabel"
             >
-                <div class="offcanvas-header px-4">
+                <div class="offcanvas-header px-4 py-3 border-bottom">
                     <a class="navbar-brand" href="{% url 'home' %}">
                         <span
                             class="d-flex flex-column text-uppercase text-xs fw-bold lh-sm"
                         >
-                            <span style="letter-spacing: .12rem;">Furnish</span>
+                            <span
+                                style="letter-spacing: .12rem; font-size: 1.1rem;"
+                                >Furnish</span
+                            >
                         </span>
                     </a>
                     <button
                         type="button"
-                        class="btn-close"
+                        class="btn-close text-reset"
                         data-bs-dismiss="offcanvas"
                         aria-label="Close"
                     ></button>
                 </div>
-                <div class="offcanvas-body">
+                <div class="offcanvas-body p-4">
+                    <!-- User Account / Auth Section -->
+                    <div class="mb-4 pb-3 border-bottom">
+                        {% if user.is_authenticated %}
+                            <div class="d-flex align-items-center gap-3 mb-3">
+                                <div
+                                    class="bg-dark text-white rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-sm"
+                                    style="width: 42px; height: 42px; font-size: 1.1rem;"
+                                >
+                                    {{ user.username|first|upper }}
+                                </div>
+                                <div class="overflow-hidden">
+                                    <div
+                                        class="fw-semibold text-dark text-truncate"
+                                    >
+                                        {{ user.first_name|default:user.username }}
+                                    </div>
+                                    <div class="text-muted small text-truncate">
+                                        {{ user.email|default:user.username }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <a
+                                    href="{% url 'manage_address_page' %}"
+                                    class="btn btn-outline-secondary btn-sm text-start py-2"
+                                >
+                                    <i
+                                        class="fa-solid fa-location-dot me-2"
+                                    ></i>
+                                    Manage Address
+                                </a>
+                                <a
+                                    href="{% url 'logout' %}"
+                                    class="btn btn-outline-danger btn-sm text-start py-2"
+                                >
+                                    <i class="bi bi-box-arrow-right me-2"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        {% else %}
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <a
+                                        href="{% url 'login' %}"
+                                        class="btn btn-outline-dark btn-sm w-100 py-2"
+                                    >
+                                        Login
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a
+                                        href="{% url 'register' %}"
+                                        class="btn btn-dark btn-sm w-100 py-2"
+                                    >
+                                        Register
+                                    </a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Search Input -->
+                    <form action="{% url 'search' %}" method="GET" class="mb-4">
+                        <div class="input-group">
+                            <input
+                                type="text"
+                                name="query"
+                                class="form-control form-control-sm border-end-0"
+                                placeholder="Search furniture..."
+                                aria-label="Search furniture"
+                            />
+                            <button
+                                class="btn btn-outline-secondary btn-sm border-start-0"
+                                type="submit"
+                            >
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Navigation Links -->
                     <div class="navbar-custom">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
                                 <a
-                                    class="nav-link {% if request.resolver_match.url_name == 'home' or request.resolver_match.url_name == 'home_alt' %}active{% endif %}"
+                                    class="nav-link d-flex align-items-center gap-2 {% if request.resolver_match.url_name == 'home' or request.resolver_match.url_name == 'home_alt' %}active{% endif %}"
                                     href="{% url 'home' %}"
-                                    >Home</a
+                                    ><i class="bi bi-house me-1"></i> Home</a
                                 >
                             </li>
                             <li class="nav-item">
                                 <a
-                                    class="nav-link {% if request.resolver_match.url_name == 'aboutus' or request.resolver_match.url_name == 'about' %}active{% endif %}"
-                                    href="{% url 'aboutus' %}"
-                                    >About us</a
+                                    class="nav-link d-flex align-items-center gap-2 {% if request.resolver_match.url_name == 'orders' or request.resolver_match.url_name == 'Orders' %}active{% endif %}"
+                                    href="{% url 'orders' %}"
+                                    ><i class="bi bi-house me-1"></i> Orders</a
                                 >
                             </li>
                             <li class="nav-item">
                                 <a
-                                    class="nav-link {% if request.resolver_match.url_name == 'products' %}active{% endif %}"
+                                    class="nav-link d-flex align-items-center gap-2 {% if request.resolver_match.url_name == 'products' %}active{% endif %}"
                                     href="{% url 'products' %}"
-                                    >Products</a
+                                    ><i class="bi bi-grid me-1"></i> Products</a
+                                >
+                            </li>
+
+                            <!-- Categories Accordion -->
+                            {% if categories %}
+                                <li class="nav-item">
+                                    <a
+                                        class="nav-link d-flex align-items-center justify-content-between collapsed"
+                                        data-bs-toggle="collapse"
+                                        href="#mobileCategories"
+                                        role="button"
+                                        aria-expanded="false"
+                                        aria-controls="mobileCategories"
+                                    >
+                                        <span
+                                            ><i class="bi bi-tags me-2"></i>
+                                            Categories</span
+                                        >
+                                        <i
+                                            class="bi bi-chevron-down small transition-rotate"
+                                        ></i>
+                                    </a>
+                                    <div
+                                        class="collapse ps-3 mt-1"
+                                        id="mobileCategories"
+                                    >
+                                        <ul class="navbar-nav">
+                                            {% for category in categories %}
+                                                <li class="nav-item">
+                                                    <a
+                                                        class="nav-link py-2 text-secondary-hover"
+                                                        href="{% url 'get_product_from_category' category.category_slug %}"
+                                                    >
+                                                        <i
+                                                            class="bi bi-arrow-right-short me-1"
+                                                        ></i>
+                                                        {{ category.category_name }}
+                                                    </a>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </li>
+                            {% endif %}
+
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link d-flex align-items-center gap-2 {% if request.resolver_match.url_name == 'aboutus' or request.resolver_match.url_name == 'about' %}active{% endif %}"
+                                    href="{% url 'aboutus' %}"
+                                    ><i class="bi bi-info-circle me-1"></i>
+                                    About us</a
                                 >
                             </li>
                             <li class="nav-item">
                                 <a
-                                    class="nav-link {% if request.resolver_match.url_name == 'testimonials' %}active{% endif %}"
+                                    class="nav-link d-flex align-items-center gap-2 {% if request.resolver_match.url_name == 'testimonials' %}active{% endif %}"
                                     href="{% url 'testimonials' %}"
-                                    >Testimonials</a
+                                    ><i class="bi bi-chat-quote me-1"></i>
+                                    Testimonials</a
                                 >
                             </li>
                             <li class="nav-item">
                                 <a
-                                    class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}"
+                                    class="nav-link d-flex align-items-center gap-2 {% if request.resolver_match.url_name == 'contact' %}active{% endif %}"
                                     href="{% url 'contact' %}"
-                                    >Contact</a
+                                    ><i class="bi bi-envelope me-1"></i>
+                                    Contact</a
                                 >
                             </li>
                             <li class="nav-item">
                                 <a
-                                    class="nav-link {% if request.resolver_match.url_name == 'search' or request.resolver_match.url_name == 'search_with_query' %}active{% endif %}"
+                                    class="nav-link d-flex align-items-center gap-2 {% if request.resolver_match.url_name == 'search' or request.resolver_match.url_name == 'search_with_query' %}active{% endif %}"
                                     href="{% url 'search' %}"
-                                    >Search</a
+                                    ><i class="bi bi-search me-1"></i> Search</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link d-flex align-items-center gap-2 {% if request.resolver_match.url_name == 'ai_assistant' %}active{% endif %}"
+                                    href="{% url 'ai_assistant' %}"
+                                    style="color: #d47f31; font-weight: 600;"
+                                >
+                                    AI Interior Stylist</a
                                 >
                             </li>
                         </ul>
                     </div>
+
+                    <!-- Favourites & Cart Quick Links -->
+                    <div class="mt-4 pt-3 border-top d-flex gap-2">
+                        <a
+                            href="{% url 'favourites' %}"
+                            class="btn btn-outline-danger btn-sm w-50 d-flex align-items-center justify-content-center gap-2 py-2"
+                        >
+                            <i class="bi bi-heart-fill"></i> Favourites
+                            <span class="badge bg-danger rounded-pill"
+                                >{{ fav_count }}</span
+                            >
+                        </a>
+                        <a
+                            href="{% url 'cart' %}"
+                            class="btn btn-outline-dark btn-sm w-50 d-flex align-items-center justify-content-center gap-2 py-2"
+                        >
+                            <i class="bi bi-cart-fill"></i> Cart
+                            <span class="badge bg-dark rounded-pill"
+                                >{{ cart_count }}</span
+                            >
+                        </a>
+                    </div>
                 </div>
             </div>
         {% endblock offcanvas %}
+
+        <!-- ================= AGENTIC AI WIDGET ================= -->
+        <div id="furnish-ai-widget">
+            <!-- Floating Launcher Button -->
+            <div
+                id="furnish-ai-launcher"
+                class="furnish-ai-launcher"
+                role="button"
+                tabindex="0"
+                title="Open Furnish AI "
+            >
+               
+                <span class="ai-launcher-text">Ask AI Stylist</span>
+                <i class="bi bi-sparkle ai-launcher-sparkle"></i>
+            </div>
+
+            <!-- AI Chat Window Drawer -->
+            <div id="furnish-ai-chat-window" class="furnish-ai-chat-window">
+                <!-- Header -->
+                <div class="furnish-ai-header">
+                    <div class="ai-header-left">
+                      
+                        <div class="ai-header-title">
+                            <h6>Furnish AI </h6>
+                            
+                        </div>
+                    </div>
+                    <div class="ai-header-actions">
+                        <button
+                            type="button"
+                            id="furnish-ai-clear"
+                            title="Clear Conversation"
+                        >
+                            <i class="bi bi-trash3"></i>
+                        </button>
+                        <button
+                            type="button"
+                            id="furnish-ai-minimize"
+                            title="Minimize"
+                        >
+                            <i class="bi bi-dash-lg"></i>
+                        </button>
+                        <button
+                            type="button"
+                            id="furnish-ai-close"
+                            title="Close"
+                        >
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quick Suggestions -->
+                <div class="furnish-ai-suggestions">
+                    <span
+                        class="ai-suggestion-pill"
+                        data-query="Show me modern sofas"
+                        >Modern Sofas</span
+                    >
+                    <span
+                        class="ai-suggestion-pill"
+                        data-query="Find tables for dining or living room"
+                        >Tables</span
+                    >
+                    <span
+                        class="ai-suggestion-pill"
+                        data-query="Help me style a cozy living room"
+                        >Style Room</span
+                    >
+                    <span
+                        class="ai-suggestion-pill"
+                        data-query="What is in my cart?"
+                        >Check Cart</span
+                    >
+                    <span
+                        class="ai-suggestion-pill"
+                        data-query="Where is my order?"
+                        >Track Orders</span
+                    >
+                </div>
+
+                <!-- Message Feed -->
+                <div id="furnish-ai-messages" class="furnish-ai-messages">
+                    <div class="ai-message-row bot-message-row">
+                        <div class="ai-message-bubble ai-bot-bubble">
+                            <div class="ai-message-text">
+                                Hello! 👋 I'm your
+                                <strong>Furnish AI Stylist</strong><br /><br />
+                                I can recommend furniture pieces, find matching
+                                sets, manage your shopping cart, and track your
+                                orders. How can I help you furnish your space
+                                today?
+                            </div>
+                            <div class="ai-message-time">Just now</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input Footer -->
+                <div class="furnish-ai-footer">
+                    {% csrf_token %}
+                    <div class="ai-input-group">
+                        <input
+                            type="text"
+                            id="furnish-ai-input"
+                            placeholder="Ask about styles, sofas, or your cart..."
+                            autocomplete="off"
+                        />
+                        <button
+                            type="button"
+                            id="furnish-ai-send-btn"
+                            class="ai-send-btn"
+                            title="Send message"
+                        >
+                            <i class="bi bi-arrow-up"></i>
+                        </button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
 
         <!-- ================= SCRIPTS ================= -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
         <script src="{% static 'assets/js/swiper.js' %}"></script>
         <script src="{% static 'assets/js/main.js' %}"></script>
+        <script src="{% static 'assets/js/ai_agent.js' %}"></script>
 
         {% block extra_js %}{% endblock %}
     </body>

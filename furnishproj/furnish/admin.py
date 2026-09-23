@@ -16,3 +16,5 @@ class EcomProductAdmin(admin.ModelAdmin):
 
 admin.site.register(Ecom_Favourites)
 admin.site.register(Ecom_Cart)
+admin.site.register(Ecom_Order)
+admin.site.register(Ecom_OrderItem)

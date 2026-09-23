@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import User
+import uuid
 
 # Create your models here.
 class Ecomm_Category(models.Model):
@@ -63,4 +64,48 @@ class Ecom_Cart(models.Model):
     def total_price(self):
         return self.product.product_price * self.quantity
 
+
+class Ecom_Adress(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='adress')
+    address = models.TextField(blank=True, null=True)
+    
+
+    def __str__(self):
+        return f"{self.user} -> {self.address}"
+
+
+
+class Ecom_Order(models.Model):
+    PAYMENT_MODE_CHOICES = (
+        ('cod', 'Cash On Delivery'),
+        ('online', 'Online Payment'),
+    )
+    PAYMENT_STATUS_CHOICES = (
+        ('pending', 'Pending'),
+        ('completed', 'Completed'),
+        ('failed', 'Failed'),
+    )
+    order_id = models.UUIDField(unique=True, null=True, blank=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    shipping_address = models.ForeignKey(Ecom_Adress, on_delete=models.SET_NULL, null=True, blank=True)
+    total_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    payment_mode = models.CharField(max_length=20, choices=PAYMENT_MODE_CHOICES, default='cod')
+    payment_status = models.CharField(max_length=20, choices=PAYMENT_STATUS_CHOICES, default='pending')
+    order_tracking_number = models.CharField(max_length=100, null=True, blank=True)
+    order_placed_at = models.DateField(auto_now_add=True)
+    razor_order_id = models.CharField (max_length=250, null=True, blank=True)
+    razor_payment_id = models.CharField (max_length=250, blank=True, null=True)
+    razorpay_signeture = models.CharField (max_length=250, null=True, blank=True)
+
+    def __str__(self):
+        return f"Order #{self.order_id} - {self.user.username}"
+
+
+class Ecom_OrderItem(models.Model):
+    order = models.ForeignKey(Ecom_Order, on_delete=models.CASCADE, related_name='item')
+    product = models.ForeignKey(Ecom_Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.product.product_name} (x{self.quantity}) for Order #{self.order.order_id}"
 

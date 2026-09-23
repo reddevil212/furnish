@@ -1,0 +1,1290 @@
+[
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1500000$Kk95XHqf73LwQ2KmW6x7Bi$WEUMMRNd6llzCa5UOyHONssNqXvKWDHWDGzldBihxjM=",
+        "last_login": "2026-09-03T12:53:45.484Z",
+        "is_superuser": true,
+        "username": "sayan",
+        "first_name": "",
+        "last_name": "",
+        "email": "sayanpal687@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-08-20T00:23:17.227Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1500000$aPHte4VKT7onWDq1Ez4s4y$0q5MYF+46OEOBOafXjFuPIUmpLeUBS4HkSQLf1wO0hA=",
+        "last_login": "2026-08-23T05:34:07.214Z",
+        "is_superuser": false,
+        "username": "Arjun",
+        "first_name": "Arjun",
+        "last_name": "Kundu",
+        "email": "arjunkundu070@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-08-23T05:34:06.271Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "beluq3mxdtlmk6orap0vfbl8m42vafnu",
+    "fields": {
+        "session_data": ".eJxVjEEOwiAQAP-yZ0OgLWzbo3ffQBZ2kaqBpLQn499Nkx70OjOZN3jat-z3JqtfGGbo4PLLAsWnlEPwg8q9qljLti5BHYk6bVO3yvK6nu3fIFPLMIO1QoyjCQmR-smJZesYyfXSIXHSOpDVOBozuSRT6FKM5EgGtKkfEsPnC_UeOKI:1wy0qN:iiVw0eGTNBFH6XvWNB8x697bltbVrae2tQe3o9rL4Ow",
+        "expire_date": "2026-09-06T05:34:07.218Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "de66vdw961hed7z4savaela771lmdj1e",
+    "fields": {
+        "session_data": ".eJx1Ul1r20AQ_CtTvSgRtmqn7oP1UAguKYHEKXX7VBezklbWkdOtuT3ZGOP_Xk4OaVro437Mzu7MnpKm985ouyGzqVoKm9ZoEH9Mip-nxIvlpEh6ZZ-MkkpcYBeSIlm1ckDH6KRm76DSkCbn0SuAVI0GcuEv1H26Z1S9p8A1QsvK2BmuWNF46SC9R0WBrGzRiMdR-mLtxsiyxwvNShrKMlyt-5tJOb-ZzefzfHKNGE5nQ_XSfuucKckyFmKlK-Uf4If_Al94HjmQxZ2njrEKIvYPdjqfTN5CY3Xt1m5hTfUcqesaQbAgH7IM4kDuiIp8jZKtHEYQD8shavfs5ADTxDPhmGvsyHjjtqB6byp-F8d-QraUwAW-cGecwe3Xe7D34nE1m8ywfPq-uXv6sfyc45QO-bTAKa2k5rTAbDIbIe1YlbYxTqNbVt9vh1njaf5x3FjSFkbhJKCR3tWD8pFmz16NOOynJQcaFn_p0363Ex89jL1bdhwdXVxszrEgaxGVtCv28ZL8wWgYEhq1UeZoPqzRAGlAezKWSnv5JqsgN3yH8W-YOg6t1JqnI6QaKPQaD3q9Pz2fr3N8652LAhqHB6nIYiGuMuy3POyTZ8n51_k34tT5zw:1x5OgR:ZQ7GqdoiROzz1RgprBXfpncb3T3KyCa4h78f3gzcPKU",
+        "expire_date": "2026-09-26T14:26:23.839Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "nnh9ne1cpbtrsb0fyqb3knd20qs06d9q",
+    "fields": {
+        "session_data": ".eJxVjMsKwjAQAP9lzxI2acmjR-9-Q9jNJqYqKTTtSfx3KfSg15lh3hBp32rce17jLDCBhssvY0rP3A4hD2r3RaWlbevM6kjUabu6LZJf17P9G1TqFSYI3iSDwQXR1nrHhQenbbGDBM9sRu8EUyEno5iCGTOx8YLeFqt1JoTPF9JkN9w:1x1gUe:BPNC2U3aK9p5vGimSs4F1JFXp0rb8XxQPckhlRXCNuE",
+        "expire_date": "2026-09-16T08:38:52.747Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "o1ejcldw3tmlpwtfax5reb1ujrpsa0w3",
+    "fields": {
+        "session_data": ".eJxVjMsKwjAQAP9lzxI2acmjR-9-Q9jNJqYqKTTtSfx3KfSg15lh3hBp32rce17jLDCBhssvY0rP3A4hD2r3RaWlbevM6kjUabu6LZJf17P9G1TqFSYI3iSDwQXR1nrHhQenbbGDBM9sRu8EUyEno5iCGTOx8YLeFqt1JoTPF9JkN9w:1x0H0a:6uyXeDJq7OnUBhFIEJxfGJruB8Rs0EWejkdoyWGP5wM",
+        "expire_date": "2026-09-12T11:14:00.119Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "rrbyxl8l4ffvorzjwb3ha4s8svdx7ybu",
+    "fields": {
+        "session_data": ".eJztlN-P0zgQx_-VIS-BKIS222u7eQDB3u1RiVsQ7IkHQNXEnsS-Jp5iT1qq1f7vyGl3WUA6eEXiJUrs-eHvZ77OVbLCXsyqD-RXVidlMk7yu2sVqjW5uKH_Q9dwodiJt1URQ4rjbij-YU3ts2PsVwUMBpOUyelioiaj0_mpHs9mi3lVVyfz8ayenejTRVVNpou5Hqka53qqJ_WIRoTVZKFHi1k9G48JR0me1L13NpgV2pUyKCtjg7DfJ-W7q8RzS0mZxI5JnsQzkpOkTM57tYY998l1fhuEIdgg6OSryGXagSFPIAyHiJgHOysG0O3BOiFv2UOQfWtdk8PGs-6VgHUfe-sthRzYA3tNPgy5nW2MgMEtFfCqJQwELQl0BGvHO7A1yNDRhthBjHUNhA0pW1sFS1DowFC7-XIOYY37e3e1fCfYMVRWlPkJwYBHxTtDjrbkY6PUE3hCvY8c6NOmZU8wkJfeU_4dBkC9tYoG6Y5IH9mhU3TD7oCkgOe8GzQtv6gaBD35X0E7b4UAYbMXww4U62FEClvVtygRqWvEANeAEMRb1_xY-1tqFXdDoSw7P_gKljfSnt7kZNm9b-cQZVN882C4oxw8Ke46cvouJdQarFAXYochWKGXAZJ4VOujS4r37r376wj5ECXUcPRSCVn2jHQOb7jGHC6xaimHF9htcjgzaH0OZy2rdQ5vhLnNsqHWY8guWKiEv6mzzsLTV0sg79nD_eloChcvL1fnL_-9-LOAq3RYT0u4SiPTtITpaJpD2lEI2MTv9NLYAF282YdneNQMZR9Oij8e1i0GE63rGFp2DXnALdo2HjSqdrSDOMxw6_1-o-O8DjiOY-wDfVP7pJgda9eRliGIUw4CNWGEG--KBtttPG-pIyehgLd0ZwwHXw2VY_YwVVRi2YXIo0hzSIOg9CFqvEWSXl8_KOB171x0tXXwghW2cMZOWfINQfzFFdlvr_72avhlvPrh-jNW9LYL:1x5QFW:EE2VulFWBHMJx0E7MECvJ1DMmKyV8k2OJl22G21gPko",
+        "expire_date": "2026-09-26T16:06:42.233Z"
+    }
+},
+{
+    "model": "furnish.ecomm_category",
+    "pk": 1,
+    "fields": {
+        "category_name": "Bed",
+        "category_slug": "bed",
+        "category_desc": "Comfortable and stylish beds designed to create a relaxing and inviting bedroom.",
+        "category_image": "categories/bed.webp",
+        "category_created_at": "2026-08-20T00:24:08.372Z"
+    }
+},
+{
+    "model": "furnish.ecomm_category",
+    "pk": 2,
+    "fields": {
+        "category_name": "Sofa",
+        "category_slug": "sofa",
+        "category_desc": "Elegant and comfortable seating options for living rooms, lounges, and modern interiors.",
+        "category_image": "categories/sofa.webp",
+        "category_created_at": "2026-08-20T00:42:05.756Z"
+    }
+},
+{
+    "model": "furnish.ecomm_category",
+    "pk": 3,
+    "fields": {
+        "category_name": "Table",
+        "category_slug": "table",
+        "category_desc": "Practical and stylish bedside furniture for keeping essentials organized and adding functionality to your bedroom.",
+        "category_image": "categories/bedside-table.webp",
+        "category_created_at": "2026-08-20T00:43:26.533Z"
+    }
+},
+{
+    "model": "furnish.ecomm_category",
+    "pk": 4,
+    "fields": {
+        "category_name": "Lamp",
+        "category_slug": "lamp",
+        "category_desc": "Modern and elegant lighting solutions designed to create a warm and inviting atmosphere in every room.",
+        "category_image": "categories/product-img-2.jpg",
+        "category_created_at": "2026-08-20T05:20:34.879Z"
+    }
+},
+{
+    "model": "furnish.ecomm_category",
+    "pk": 5,
+    "fields": {
+        "category_name": "Chair",
+        "category_slug": "chair",
+        "category_desc": "Comfortable and stylish chairs designed for homes, offices, dining spaces, and contemporary interiors.",
+        "category_image": "categories/product-img-5.jpg",
+        "category_created_at": "2026-08-20T10:53:35Z"
+    }
+},
+{
+    "model": "furnish.ecomm_category",
+    "pk": 6,
+    "fields": {
+        "category_name": "Clock",
+        "category_slug": "clock",
+        "category_desc": "Decorative and functional clocks that add a sophisticated finishing touch to modern interiors.",
+        "category_image": "categories/product-img-6_id6x46I.jpg",
+        "category_created_at": "2026-08-20T10:53:35Z"
+    }
+},
+{
+    "model": "furnish.ecomm_category",
+    "pk": 7,
+    "fields": {
+        "category_name": "Stool",
+        "category_slug": "stool",
+        "category_desc": "Modern stools combining practical seating with contemporary designs for kitchens, counters, bars, and living spaces.",
+        "category_image": "categories/product-img-7.jpg",
+        "category_created_at": "2026-08-20T10:53:35Z"
+    }
+},
+{
+    "model": "furnish.ecom_product",
+    "pk": 1,
+    "fields": {
+        "product_category": 1,
+        "product_name": "Annibale Colombo Bed",
+        "product_slug": "annibale-colombo-bed",
+        "product_image": "products/bed.webp",
+        "product_description": "The Annibale Colombo Bed is a luxurious and elegant bed frame, crafted with high-quality materials for a comfortable and stylish bedroom.",
+        "product_price": "20000.00",
+        "product_quantity_in_stock": 88,
+        "product_is_active": true,
+        "product_is_featured": true,
+        "product_created_at": "2026-08-20T00:57:04.234Z"
+    }
+},
+{
+    "model": "furnish.ecom_product",
+    "pk": 2,
+    "fields": {
+        "product_category": 2,
+        "product_name": "Annibale Colombo Sofa",
+        "product_slug": "annibale-colombo-sofa",
+        "product_image": "products/sofa.png",
+        "product_description": "A sophisticated and comfortable seating option, featuring exquisite design and premium upholstery for your living room.",
+        "product_price": "34999.00",
+        "product_quantity_in_stock": 60,
+        "product_is_active": true,
+        "product_is_featured": false,
+        "product_created_at": "2026-08-20T00:58:50.896Z"
+    }
+},
+{
+    "model": "furnish.ecom_product",
+    "pk": 3,
+    "fields": {
+        "product_category": 3,
+        "product_name": "Bedside Table African Cherry",
+        "product_slug": "bedside-table-african-cherry",
+        "product_image": "products/bedside-table.webp",
+        "product_description": "The Bedside Table in African Cherry is a stylish and functional addition to your bedroom, providing convenient storage space and a touch of elegance.",
+        "product_price": "4999.00",
+        "product_quantity_in_stock": 64,
+        "product_is_active": true,
+        "product_is_featured": false,
+        "product_created_at": "2026-08-20T00:59:38.672Z"
+    }
+},
+{
+    "model": "furnish.ecom_product",
+    "pk": 5,
+    "fields": {
+        "product_category": 2,
+        "product_name": "Modern Sofa",
+        "product_slug": "modern-sofa",
+        "product_image": "products/product-img-1.jpg",
+        "product_description": "A stylish modern sofa designed with comfortable seating and a contemporary finish. Perfect for living rooms, lounges, and modern interiors.",
+        "product_price": "24999.00",
+        "product_quantity_in_stock": 15,
+        "product_is_active": true,
+        "product_is_featured": false,
+        "product_created_at": "2026-08-20T05:28:42.519Z"
+    }
+},
+{
+    "model": "furnish.ecom_product",
+    "pk": 6,
+    "fields": {
+        "product_category": 4,
+        "product_name": "Floor Lamp",
+        "product_slug": "floor-lamp",
+        "product_image": "products/product-img-2.jpg",
+        "product_description": "An elegant floor lamp with a contemporary design that provides warm and comfortable lighting for living rooms, bedrooms, and reading corners.",
+        "product_price": "7499.00",
+        "product_quantity_in_stock": 20,
+        "product_is_active": true,
+        "product_is_featured": true,
+        "product_created_at": "2026-08-20T05:31:21.174Z"
+    }
+},
+{
+    "model": "furnish.ecom_product",
+    "pk": 7,
+    "fields": {
+        "product_category": 5,
+        "product_name": "High Back Boss Chair",
+        "product_slug": "high-back-boss-chair",
+        "product_image": "products/product-img-5.jpg",
+        "product_description": "A premium high-back boss chair designed for superior comfort and support. Ideal for offices, workspaces, and home offices.",
+        "product_price": "8999.00",
+        "product_quantity_in_stock": 12,
+        "product_is_active": true,
+        "product_is_featured": false,
+        "product_created_at": "2026-08-20T05:32:01.254Z"
+    }
+},
+{
+    "model": "furnish.ecom_product",
+    "pk": 8,
+    "fields": {
+        "product_category": 6,
+        "product_name": "Fancy Metal Clock",
+        "product_slug": "fancy-metal-clock",
+        "product_image": "products/product-img-6.jpg",
+        "product_description": "A stylish decorative metal clock featuring a sophisticated modern design that adds elegance and character to contemporary interiors.",
+        "product_price": "3499.00",
+        "product_quantity_in_stock": 18,
+        "product_is_active": true,
+        "product_is_featured": true,
+        "product_created_at": "2026-08-20T05:32:35.074Z"
+    }
+},
+{
+    "model": "furnish.ecom_product",
+    "pk": 9,
+    "fields": {
+        "product_category": 7,
+        "product_name": "Modern Metal Frame Stool",
+        "product_slug": "modern-metal-frame-stool",
+        "product_image": "products/product-img-7.jpg",
+        "product_description": "A compact modern stool featuring a durable metal frame and contemporary styling. Perfect for kitchens, counters, bars, and casual seating areas.",
+        "product_price": "1900.00",
+        "product_quantity_in_stock": 30,
+        "product_is_active": true,
+        "product_is_featured": false,
+        "product_created_at": "2026-08-20T05:33:17.687Z"
+    }
+},
+{
+    "model": "furnish.ecom_product",
+    "pk": 10,
+    "fields": {
+        "product_category": 5,
+        "product_name": "Comfort Chair",
+        "product_slug": "comfort-chair",
+        "product_image": "products/product-img-5_uGEB6zo.jpg",
+        "product_description": "A comfortable and versatile chair designed for everyday relaxation. Its clean design makes it suitable for living rooms, bedrooms, and lounge spaces.",
+        "product_price": "2900.00",
+        "product_quantity_in_stock": 25,
+        "product_is_active": true,
+        "product_is_featured": true,
+        "product_created_at": "2026-08-20T05:34:43.492Z"
+    }
+},
+{
+    "model": "furnish.ecom_favourites",
+    "pk": 13,
+    "fields": {
+        "user": [
+            "sayan"
+        ],
+        "product": 3,
+        "createdaAt": "2026-09-03"
+    }
+},
+{
+    "model": "furnish.ecom_cart",
+    "pk": 11,
+    "fields": {
+        "user": [
+            "Arjun"
+        ],
+        "product": 1,
+        "quantity": 1,
+        "created_at": "2026-09-02T08:25:09.077Z"
+    }
+},
+{
+    "model": "furnish.ecom_adress",
+    "pk": 7,
+    "fields": {
+        "user": [
+            "sayan"
+        ],
+        "address": "new address"
+    }
+},
+{
+    "model": "furnish.ecom_adress",
+    "pk": 9,
+    "fields": {
+        "user": [
+            "Arjun"
+        ],
+        "address": "H8jxxhg"
+    }
+},
+{
+    "model": "furnish.ecom_adress",
+    "pk": 10,
+    "fields": {
+        "user": [
+            "sayan"
+        ],
+        "address": "vdb"
+    }
+},
+{
+    "model": "furnish.ecom_order",
+    "pk": 4,
+    "fields": {
+        "order_id": "022dfa50-9a9f-42ab-982c-e39dccb2d8cc",
+        "user": [
+            "sayan"
+        ],
+        "shipping_address": 7,
+        "total_amount": "4999.00",
+        "payment_mode": "cod",
+        "payment_status": "pending",
+        "order_tracking_number": "C6F1AB58",
+        "order_placed_at": "2026-09-02",
+        "razor_order_id": null,
+        "razor_payment_id": null,
+        "razorpay_signeture": null
+    }
+},
+{
+    "model": "furnish.ecom_order",
+    "pk": 5,
+    "fields": {
+        "order_id": "68a05c18-dc56-4c7b-ac81-4ec90764fb4c",
+        "user": [
+            "sayan"
+        ],
+        "shipping_address": 7,
+        "total_amount": "4999.00",
+        "payment_mode": "cod",
+        "payment_status": "pending",
+        "order_tracking_number": "56325AF5",
+        "order_placed_at": "2026-09-03",
+        "razor_order_id": null,
+        "razor_payment_id": null,
+        "razorpay_signeture": null
+    }
+},
+{
+    "model": "furnish.ecom_order",
+    "pk": 6,
+    "fields": {
+        "order_id": "afafd68e-a3a8-46d7-a63b-3ac6159f4253",
+        "user": [
+            "sayan"
+        ],
+        "shipping_address": 7,
+        "total_amount": "1.00",
+        "payment_mode": "online",
+        "payment_status": "failed",
+        "order_tracking_number": "D35840B1",
+        "order_placed_at": "2026-09-03",
+        "razor_order_id": null,
+        "razor_payment_id": null,
+        "razorpay_signeture": null
+    }
+},
+{
+    "model": "furnish.ecom_order",
+    "pk": 7,
+    "fields": {
+        "order_id": "c0786d85-4665-4876-a271-0e21f178b19f",
+        "user": [
+            "sayan"
+        ],
+        "shipping_address": 7,
+        "total_amount": "1.00",
+        "payment_mode": "online",
+        "payment_status": "completed",
+        "order_tracking_number": "283CC8E3",
+        "order_placed_at": "2026-09-03",
+        "razor_order_id": "order_TXaoeAm0Vvv1zn",
+        "razor_payment_id": "pay_TXapEMWGyMZC7g",
+        "razorpay_signeture": "6fda3a6e3f797c1cfb4373424720ba9004379a625d76c8ac78bfeb25c07b8085"
+    }
+},
+{
+    "model": "furnish.ecom_orderitem",
+    "pk": 6,
+    "fields": {
+        "order": 4,
+        "product": 3,
+        "quantity": 1
+    }
+},
+{
+    "model": "furnish.ecom_orderitem",
+    "pk": 7,
+    "fields": {
+        "order": 5,
+        "product": 3,
+        "quantity": 1
+    }
+},
+{
+    "model": "furnish.ecom_orderitem",
+    "pk": 8,
+    "fields": {
+        "order": 6,
+        "product": 1,
+        "quantity": 1
+    }
+},
+{
+    "model": "furnish.ecom_orderitem",
+    "pk": 9,
+    "fields": {
+        "order": 7,
+        "product": 1,
+        "quantity": 1
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+        "action_time": "2026-08-20T00:24:08.374Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecomm_category"
+        ],
+        "object_id": "1",
+        "object_repr": "Beds",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+        "action_time": "2026-08-20T00:42:05.757Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecomm_category"
+        ],
+        "object_id": "2",
+        "object_repr": "Sofas",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+        "action_time": "2026-08-20T00:43:26.534Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecomm_category"
+        ],
+        "object_id": "3",
+        "object_repr": "Bedside Tables",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+        "action_time": "2026-08-20T00:47:28.295Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecomm_category"
+        ],
+        "object_id": "1",
+        "object_repr": "Beds",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Category image\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+        "action_time": "2026-08-20T00:57:04.236Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_product"
+        ],
+        "object_id": "1",
+        "object_repr": "Annibale Colombo Bed",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields": {
+        "action_time": "2026-08-20T00:58:50.898Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_product"
+        ],
+        "object_id": "2",
+        "object_repr": "Annibale Colombo Sofa",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields": {
+        "action_time": "2026-08-20T00:59:38.674Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_product"
+        ],
+        "object_id": "3",
+        "object_repr": "Bedside Table African Cherry",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 8,
+    "fields": {
+        "action_time": "2026-08-20T01:00:15.377Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_product"
+        ],
+        "object_id": "3",
+        "object_repr": "Bedside Table African Cherry",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Product price\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 9,
+    "fields": {
+        "action_time": "2026-08-20T01:00:27.577Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_product"
+        ],
+        "object_id": "1",
+        "object_repr": "Annibale Colombo Bed",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Product price\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 10,
+    "fields": {
+        "action_time": "2026-08-20T01:00:38.952Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_product"
+        ],
+        "object_id": "2",
+        "object_repr": "Annibale Colombo Sofa",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Product price\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 11,
+    "fields": {
+        "action_time": "2026-08-20T01:00:52.425Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_product"
+        ],
+        "object_id": "3",
+        "object_repr": "Bedside Table African Cherry",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Product price\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 12,
+    "fields": {
+        "action_time": "2026-08-20T03:36:04.564Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_product"
+        ],
+        "object_id": "4",
+        "object_repr": "hell no",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 13,
+    "fields": {
+        "action_time": "2026-08-20T05:16:14.796Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecomm_category"
+        ],
+        "object_id": "2",
+        "object_repr": "Sofa",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Category name\", \"Category slug\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 14,
+    "fields": {
+        "action_time": "2026-08-20T05:16:27.537Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecomm_category"
+        ],
+        "object_id": "1",
+        "object_repr": "Bed",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Category name\", \"Category slug\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 15,
+    "fields": {
+        "action_time": "2026-08-20T05:16:35.097Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecomm_category"
+        ],
+        "object_id": "3",
+        "object_repr": "Bedside Table",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Category name\", \"Category slug\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 16,
+    "fields": {
+        "action_time": "2026-08-20T05:20:34.880Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecomm_category"
+        ],
+        "object_id": "4",
+        "object_repr": "Lamp",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 17,
+    "fields": {
+        "action_time": "2026-08-20T05:26:17.845Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecomm_category"
+        ],
+        "object_id": "6",
+        "object_repr": "Clock",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Category image\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 18,
+    "fields": {
+        "action_time": "2026-08-20T05:27:11.581Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecomm_category"
+        ],
+        "object_id": "7",
+        "object_repr": "Stool",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Category image\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 19,
+    "fields": {
+        "action_time": "2026-08-20T05:27:25.477Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecomm_category"
+        ],
+        "object_id": "5",
+        "object_repr": "Chair",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Category image\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 20,
+    "fields": {
+        "action_time": "2026-08-20T05:27:33.403Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecomm_category"
+        ],
+        "object_id": "4",
+        "object_repr": "Lamp",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Category image\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 21,
+    "fields": {
+        "action_time": "2026-08-20T05:28:42.521Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_product"
+        ],
+        "object_id": "5",
+        "object_repr": "Modern Sofa",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 22,
+    "fields": {
+        "action_time": "2026-08-20T05:31:21.176Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_product"
+        ],
+        "object_id": "6",
+        "object_repr": "Floor Lamp",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 23,
+    "fields": {
+        "action_time": "2026-08-20T05:32:01.255Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_product"
+        ],
+        "object_id": "7",
+        "object_repr": "High Back Boss Chair",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 24,
+    "fields": {
+        "action_time": "2026-08-20T05:32:35.076Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_product"
+        ],
+        "object_id": "8",
+        "object_repr": "Fancy Metal Clock",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 25,
+    "fields": {
+        "action_time": "2026-08-20T05:33:17.688Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_product"
+        ],
+        "object_id": "9",
+        "object_repr": "Modern Metal Frame Stool",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 26,
+    "fields": {
+        "action_time": "2026-08-20T05:34:43.492Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_product"
+        ],
+        "object_id": "10",
+        "object_repr": "Comfort Chair",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 27,
+    "fields": {
+        "action_time": "2026-08-20T05:34:54.038Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_product"
+        ],
+        "object_id": "10",
+        "object_repr": "Comfort Chair",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Product image\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 28,
+    "fields": {
+        "action_time": "2026-08-20T05:35:46.611Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_product"
+        ],
+        "object_id": "8",
+        "object_repr": "Fancy Metal Clock",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Product image\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 29,
+    "fields": {
+        "action_time": "2026-08-20T05:36:19.159Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_product"
+        ],
+        "object_id": "4",
+        "object_repr": "hell no",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 30,
+    "fields": {
+        "action_time": "2026-08-20T05:49:11.350Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_product"
+        ],
+        "object_id": "1",
+        "object_repr": "Annibale Colombo Bed",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Product is featured\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 31,
+    "fields": {
+        "action_time": "2026-08-20T06:36:42.838Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_product"
+        ],
+        "object_id": "8",
+        "object_repr": "Fancy Metal Clock",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Product is featured\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 32,
+    "fields": {
+        "action_time": "2026-08-20T06:36:47.205Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_product"
+        ],
+        "object_id": "6",
+        "object_repr": "Floor Lamp",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Product is featured\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 33,
+    "fields": {
+        "action_time": "2026-08-20T07:20:50.845Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_product"
+        ],
+        "object_id": "10",
+        "object_repr": "Comfort Chair",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Product is featured\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 34,
+    "fields": {
+        "action_time": "2026-08-20T07:21:05.521Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_product"
+        ],
+        "object_id": "1",
+        "object_repr": "Annibale Colombo Bed",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Product is featured\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 35,
+    "fields": {
+        "action_time": "2026-08-23T00:59:19.465Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_favourites"
+        ],
+        "object_id": "1",
+        "object_repr": "Ecom_Favourites object (1)",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 36,
+    "fields": {
+        "action_time": "2026-08-23T01:01:10.469Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_favourites"
+        ],
+        "object_id": "3",
+        "object_repr": "sayan -> Annibale Colombo Bed",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 37,
+    "fields": {
+        "action_time": "2026-08-23T01:01:20.711Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_favourites"
+        ],
+        "object_id": "3",
+        "object_repr": "sayan -> Annibale Colombo Bed",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 38,
+    "fields": {
+        "action_time": "2026-08-23T01:28:43.776Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_favourites"
+        ],
+        "object_id": "4",
+        "object_repr": "sayan -> Annibale Colombo Sofa",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 39,
+    "fields": {
+        "action_time": "2026-08-23T01:28:43.776Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_favourites"
+        ],
+        "object_id": "1",
+        "object_repr": "sayan -> Annibale Colombo Bed",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 40,
+    "fields": {
+        "action_time": "2026-08-23T06:17:31.322Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_product"
+        ],
+        "object_id": "1",
+        "object_repr": "Annibale Colombo Bed",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Product is featured\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 41,
+    "fields": {
+        "action_time": "2026-09-02T08:59:54.218Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_order"
+        ],
+        "object_id": "3",
+        "object_repr": "Order #52f6fc31-d556-420d-8526-6b2f419f856b - Arjun",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 42,
+    "fields": {
+        "action_time": "2026-09-02T08:59:54.218Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_order"
+        ],
+        "object_id": "2",
+        "object_repr": "Order #2616543a-ed26-406c-b764-8f39e161a743 - sayan",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 43,
+    "fields": {
+        "action_time": "2026-09-02T08:59:54.218Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_order"
+        ],
+        "object_id": "1",
+        "object_repr": "Order #96692a06-55e5-45a5-bb7b-e3a5e0231c41 - sayan",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 44,
+    "fields": {
+        "action_time": "2026-09-02T09:32:55.344Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecomm_category"
+        ],
+        "object_id": "3",
+        "object_repr": "Table",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Category name\", \"Category slug\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 45,
+    "fields": {
+        "action_time": "2026-09-03T14:09:08.780Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_product"
+        ],
+        "object_id": "1",
+        "object_repr": "Annibale Colombo Bed",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Product price\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 46,
+    "fields": {
+        "action_time": "2026-09-12T14:34:22.462Z",
+        "user": [
+            "sayan"
+        ],
+        "content_type": [
+            "furnish",
+            "ecom_product"
+        ],
+        "object_id": "1",
+        "object_repr": "Annibale Colombo Bed",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Product price\"]}}]"
+    }
+}
+]

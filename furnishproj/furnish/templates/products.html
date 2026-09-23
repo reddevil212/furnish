@@ -2,19 +2,19 @@
 {% load static %}
 
 {% block title %}
-  Products eCommerce Bootstrap HTML Template - Furnish
+  Products - Furnish eCommerce
 {% endblock %}
 
 {% block content %}
-  <main>
-    <section class="py-lg-8 py-5 text-center">
+  <main class="bg-light bg-opacity-25 min-vh-100">
+    <!-- Breadcrumb & Header Banner -->
+    <section class="py-5 bg-white border-bottom text-center">
       <div class="container">
         <div class="row justify-content-center">
-          <div class="col-lg-6">
-            <h1 class="display-5 mb-3">Product List</h1>
-            <p class="text-muted  lead">
-              List of all products available here, could be your desired sofa,
-              chair, lamp even a chair
+          <div class="col-lg-7">
+            <h1 class="display-6 fw-bold mb-2">Our Furniture Collection</h1>
+            <p class="text-muted mb-0">
+              Explore handcrafted modern furniture designed for comfort, longevity, and style.
             </p>
           </div>
         </div>
@@ -22,162 +22,518 @@
     </section>
 
     <!-- Page Content -->
-    <section class="py-lg-8 py-5">
-      <div class="container ">
-        <div class="row">
-          <!-- Sidebar Filters -->
-          <aside class="col-lg-3 mb-4">
-            <h3 class="fw-semibold mb-3 h5 ">Filters</h3>
-            <div class="mb-4 bg-light border bg-opacity-50 p-4">
-              <h6 class="fw-semibold mb-3 text-xs text-uppercase">Category</h6>
-              <ul class="list-unstyled lh-lg small mb-0">
-                <li><a href="#" class="text-dark">Bed</a></li>
-                <li><a href="#" class="text-dark">Sofa</a></li>
-                <li><a href="#" class="text-dark">Bedside Table</a></li>
-                <li><a href="#" class="text-dark">Lamp</a></li>
-                <li><a href="#" class="text-dark">Chair</a></li>
-                <li><a href="#" class="text-dark">Clock</a></li>
-                <li><a href="#" class="text-dark">Stool</a></li>
-              </ul>
-            </div>
-            <div class="mb-4 bg-light border bg-opacity-50 p-4">
-              <h6 class="fw-semibold mb-3 text-xs text-uppercase">Price</h6>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="price1" />
-                <label class="form-check-label " for="price1">Under ₹100</label>
+    <section class="py-5">
+      <div class="container">
+        <div class="row g-4">
+          <!-- Sidebar Filters Form (Responsive Offcanvas for Mobile) -->
+          <aside class="col-lg-3">
+            <div class="offcanvas-lg offcanvas-start bg-white p-3 p-lg-0 rounded-3" tabindex="-1" id="filterOffcanvas" aria-labelledby="filterOffcanvasLabel">
+              <div class="offcanvas-header border-bottom pb-3 mb-3 d-lg-none">
+                <h5 class="offcanvas-title fw-bold" id="filterOffcanvasLabel">
+                  <i class="bi bi-funnel me-1"></i> Filter Products
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#filterOffcanvas" aria-label="Close"></button>
               </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="price2" />
-                <label class="form-check-label" for="price2">₹100-₹300</label>
+
+              <div class="offcanvas-body d-flex flex-column">
+                <form id="productFilterForm" method="GET" action="{% url 'products' %}" class="w-100">
+                  <input type="hidden" name="sort_by" id="sort_by_input" value="{{ sort_by }}" />
+
+                  <!-- Filters Header -->
+                  <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom">
+                    <div class="d-flex align-items-center gap-2">
+                      <i class="bi bi-sliders text-secondary"></i>
+                      <h5 class="fw-bold mb-0 text-dark" style="font-size: 1.05rem;">Filters</h5>
+                      {% if active_filters_count %}
+                        <span class="badge bg-dark rounded-pill">{{ active_filters_count }}</span>
+                      {% endif %}
+                    </div>
+                    {% if active_filters_count %}
+                      <a href="{% url 'products' %}" class="small text-danger text-decoration-none fw-semibold">
+                        <i class="bi bi-x-circle me-1"></i>Clear all
+                      </a>
+                    {% endif %}
+                  </div>
+
+                  <!-- 1. Search Within Products -->
+                  <div class="mb-4 bg-white border p-3 rounded-3 shadow-xs">
+                    <h6 class="fw-semibold mb-2 text-xs text-uppercase text-secondary" style="letter-spacing: 0.05rem;">
+                      Search
+                    </h6>
+                    <div class="input-group input-group-sm">
+                      <input
+                        type="text"
+                        name="q"
+                        value="{{ q }}"
+                        class="form-control"
+                        placeholder="Keyword (e.g. sofa, wood)..."
+                      />
+                      <button class="btn btn-outline-secondary" type="submit" title="Search">
+                        <i class="bi bi-search"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- 2. Categories Filter -->
+                  <div class="mb-4 bg-white border p-3 rounded-3 shadow-xs">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                      <h6 class="fw-semibold text-xs text-uppercase text-secondary mb-0" style="letter-spacing: 0.05rem;">
+                        Category
+                      </h6>
+                      {% if selected_categories %}
+                        <span class="badge bg-secondary text-xs">{{ selected_categories|length }} selected</span>
+                      {% endif %}
+                    </div>
+                    <div class="d-flex flex-column gap-2" style="max-height: 220px; overflow-y: auto;">
+                      {% for cat in categories_with_count %}
+                        <div class="form-check d-flex align-items-center justify-content-between pe-1">
+                          <div>
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              name="category"
+                              value="{{ cat.category_slug }}"
+                              id="cat_{{ cat.id }}"
+                              {% if cat.category_slug in selected_categories %}checked{% endif %}
+                              onchange="document.getElementById('productFilterForm').submit();"
+                            />
+                            <label class="form-check-label small ms-1" for="cat_{{ cat.id }}" style="cursor: pointer;">
+                              {{ cat.category_name }}
+                            </label>
+                          </div>
+                          <span class="badge rounded-pill bg-light text-secondary border text-xs">{{ cat.total_products }}</span>
+                        </div>
+                      {% empty %}
+                        <p class="text-muted small mb-0">No categories found.</p>
+                      {% endfor %}
+                    </div>
+                  </div>
+
+                  <!-- 3. Price Range Filter -->
+                  <div class="mb-4 bg-white border p-3 rounded-3 shadow-xs">
+                    <h6 class="fw-semibold mb-2 text-xs text-uppercase text-secondary" style="letter-spacing: 0.05rem;">
+                      Price Range
+                    </h6>
+                    
+                    <div class="form-check mb-2">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="price_range"
+                        value=""
+                        id="price_all"
+                        {% if not price_range %}checked{% endif %}
+                        onchange="document.getElementById('productFilterForm').submit();"
+                      />
+                      <label class="form-check-label small" for="price_all" style="cursor: pointer;">All Prices</label>
+                    </div>
+
+                    <div class="form-check mb-2">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="price_range"
+                        value="under_5000"
+                        id="price_u5000"
+                        {% if price_range == 'under_5000' %}checked{% endif %}
+                        onchange="document.getElementById('productFilterForm').submit();"
+                      />
+                      <label class="form-check-label small" for="price_u5000" style="cursor: pointer;">Under ₹5,000</label>
+                    </div>
+
+                    <div class="form-check mb-2">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="price_range"
+                        value="5000_10000"
+                        id="price_5k_10k"
+                        {% if price_range == '5000_10000' %}checked{% endif %}
+                        onchange="document.getElementById('productFilterForm').submit();"
+                      />
+                      <label class="form-check-label small" for="price_5k_10k" style="cursor: pointer;">₹5,000 - ₹10,000</label>
+                    </div>
+
+                    <div class="form-check mb-2">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="price_range"
+                        value="10000_25000"
+                        id="price_10k_25k"
+                        {% if price_range == '10000_25000' %}checked{% endif %}
+                        onchange="document.getElementById('productFilterForm').submit();"
+                      />
+                      <label class="form-check-label small" for="price_10k_25k" style="cursor: pointer;">₹10,000 - ₹25,000</label>
+                    </div>
+
+                    <div class="form-check mb-3">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="price_range"
+                        value="above_25000"
+                        id="price_a25000"
+                        {% if price_range == 'above_25000' %}checked{% endif %}
+                        onchange="document.getElementById('productFilterForm').submit();"
+                      />
+                      <label class="form-check-label small" for="price_a25000" style="cursor: pointer;">Above ₹25,000</label>
+                    </div>
+
+                    <!-- Custom Price Filter -->
+                    <div class="pt-3 border-top">
+                      <label class="form-label text-xs text-muted text-uppercase fw-semibold mb-2">Custom Price (₹)</label>
+                      <div class="d-flex align-items-center gap-2 mb-2">
+                        <input
+                          type="number"
+                          name="min_price"
+                          value="{{ min_price }}"
+                          placeholder="Min ₹"
+                          class="form-control form-control-sm"
+                          min="0"
+                        />
+                        <span class="text-muted">–</span>
+                        <input
+                          type="number"
+                          name="max_price"
+                          value="{{ max_price }}"
+                          placeholder="Max ₹"
+                          class="form-control form-control-sm"
+                          min="0"
+                        />
+                      </div>
+                      <button type="submit" class="btn btn-outline-dark btn-sm w-100 py-1" style="font-size: 0.78rem;">
+                        Apply Custom Price
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- 4. Availability & Specials -->
+                  <div class="mb-4 bg-white border p-3 rounded-3 shadow-xs">
+                    <h6 class="fw-semibold mb-2 text-xs text-uppercase text-secondary" style="letter-spacing: 0.05rem;">
+                      Availability & Status
+                    </h6>
+                    
+                    <div class="form-check mb-2">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="in_stock"
+                        value="1"
+                        id="in_stock_cb"
+                        {% if in_stock == '1' or in_stock == 'true' or in_stock == 'on' %}checked{% endif %}
+                        onchange="document.getElementById('productFilterForm').submit();"
+                      />
+                      <label class="form-check-label small" for="in_stock_cb" style="cursor: pointer;">
+                        In Stock Only
+                      </label>
+                    </div>
+
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="featured"
+                        value="1"
+                        id="featured_cb"
+                        {% if featured == '1' or featured == 'true' or featured == 'on' %}checked{% endif %}
+                        onchange="document.getElementById('productFilterForm').submit();"
+                      />
+                      <label class="form-check-label small" for="featured_cb" style="cursor: pointer;">
+                        Featured Products Only
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- Submit & Reset Buttons -->
+                  <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-dark btn-sm py-2 fw-semibold">
+                      <i class="bi bi-check2-circle me-1"></i> Apply Filters
+                    </button>
+                    {% if active_filters_count %}
+                      <a href="{% url 'products' %}" class="btn btn-outline-secondary btn-sm py-2">
+                        Reset All Filters
+                      </a>
+                    {% endif %}
+                  </div>
+                </form>
               </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="price3" />
-                <label class="form-check-label" for="price3">Above ₹300</label>
-              </div>
-            </div>
-            <div class="mb-4 bg-light border bg-opacity-50 p-4">
-              <h6 class="fw-semibold mb-3 text-xs text-uppercase">Colour</h6>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="col1" />
-                <label class="form-check-label" for="col1">Gray</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="col2" />
-                <label class="form-check-label" for="col2">Black</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="col3" />
-                <label class="form-check-label" for="col3">Wood</label>
-              </div>
-            </div>
-            <div class="d-grid">
-              <button class="btn btn-primary">Apply Filters</button>
             </div>
           </aside>
 
-          <!-- Product Grid -->
+          <!-- Product Grid Area -->
           <div class="col-lg-9">
-            <div class="row g-4">
-              <div class="col-12">
-                <div
-                  class=" d-flex flex-column flex-lg-row flex-row justify-content-between gap-4"
+            <!-- Top Controls Bar -->
+            <div class="bg-white border rounded-3 p-3 mb-4 d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 shadow-xs">
+              <div class="d-flex align-items-center gap-2">
+                <!-- Mobile Filter Toggle Button -->
+                <button
+                  class="btn btn-outline-dark btn-sm d-lg-none d-flex align-items-center gap-2"
+                  type="button"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#filterOffcanvas"
+                  aria-controls="filterOffcanvas"
                 >
-                  <div class="col-sm-4 col-lg-3 offset-lg-9">
-                    <select class="form-select">
-                      <option value="" selected="">Sort by: Featured</option>
-                      <option value="Best selling">Best selling</option>
-                      <option value="Alphabetically, A-Z">
-                        Alphabetically, A-Z
-                      </option>
-                      <option value="Alphabetically, Z-A">
-                        Alphabetically, Z-A
-                      </option>
-                      <option value="Price, low to high">
-                        Price, low to high
-                      </option>
-                      <option value="Price, high to low">
-                        Price, high to low
-                      </option>
-                      <option value="Date, old to new">Date, old to new</option>
-                      <option value="Date, new to old">Date, new to old</option>
-                    </select>
-                  </div>
-                </div>
+                  <i class="bi bi-funnel"></i>
+                  <span>Filters</span>
+                  {% if active_filters_count %}
+                    <span class="badge bg-dark rounded-pill">{{ active_filters_count }}</span>
+                  {% endif %}
+                </button>
+
+                <!-- Results Counter -->
+                <span class="text-muted small">
+                  Showing <strong>{{ total_count }}</strong> product{{ total_count|pluralize }}
+                </span>
               </div>
 
-              <!-- Repeat Product Card -->
+              <!-- Sorting Dropdown -->
+              <div class="d-flex align-items-center gap-2 ms-md-auto">
+                <label for="sortDropdown" class="small text-muted text-nowrap d-none d-sm-inline">Sort by:</label>
+                <select
+                  id="sortDropdown"
+                  class="form-select form-select-sm"
+                  style="min-width: 190px;"
+                  onchange="document.getElementById('sort_by_input').value=this.value; document.getElementById('productFilterForm').submit();"
+                >
+                  <option value="featured" {% if sort_by == 'featured' %}selected{% endif %}>Featured</option>
+                  <option value="price_asc" {% if sort_by == 'price_asc' %}selected{% endif %}>Price: Low to High</option>
+                  <option value="price_desc" {% if sort_by == 'price_desc' %}selected{% endif %}>Price: High to Low</option>
+                  <option value="name_asc" {% if sort_by == 'name_asc' %}selected{% endif %}>Alphabetically, A-Z</option>
+                  <option value="name_desc" {% if sort_by == 'name_desc' %}selected{% endif %}>Alphabetically, Z-A</option>
+                  <option value="newest" {% if sort_by == 'newest' %}selected{% endif %}>Newest First</option>
+                  <option value="oldest" {% if sort_by == 'oldest' %}selected{% endif %}>Oldest First</option>
+                </select>
+              </div>
+            </div>
 
+            <!-- Active Filter Chips -->
+            {% if active_filters_count %}
+              <div class="d-flex flex-wrap align-items-center gap-2 mb-4">
+                <span class="text-muted text-xs text-uppercase fw-semibold">Active:</span>
+
+                {% if q %}
+                  <a
+                    href="?{% for k, v in request.GET.items %}{% if k != 'q' and k != 'page' %}{{ k }}={{ v }}&{% endif %}{% endfor %}"
+                    class="badge bg-light text-dark border d-flex align-items-center gap-1 text-decoration-none py-2 px-3"
+                  >
+                    Keyword: "{{ q }}" <i class="bi bi-x"></i>
+                  </a>
+                {% endif %}
+
+                {% for cat_slug in selected_categories %}
+                  <a
+                    href="?{% for k, v in request.GET.items %}{% if k != 'page' %}{% if k == 'category' and v == cat_slug %}{% else %}{{ k }}={{ v }}&{% endif %}{% endif %}{% endfor %}"
+                    class="badge bg-light text-dark border d-flex align-items-center gap-1 text-decoration-none py-2 px-3"
+                  >
+                    Category: {{ cat_slug|title }} <i class="bi bi-x"></i>
+                  </a>
+                {% endfor %}
+
+                {% if price_range == 'under_5000' %}
+                  <a
+                    href="?{% for k, v in request.GET.items %}{% if k != 'price_range' and k != 'page' %}{{ k }}={{ v }}&{% endif %}{% endfor %}"
+                    class="badge bg-light text-dark border d-flex align-items-center gap-1 text-decoration-none py-2 px-3"
+                  >
+                    Price: Under ₹5,000 <i class="bi bi-x"></i>
+                  </a>
+                {% elif price_range == '5000_10000' %}
+                  <a
+                    href="?{% for k, v in request.GET.items %}{% if k != 'price_range' and k != 'page' %}{{ k }}={{ v }}&{% endif %}{% endfor %}"
+                    class="badge bg-light text-dark border d-flex align-items-center gap-1 text-decoration-none py-2 px-3"
+                  >
+                    Price: ₹5,000 - ₹10,000 <i class="bi bi-x"></i>
+                  </a>
+                {% elif price_range == '10000_25000' %}
+                  <a
+                    href="?{% for k, v in request.GET.items %}{% if k != 'price_range' and k != 'page' %}{{ k }}={{ v }}&{% endif %}{% endfor %}"
+                    class="badge bg-light text-dark border d-flex align-items-center gap-1 text-decoration-none py-2 px-3"
+                  >
+                    Price: ₹10,000 - ₹25,000 <i class="bi bi-x"></i>
+                  </a>
+                {% elif price_range == 'above_25000' %}
+                  <a
+                    href="?{% for k, v in request.GET.items %}{% if k != 'price_range' and k != 'page' %}{{ k }}={{ v }}&{% endif %}{% endfor %}"
+                    class="badge bg-light text-dark border d-flex align-items-center gap-1 text-decoration-none py-2 px-3"
+                  >
+                    Price: Above ₹25,000 <i class="bi bi-x"></i>
+                  </a>
+                {% endif %}
+
+                {% if min_price or max_price %}
+                  <a
+                    href="?{% for k, v in request.GET.items %}{% if k != 'min_price' and k != 'max_price' and k != 'page' %}{{ k }}={{ v }}&{% endif %}{% endfor %}"
+                    class="badge bg-light text-dark border d-flex align-items-center gap-1 text-decoration-none py-2 px-3"
+                  >
+                    Price: {% if min_price %}₹{{ min_price }}{% else %}₹0{% endif %} - {% if max_price %}₹{{ max_price }}{% else %}Any{% endif %} <i class="bi bi-x"></i>
+                  </a>
+                {% endif %}
+
+                {% if in_stock == '1' or in_stock == 'true' or in_stock == 'on' %}
+                  <a
+                    href="?{% for k, v in request.GET.items %}{% if k != 'in_stock' and k != 'page' %}{{ k }}={{ v }}&{% endif %}{% endfor %}"
+                    class="badge bg-light text-dark border d-flex align-items-center gap-1 text-decoration-none py-2 px-3"
+                  >
+                    In Stock Only <i class="bi bi-x"></i>
+                  </a>
+                {% endif %}
+
+                {% if featured == '1' or featured == 'true' or featured == 'on' %}
+                  <a
+                    href="?{% for k, v in request.GET.items %}{% if k != 'featured' and k != 'page' %}{{ k }}={{ v }}&{% endif %}{% endfor %}"
+                    class="badge bg-light text-dark border d-flex align-items-center gap-1 text-decoration-none py-2 px-3"
+                  >
+                    Featured Only <i class="bi bi-x"></i>
+                  </a>
+                {% endif %}
+
+                <a href="{% url 'products' %}" class="small text-danger text-decoration-none ms-auto fw-semibold">
+                  Clear All
+                </a>
+              </div>
+            {% endif %}
+
+            <!-- Products Grid Cards -->
+            <div class="row g-4">
               {% for product in products %}
-                <div class="col-sm-6 col-md-4 ">
-                  <div class="card product-card">
-                    <a
-                      href="{% url 'get_product_detail_view' product.product_slug %}"
-                      ><img
-                        src="{{ product.product_image.url }}"
-                        class="card-img-top"
-                        alt="Product Name"
-                    /></a>
-                    <div class="card-body">
-                      <p class="text-muted mb-2 text-uppercase text-xs mb-3">
-                        <span
-                          class="text-bg-info text-sm-center badge rounded-pill"
-                          >{{ product.product_category }}</span
-                        >
-                        {% if product.product_is_featured %}
-                          <span
-                            class="text-bg-warning text-sm-center badge rounded-pill"
-                            >Featured</span
-                          >
+                <div class="col-sm-6 col-md-4">
+                  <div class="card h-100 product-card shadow-xs border bg-white rounded-3 overflow-hidden d-flex flex-column">
+                    <div class="position-relative overflow-hidden bg-light text-center" style="height: 220px;">
+                      <a href="{% url 'get_product_detail_view' product.product_slug %}" class="d-block w-100 h-100">
+                        {% if product.product_image %}
+                          <img
+                            src="{{ product.product_image.url }}"
+                            class="w-100 h-100 object-fit-cover"
+                            alt="{{ product.product_name }}"
+                          />
+                        {% else %}
+                          <div class="w-100 h-100 d-flex align-items-center justify-content-center bg-secondary bg-opacity-10 text-muted">
+                            <i class="bi bi-image fs-1"></i>
+                          </div>
                         {% endif %}
-                      </p>
-                      <div class="mb-3">
-                        <h3 class="h5 mb-1">{{ product.product_name }}</h3>
+                      </a>
 
-                        <div class="mb-3">
-                          <span
-                            class="text-muted text-decoration-line-through me-2"
-                            >₹{{ product.product_price|add:"500" }}</span
-                          >
-                          <span class="fw-bold text-dark"
-                            >₹{{ product.product_price }}</span
-                          >
-                        </div>
+                      <!-- Floating Badges -->
+                      <div class="position-absolute top-0 start-0 m-2 d-flex flex-column gap-1 align-items-start">
+                        {% if product.product_category %}
+                          <span class="badge bg-dark bg-opacity-75 backdrop-blur text-xs">{{ product.product_category.category_name }}</span>
+                        {% endif %}
+                        {% if product.product_is_featured %}
+                          <span class="badge text-bg-warning text-xs"><i class="bi bi-star-fill me-1"></i>Featured</span>
+                        {% endif %}
                       </div>
-                      <div class="d-flex gap-2 mt-auto">
-                        <a
-                          href="{% url 'add_to_cart' product.id %}"
-                          class="btn btn-dark btn-sm flex-fill"
-                          ><i class="bi bi-cart-plus me-1"></i>Add to Cart</a
-                        >
+
+                      {% if product.product_quantity_in_stock <= 0 %}
+                        <div class="position-absolute bottom-0 start-0 end-0 bg-danger text-white text-center py-1 text-xs fw-semibold">
+                          Out of Stock
+                        </div>
+                      {% endif %}
+                    </div>
+
+                    <div class="card-body p-3 d-flex flex-column flex-grow-1">
+                      <h3 class="h6 mb-2 fw-semibold text-truncate" title="{{ product.product_name }}">
+                        <a href="{% url 'get_product_detail_view' product.product_slug %}" class="text-dark text-decoration-none">
+                          {{ product.product_name }}
+                        </a>
+                      </h3>
+
+                      <div class="mb-3 mt-auto">
+                        <span class="text-muted text-decoration-line-through me-2 small">
+                          ₹{{ product.product_price|add:"500" }}
+                        </span>
+                        <span class="fw-bold text-dark fs-6" style="color: #d47f31 !important;">
+                          ₹{{ product.product_price }}
+                        </span>
+                      </div>
+
+                      <div class="d-flex gap-2">
+                        {% if product.product_quantity_in_stock > 0 %}
+                          <a
+                            href="{% url 'add_to_cart' product.id %}"
+                            class="btn btn-dark btn-sm flex-fill d-flex align-items-center justify-content-center gap-1 py-2"
+                          >
+                            <i class="bi bi-cart-plus"></i> Add to Cart
+                          </a>
+                        {% else %}
+                          <button class="btn btn-secondary btn-sm flex-fill py-2" disabled>
+                            Out of Stock
+                          </button>
+                        {% endif %}
+
                         <a
                           href="{% url 'add_to_fav' product.id %}"
-                          class="btn btn-outline-danger btn-sm"
+                          class="btn btn-outline-danger btn-sm px-3 d-flex align-items-center justify-content-center"
                           title="Add to Favourites"
-                          ><i class="bi bi-heart-fill"></i
-                        ></a>
+                        >
+                          <i class="bi bi-heart-fill"></i>
+                        </a>
                       </div>
                     </div>
                   </div>
                 </div>
+              {% empty %}
+                <!-- Empty State -->
+                <div class="col-12 py-5 text-center">
+                  <div class="p-5 bg-white border rounded-3 max-w-md mx-auto">
+                    <div class="rounded-circle bg-light d-inline-flex p-4 mb-3 text-secondary">
+                      <i class="bi bi-funnel fs-1"></i>
+                    </div>
+                    <h4 class="fw-bold mb-2">No matching products found</h4>
+                    <p class="text-muted small mb-4">
+                      We couldn't find any furniture matching your active filters. Try adjusting your search keyword, category, or price range.
+                    </p>
+                    <a href="{% url 'products' %}" class="btn btn-dark btn-sm px-4 py-2">
+                      <i class="bi bi-arrow-counterclockwise me-1"></i> Clear All Filters
+                    </a>
+                  </div>
+                </div>
               {% endfor %}
-
-              <!-- Add more cards as needed -->
             </div>
 
             <!-- Pagination -->
-            <nav class="mt-4">
-              <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                  <a class="page-link" href="#">«</a>
-                </li>
-                <li class="page-item active">
-                  <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">»</a></li>
-              </ul>
-            </nav>
+            {% if page_obj.has_other_pages %}
+              <nav class="mt-5" aria-label="Product pagination">
+                <ul class="pagination justify-content-center gap-1">
+                  {% if page_obj.has_previous %}
+                    <li class="page-item">
+                      <a class="page-link rounded-2 text-dark" href="?{% if filter_querystring %}{{ filter_querystring }}&{% endif %}page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                        &laquo; Prev
+                      </a>
+                    </li>
+                  {% else %}
+                    <li class="page-item disabled">
+                      <span class="page-link rounded-2">&laquo; Prev</span>
+                    </li>
+                  {% endif %}
+
+                  {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                      <li class="page-item active" aria-current="page">
+                        <span class="page-link rounded-2 bg-dark border-dark text-white">{{ num }}</span>
+                      </li>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                      <li class="page-item">
+                        <a class="page-link rounded-2 text-dark" href="?{% if filter_querystring %}{{ filter_querystring }}&{% endif %}page={{ num }}">
+                          {{ num }}
+                        </a>
+                      </li>
+                    {% endif %}
+                  {% endfor %}
+
+                  {% if page_obj.has_next %}
+                    <li class="page-item">
+                      <a class="page-link rounded-2 text-dark" href="?{% if filter_querystring %}{{ filter_querystring }}&{% endif %}page={{ page_obj.next_page_number }}" aria-label="Next">
+                        Next &raquo;
+                      </a>
+                    </li>
+                  {% else %}
+                    <li class="page-item disabled">
+                      <span class="page-link rounded-2">Next &raquo;</span>
+                    </li>
+                  {% endif %}
+                </ul>
+              </nav>
+            {% endif %}
           </div>
         </div>
       </div>

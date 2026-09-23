@@ -1,0 +1,220 @@
+{% extends 'app.html' %}
+{% load static %}
+
+{% block title %}
+    Checkout - Furnish
+{% endblock %}
+
+{% block content %}
+    <div class="container py-5">
+        <!-- Header -->
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h2 class="fw-bold mb-0">
+                <i class="bi bi-credit-card-fill text-dark me-2"></i>
+                Checkout
+            </h2>
+
+            <a href="{% url 'cart' %}" class="btn btn-outline-secondary btn-sm">
+                <i class="bi bi-arrow-left me-1"></i>
+                Back to Cart
+            </a>
+        </div>
+
+        <div class="row g-4">
+            <!-- LEFT SIDE -->
+            <div class="col-lg-8">
+                <form action="{% url 'order_process' %}" method="post">
+                    {% csrf_token %}
+                    <!-- Shipping Address -->
+                    <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
+                        <h4 class="fw-bold mb-4">
+                            <i class="bi bi-geo-alt-fill me-2"></i>
+                            Delivery Address
+                        </h4>
+
+                        {% if user_addresses %}
+                            {% for addr in user_addresses %}
+                                <div class="form-check border rounded-3 p-3 mb-3">
+                                    <input
+                                        class="form-check-input ms-0 me-3"
+                                        type="radio"
+                                        name="address_id"
+                                        id="address_{{ addr.id }}"
+                                        value="{{ addr.id }}"
+                                        {% if forloop.first %}checked{% endif %}
+                                        required
+                                    />
+                                    <label class="form-check-label w-100" for="address_{{ addr.id }}">
+                                        <div>
+                                            <div class="fw-semibold">{{ addr.address }}</div>
+                                        </div>
+                                    </label>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="alert alert-warning mb-0">
+                                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                                No delivery address found. Please <a href="{% url 'manage_address_page' %}" class="alert-link">add an address</a> before placing an order.
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Payment Method -->
+                    <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
+                        <h4 class="fw-bold mb-4">
+                            <i class="bi bi-wallet2 me-2"></i>
+                            Payment Method
+                        </h4>
+
+                        <div class="payment-methods">
+                            <!-- Cash on Delivery -->
+                            <div class="form-check border rounded-3 p-3 mb-3">
+                                <input
+                                    class="form-check-input ms-0 me-3"
+                                    type="radio"
+                                    name="payment_method"
+                                    id="cod"
+                                    value="cod"
+                                    checked
+                                />
+
+                                <label class="form-check-label w-100" for="cod">
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-cash-stack fs-3 me-3"></i>
+
+                                        <div>
+                                            <div class="fw-bold">
+                                                Cash on Delivery
+                                            </div>
+
+                                            <small class="text-muted">
+                                                Pay when your order is delivered.
+                                            </small>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <!-- Razorpay Online Payment -->
+                            <div class="form-check border rounded-3 p-3 mb-3">
+                                <input
+                                    class="form-check-input ms-0 me-3"
+                                    type="radio"
+                                    name="payment_method"
+                                    id="online"
+                                    value="online"
+                                />
+
+                                <label class="form-check-label w-100" for="online">
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-credit-card-2-front fs-3 me-3 text-primary"></i>
+
+                                        <div>
+                                            <div class="fw-bold">
+                                                Online Payment (Razorpay)
+                                                <span class="badge bg-primary-subtle text-primary rounded-pill ms-2 small">UPI, Cards, NetBanking</span>
+                                            </div>
+
+                                            <small class="text-muted">
+                                                Pay securely with Razorpay using UPI, Credit/Debit Cards, NetBanking, or Wallets.
+                                            </small>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Place Order -->
+                    <div class="card border-0 shadow-sm rounded-4 p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="bi bi-shield-check text-success fs-3 me-3"></i>
+
+                            <div>
+                                <h6 class="fw-bold mb-1">Secure Checkout</h6>
+
+                                <small class="text-muted">
+                                    Your information is safe and secure.
+                                </small>
+                            </div>
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="btn btn-dark btn-lg w-100 rounded-3 py-3 fw-semibold"
+                            {% if not user_addresses or not cart_items %}disabled{% endif %}
+                        >
+                            Place Order
+                            <i class="bi bi-check-circle ms-2"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- RIGHT SIDE - ORDER SUMMARY -->
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm rounded-4 p-4">
+                    <h4 class="fw-bold mb-4">Order Summary</h4>
+
+                    <!-- Cart Items -->
+                    {% for item in cart_items %}
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="d-flex align-items-center">
+                                {% if item.product.product_image %}
+                                    <img src="{{ item.product.product_image.url }}" alt="{{ item.product.product_name }}" style="width: 50px; height: 50px; object-fit: cover;" class="rounded me-3">
+                                {% else %}
+                                    <div class="bg-light rounded me-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                        <i class="bi bi-box-seam text-muted fs-4"></i>
+                                    </div>
+                                {% endif %}
+                                <div>
+                                    <h6 class="mb-0 fw-semibold">{{ item.product.product_name }}</h6>
+                                    <small class="text-muted">Qty: {{ item.quantity }} x ₹{{ item.product.product_price }}</small>
+                                </div>
+                            </div>
+                            <span class="fw-semibold">₹{{ item.total_price }}</span>
+                        </div>
+                    {% empty %}
+                        <p class="text-muted">Your cart is empty.</p>
+                    {% endfor %}
+
+                    <hr class="my-3" />
+
+                    <!-- Subtotal -->
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted"> Subtotal </span>
+
+                        <span class="fw-semibold"> ₹{{ total_amount }} </span>
+                    </div>
+
+                    <!-- Shipping -->
+                    <div class="d-flex justify-content-between mb-3">
+                        <span class="text-muted"> Shipping </span>
+
+                        <span class="text-success fw-semibold"> FREE </span>
+                    </div>
+
+                    <hr class="my-3" />
+
+                    <!-- Total -->
+                    <div class="d-flex justify-content-between">
+                        <span class="fw-bold fs-5"> Total </span>
+
+                        <span class="fw-bold fs-5"> ₹{{ total_amount }} </span>
+                    </div>
+                </div>
+
+                <!-- Back to Cart -->
+                <div class="text-center mt-3">
+                    <a
+                        href="{% url 'cart' %}"
+                        class="text-decoration-none text-muted"
+                    >
+                        <i class="bi bi-arrow-left me-1"></i>
+                        Return to Cart
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
