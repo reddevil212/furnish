@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: furnishproj
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn --chdir furnishproj furnishproj.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
