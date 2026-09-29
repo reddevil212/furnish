@@ -82,25 +82,16 @@ WSGI_APPLICATION = 'furnishproj.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'Furnish',
-#         'USER': 'root',
-#         'PASSWORD':'sayanpal687@999',
-#         'HOST': 'localhost',
-#         'PORT': '3306',
-#     }
-# }
+
 
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
-        'USER': 'postgres',
+        'USER': 'postgres.oyrfxiyselvadmndzfyp',
         'PASSWORD': 'LibManage@123',
-        'HOST': 'db.oyrfxiyselvadmndzfyp.supabase.co',
+        'HOST': 'aws-0-ap-south-1.pooler.supabase.com',
         'PORT': '5432',
     }
 }
