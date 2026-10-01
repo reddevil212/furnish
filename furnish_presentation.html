@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furnish - Project Presentation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0F172A;
+            --card-bg: #1E293B;
+            --card-border: #334155;
+            --accent-gold: #F59E0B;
+            --accent-indigo: #6366F1;
+            --accent-emerald: #10B981;
+            --accent-rose: #F43F5E;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Top Progress Bar */
+        .progress-container {
+            height: 4px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-indigo));
+            transition: width 0.3s ease;
+        }
+
+        /* Slides Container */
+        .slides-wrapper {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 2.5rem 4rem;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(30px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(0);
+        }
+
+        /* Header */
+        .slide-header {
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--accent-gold);
+            padding-bottom: 0.75rem;
+        }
+
+        .slide-tag {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent-gold);
+            margin-bottom: 0.25rem;
+        }
+
+        .slide-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-main);
+            line-height: 1.2;
+        }
+
+        /* Content Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            flex: 1;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+            flex: 1;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.2rem;
+            flex: 1;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-gold);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-title.gold { color: var(--accent-gold); }
+        .card-title.indigo { color: var(--accent-indigo); }
+        .card-title.emerald { color: var(--accent-emerald); }
+        .card-title.rose { color: var(--accent-rose); }
+
+        .bullet-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .bullet-list li {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            line-height: 1.5;
+            position: relative;
+            padding-left: 1.4rem;
+        }
+
+        .bullet-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        /* Title Slide Special */
+        .title-slide {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .hero-card {
+            background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.15), transparent 60%), var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 3.5rem 3rem;
+            max-width: 900px;
+            width: 100%;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .hero-title {
+            font-size: 3.8rem;
+            font-weight: 800;
+            color: var(--accent-gold);
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-desc {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+            line-height: 1.6;
+        }
+
+        .badge-row {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            color: var(--accent-gold);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .badge.indigo {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: rgba(99, 102, 241, 0.3);
+            color: var(--accent-indigo);
+        }
+
+        .badge.emerald {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: rgba(16, 185, 129, 0.3);
+            color: var(--accent-emerald);
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+        }
+
+        th, td {
+            padding: 1rem 1.2rem;
+            text-align: left;
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        th {
+            background: rgba(255,255,255,0.05);
+            color: var(--accent-gold);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        td.code {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-emerald);
+            font-weight: 600;
+        }
+
+        /* Navigation Controls */
+        .controls {
+            height: 60px;
+            background: rgba(15, 23, 42, 0.9);
+            border-top: 1px solid var(--card-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .counter {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover:not(:disabled) {
+            background: var(--accent-gold);
+            color: #000;
+            border-color: var(--accent-gold);
+        }
+
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="slides-wrapper">
+
+        <!-- SLIDE 1: Title -->
+        <div class="slide title-slide active">
+            <div class="hero-card">
+                <div class="hero-title">FURNISH</div>
+                <div class="hero-subtitle">Next-Gen E-Commerce & Agentic AI Interior Stylist Platform</div>
+                <div class="hero-desc">
+                    A modern full-stack web application powered by Django 6.1, Google AI Studio (Gemini 3.6 Flash), Autonomous Function Calling, and Razorpay Payments.
+                </div>
+                <div class="badge-row">
+                    <span class="badge">Django 6.1 Framework</span>
+                    <span class="badge indigo">Google Gemini 3.6 Flash</span>
+                    <span class="badge emerald">8 Autonomous AI Tools</span>
+                    <span class="badge">Razorpay Payments Integration</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: Executive Summary -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-tag">Furnish Project Presentation</div>
+                <div class="slide-title">Executive Summary & Vision</div>
+            </div>
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title gold">🛒 E-Commerce Core Foundation</div>
+                    <ul class="bullet-list">
+                        <li>Complete furniture & decor catalog management with multi-criteria filtering.</li>
+                        <li>Interactive cart management, wishlist system, and address book.</li>
+                        <li>Seamless checkout flow with Cash on Delivery (COD) & Razorpay Online Payment Gateway.</li>
+                        <li>UUID order tracking system with status monitoring.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-title indigo">🤖 Agentic AI Innovation Layer</div>
+                    <ul class="bullet-list">
+                        <li>Embedded AI Concierge powered by Google AI Studio (Gemini 3.6 Flash).</li>
+                        <li>8 Autonomous Python tools bound directly to Django ORM via ContextVar.</li>
+                        <li>Provides interior styling advice, room recommendations, and color matching.</li>
+                        <li>Performs live DB actions: adds/removes cart items and retrieves user order statuses.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: Problem & Solution -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-tag">Market Opportunity</div>
+                <div class="slide-title">Problem Statement & The Furnish Solution</div>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-title rose">❌ The Problem</div>
+                    <ul class="bullet-list">
+                        <li>Standard e-commerce browsing is rigid and uninspiring.</li>
+                        <li>Customers struggle to visualize furniture spatial fit and color harmony.</li>
+                        <li>High customer service overhead for basic tracking and specification queries.</li>
+                        <li>Chatbots usually lack direct database interaction and real store awareness.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-title gold">💡 The Furnish Solution</div>
+                    <ul class="bullet-list">
+                        <li>Autonomous AI Assistant with real-time store catalog and user cart access.</li>
+                        <li>Function calling capability to recommend complementary furniture pieces.</li>
+                        <li>Direct execution of cart modifications straight from conversational chat.</li>
+                        <li>Self-service order tracking integrated seamlessly in natural language.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-title emerald">🚀 Key Benefits</div>
+                    <ul class="bullet-list">
+                        <li>Increased sales conversions via personalized styling suggestions.</li>
+                        <li>Zero-friction shopping experience with single-click conversational actions.</li>
+                        <li>24/7 automated support with zero operational overhead.</li>
+                        <li>Robust offline fallback engine ensuring 100% service uptime.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: System Architecture -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-tag">Technical Specs</div>
+                <div class="slide-title">System Architecture & Tech Stack</div>
+            </div>
+            <div class="grid-4">
+                <div class="card">
+                    <div class="card-title indigo">🌐 Frontend</div>
+                    <ul class="bullet-list">
+                        <li>HTML5 & Custom Vanilla CSS</li>
+                        <li>AJAX Dynamic Chat Interface</li>
+                        <li>Glassmorphism Visual Tokens</li>
+                        <li>Real-time Cart Badges</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-title gold">⚡ Backend</div>
+                    <ul class="bullet-list">
+                        <li>Django 6.1 (Python Framework)</li>
+                        <li>Django ORM & Model Abstraction</li>
+                        <li>Gunicorn & Whitenoise</li>
+                        <li>Session State Management</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-title emerald">🧠 AI Core</div>
+                    <ul class="bullet-list">
+                        <li>Google AI Studio (Gemini 3.6)</li>
+                        <li>Autonomous Function Tools</li>
+                        <li>ContextVar Request Isolation</li>
+                        <li>Local Regex Concierge Fallback</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-title rose">💳 Database & API</div>
+                    <ul class="bullet-list">
+                        <li>Razorpay Payment SDK</li>
+                        <li>HMAC SHA256 Verification</li>
+                        <li>PostgreSQL / SQLite Database</li>
+                        <li>Pillow Image Processing</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: Database Schema -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-tag">Data Layer</div>
+                <div class="slide-title">Database Models & Entity Architecture</div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Model Name</th>
+                        <th>Key Fields</th>
+                        <th>Purpose & Business Logic</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="code">Ecomm_Category</td>
+                        <td>category_name, category_slug, category_desc, category_image</td>
+                        <td>Catalog categorization; automatically generates URL slug on save.</td>
+                    </tr>
+                    <tr>
+                        <td class="code">Ecom_Product</td>
+                        <td>product_name, product_slug, price, quantity_in_stock, is_featured</td>
+                        <td>Core inventory data; linked to Category with stock and active status flags.</td>
+                    </tr>
+                    <tr>
+                        <td class="code">Ecom_Favourites</td>
+                        <td>user, product, createdaAt</td>
+                        <td>User wishlist table for saving favorite items.</td>
+                    </tr>
+                    <tr>
+                        <td class="code">Ecom_Cart</td>
+                        <td>user, product, quantity, total_price (property)</td>
+                        <td>Active shopping cart items with dynamic price calculation.</td>
+                    </tr>
+                    <tr>
+                        <td class="code">Ecom_Adress</td>
+                        <td>user, address</td>
+                        <td>User address book for order delivery selection.</td>
+                    </tr>
+                    <tr>
+                        <td class="code">Ecom_Order & Item</td>
+                        <td>order_id (UUID), user, razor_order_id, razor_payment_id, status</td>
+                        <td>Completed/pending order tracking with Razorpay token storage.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- SLIDE 6: AI Tools -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-tag">Agentic AI Deep-Dive</div>
+                <div class="slide-title">8 Autonomous Tools Exposed to Gemini AI</div>
+            </div>
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title gold">🔍 Catalog & Specs Tools</div>
+                    <ul class="bullet-list">
+                        <li><b style="color:var(--accent-emerald);">search_products:</b> Filters active inventory using word tokens, stems, and price ranges.</li>
+                        <li><b style="color:var(--accent-emerald);">get_product_details:</b> Retrieves full specifications, exact stock, and image URLs.</li>
+                        <li><b style="color:var(--accent-emerald);">get_store_categories:</b> Lists store categories with item counts for layout ideas.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-title indigo">🛒 Cart & Order Action Tools</div>
+                    <ul class="bullet-list">
+                        <li><b style="color:var(--accent-emerald);">get_user_cart:</b> Calculates current user's itemized cart list and subtotal.</li>
+                        <li><b style="color:var(--accent-emerald);">add_product_to_cart:</b> Checks stock availability and inserts item into user cart.</li>
+                        <li><b style="color:var(--accent-emerald);">remove_product_from_cart:</b> Deletes items from current active cart session.</li>
+                        <li><b style="color:var(--accent-emerald);">get_order_history & track_specific_order:</b> Retrieves past order statuses via UUID.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 7: ContextVar & Fallback -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-tag">Resilience & Security</div>
+                <div class="slide-title">Thread Safety & Local Fallback Engine</div>
+            </div>
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title indigo">🔒 Thread-Safe ContextVar Isolation</div>
+                    <ul class="bullet-list">
+                        <li>Google GenAI SDK deep-copies function declarations during tool registration.</li>
+                        <li>Furnish utilizes Python <code>contextvars.ContextVar('active_agent')</code> to bind the current web HTTP request context.</li>
+                        <li>Guarantees that global tool functions operate strictly on the authenticated request user.</li>
+                        <li>Prevents state leaking between concurrent users.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-title gold">🛡️ Local Concierge Fallback Engine</div>
+                    <ul class="bullet-list">
+                        <li>Automatically engages if API key is missing or quota limits are exceeded (HTTP 429).</li>
+                        <li>Performs token-matching regex catalog search directly against Django ORM.</li>
+                        <li>Supports complete cart management and order tracking locally.</li>
+                        <li>Ensures 100% continuous application availability regardless of external AI service status.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 8: Razorpay Integration -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-tag">E-Commerce Flow</div>
+                <div class="slide-title">Checkout Flow & Razorpay Payments</div>
+            </div>
+            <div class="card" style="margin-bottom:1rem;">
+                <div class="card-title emerald">💳 End-to-End Payment Processing Lifecycle</div>
+                <ul class="bullet-list" style="gap: 1rem;">
+                    <li><b>1. Order Creation:</b> User selects address and initiates order; backend calculates total and creates Razorpay Order ID (in paise).</li>
+                    <li><b>2. Client Checkout Modal:</b> Frontend opens secure Razorpay JavaScript checkout modal with order details.</li>
+                    <li><b>3. Signature Verification:</b> Payment response triggers <code>payment_callback</code> view; validates HMAC SHA256 signature using Razorpay Secret.</li>
+                    <li><b>4. Post-Payment Actions:</b> Order status marked as completed, transaction ID recorded, and user cart automatically flushed.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SLIDE 9: UX System -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-tag">User Experience</div>
+                <div class="slide-title">UI/UX & Interactive Design System</div>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-title gold">📱 Full AI Studio</div>
+                    <ul class="bullet-list">
+                        <li>Dedicated <code>/ai/assistant/</code> route for full-screen interior styling experience.</li>
+                        <li>Renders rich interactive product cards directly inside chat bubbles.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-title indigo">🛍️ Dynamic Catalog</div>
+                    <ul class="bullet-list">
+                        <li>Multi-criteria sidebar filter (categories, price presets, custom range, in-stock).</li>
+                        <li>Preserves query strings across pagination.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-title emerald">⚡ Micro-Interactions</div>
+                    <ul class="bullet-list">
+                        <li>Real-time cart badge counter.</li>
+                        <li>Toast notifications for cart & wishlist actions.</li>
+                        <li>Modern dark mode styling.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 10: Security & Performance -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-tag">Production Quality</div>
+                <div class="slide-title">Security Hardening & Performance</div>
+            </div>
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title rose">🔒 Security Architecture</div>
+                    <ul class="bullet-list">
+                        <li>HMAC SHA256 payment signature validation.</li>
+                        <li>Django CSRF tokens enforced across all POST forms.</li>
+                        <li>Protected endpoints (cart, orders, address book) locked behind authentication guards.</li>
+                        <li>Secrets isolated in <code>.env</code> file.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-title emerald">⚡ Performance Optimizations</div>
+                    <ul class="bullet-list">
+                        <li>Zero N+1 query overhead using <code>select_related()</code> and <code>prefetch_related()</code>.</li>
+                        <li>ORM Category aggregations with <code>Count()</code> annotations.</li>
+                        <li>Whitenoise asset compression and static caching.</li>
+                        <li>Paginated catalog views (9 items/page).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 11: Roadmap -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-tag">Future Vision</div>
+                <div class="slide-title">Future Roadmap & Technical Expansion</div>
+            </div>
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title gold">🔮 Phase 1: AR Room Visualization</div>
+                    <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.5;">Integration of WebXR & 3D model previews (GLTF/USDZ) allowing shoppers to visualize furniture items directly inside their living spaces using mobile cameras.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title indigo">📷 Phase 2: Multimodal Vision AI Search</div>
+                    <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.5;">Allow users to upload room photos. Gemini Vision API analyzes existing wall colors and decor to suggest perfectly matched furniture from the catalog.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title emerald">🎙️ Phase 3: Conversational Voice Shopping</div>
+                    <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.5;">Web Speech API integration allowing hands-free voice interactions with the AI Interior Concierge.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title rose">📊 Phase 4: Vendor Dashboard & Analytics</div>
+                    <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.5;">Multi-vendor seller portal featuring AI-driven demand analytics and automated stock inventory forecasts.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 12: Conclusion -->
+        <div class="slide title-slide">
+            <div class="hero-card">
+                <div class="hero-title" style="font-size:3rem; margin-bottom:1rem;">Thank You!</div>
+                <div class="hero-subtitle">Furnish — Pioneering AI-Powered E-Commerce</div>
+                <div class="hero-desc" style="font-size:1.1rem; color:var(--text-main); margin-bottom:2rem;">
+                    Key Takeaway: Furnish proves that marrying autonomous AI tool execution with a full e-commerce stack delivers a revolutionary, frictionless shopping experience.
+                </div>
+                <div class="badge" style="background:rgba(16,185,129,0.15); border-color:rgba(16,185,129,0.4); color:var(--accent-emerald); font-size:1.1rem; padding:0.6rem 1.8rem;">
+                    Open for Questions & Live Demonstration
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="controls">
+        <div class="counter" id="slideCounter">Slide 1 of 12</div>
+        <div class="btn-group">
+            <button class="btn" id="prevBtn" onclick="changeSlide(-1)">Previous</button>
+            <button class="btn" id="nextBtn" onclick="changeSlide(1)">Next</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const progressBar = document.getElementById('progressBar');
+        const slideCounter = document.getElementById('slideCounter');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+            const progress = ((currentSlide + 1) / totalSlides) * 100;
+            progressBar.style.width = progress + '%';
+            slideCounter.textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === totalSlides - 1;
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide < 0) currentSlide = 0;
+            if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+            updateSlide();
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'Space') {
+                changeSlide(1);
+            } else if (e.key === 'ArrowLeft') {
+                changeSlide(-1);
+            }
+        });
+
+        updateSlide();
+    </script>
+</body>
+</html>

@@ -494,7 +494,7 @@ def checkout(request):
         'total_amount': total_amount,
         'user_addresses': user_addresses
     }
-    return render(request, 'checkout.html', context)
+    return render(request, 'Checkout.html', context)
 
 
 def order_process(request):
